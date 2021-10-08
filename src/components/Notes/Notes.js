@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
-import {listPosts} from '../../graphql/queries';
+import {listNotes} from '../../graphql/queries';
 
 export const Notes = () => {
 
@@ -13,10 +13,8 @@ export const Notes = () => {
 
     async function fetchNotes(){
         try{
-            const notesData = await API.graphql(graphqlOperation(listPosts))
-            console.log(notesData)
-            const notes = notesData.data.listPosts.items
-            console.log(notes)
+            const notesData = await API.graphql(graphqlOperation(listNotes))
+            const notes = notesData.data.listNotes.items
             setNotes(notes)
         }catch(err){
             console.log('error')

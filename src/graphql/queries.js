@@ -150,3 +150,32 @@ export const listComments = /* GraphQL */ `
     }
   }
 `;
+export const getNotes = /* GraphQL */ `
+  query GetNotes($id: ID!) {
+    getNotes(id: $id) {
+      id
+      title
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listNotes = /* GraphQL */ `
+  query ListNotes(
+    $filter: ModelNotesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

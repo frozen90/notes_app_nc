@@ -18,3 +18,10 @@ type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
   post: Post @connection(fields: ["postID"])
   content: String!
 }
+
+
+type Notes @model {
+  id: ID!
+  title: String!
+  content: String
+}
