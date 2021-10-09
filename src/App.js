@@ -19,8 +19,11 @@ function App() {
 
   useEffect(() => {
     Hub.listen("auth", (event) => {
-      console.log("auth event", event)
-      setCurrentUser(event.payload.data)
+      console.log(event.payload.event)
+      if(event.payload.event === "signIn"){
+        setCurrentUser(event.payload.data)
+      }
+        
     });
   });
 
