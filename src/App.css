@@ -45,6 +45,7 @@
   background-color: #F6AE2D !important;
 }
 body{
+  font-family: 'Noto Sans Display', sans-serif !important;
   background-color: #3F3B51 !important;
 }
 
@@ -52,4 +53,8 @@ body{
   background-color: #1F1D2C;
   min-height: 90vh;
   padding: 50px;
+}
+
+body > div {
+  height: 100%
 }
