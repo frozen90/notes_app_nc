@@ -36,7 +36,7 @@ export const Notes = () => {
                 <link rel="canonical" href="/login" />
             </Helmet>
             {!loading ?
-                <Grid centered style={{ padding: '20px', height: "100vh" }} verticalAlign="middle">
+                <Grid centered style={{ padding: '30px', height: "100vh" }} verticalAlign="middle">
                     {notes.length > 0 || start ?
 
                         <NotesDashboard />

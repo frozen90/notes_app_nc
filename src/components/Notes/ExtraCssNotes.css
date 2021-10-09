@@ -23,7 +23,23 @@
     color: white !important;
 }
 
+.remove-bg{
+    background-color: transparent !important;
+    border: none !important;
+}
 
+.dashboard-btns{
+    background-color: transparent !important;
+    color: #3F3B51 !important;
+}
+.active-btn {
+    text-decoration: underline !important;
+    color: #F6AE2D !important;
+}
+.dashboard-btns:hover {
+    text-decoration: underline !important;
+    color: #F6AE2D !important;
+}
 
 @media only screen and (max-width: 400px) {
     .search-bar .input {

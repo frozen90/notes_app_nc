@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from "framer-motion"
 
 export const NotesDashboard = ({ notes }) => {
+    const [navSelection, setNavSelection] = useState('All')
     const [showSearch, setShowSearch] = useState(false)
     return (
         <>
@@ -31,18 +32,28 @@ export const NotesDashboard = ({ notes }) => {
                             <Search fluid className='search-bar' input={{ icon: 'search', iconPosition: 'left' }} />
 
                         )}
-                        <Dropdown item icon='ellipsis horizontal' className='elipsis-icon' onClick={()=>{setShowSearch(false)}}>
-                        <Dropdown.Menu className="tools-menu">
-                            <Dropdown.Item>Option #2</Dropdown.Item>
-                            <Dropdown.Item>Option #3</Dropdown.Item>
-                        </Dropdown.Menu>
+                        <Dropdown item icon='ellipsis horizontal' className='elipsis-icon' onClick={() => { setShowSearch(false) }}>
+                            <Dropdown.Menu className="tools-menu">
+                                <Dropdown.Item>Option #2</Dropdown.Item>
+                                <Dropdown.Item>Option #3</Dropdown.Item>
+                            </Dropdown.Menu>
                         </Dropdown>
                     </Menu.Item>
 
-
-
                 </Menu>
+                <Segment className='remove-bg' textAlign='center' style={{height:'70vh'}}>
+                            <Button size='huge' value='All' className={navSelection === 'All' ? 'dashboard-btns active-btn':'dashboard-btns'} onClick={(e,{value})=>{setNavSelection(value)}}>All</Button>
+                            <Button size='huge' value='Folders' className={navSelection === 'Folders' ? 'dashboard-btns active-btn':'dashboard-btns'} onClick={(e,{value})=>{setNavSelection(value)}}>Folders</Button>
+                </Segment>
+                <Segment attached='bottom' className='remove-bg' >
+                        <Menu fluid compact className='notes-menu'>
+                            <Menu.Item className='tools' position='right'>
+                                <Icon size='huge'name='file text' color='blue'/>
+                            </Menu.Item>
+                        </Menu>
+                </Segment>
             </Grid.Column>
+            
         </>
     )
 }
