@@ -28,10 +28,14 @@ export const NotesDashboard = ({ notes }) => {
                     >
                         {!showSearch && <Icon name='search' onClick={() => { setShowSearch(true) }} />}
                         {showSearch && (
-                            <Search fluid input={{ icon: 'search', iconPosition: 'left' }} />
+                            <Search fluid className='search-bar' input={{ icon: 'search', iconPosition: 'left' }} />
 
                         )}
                         <Dropdown item icon='ellipsis horizontal' className='elipsis-icon' onClick={()=>{setShowSearch(false)}}>
+                        <Dropdown.Menu className="tools-menu">
+                            <Dropdown.Item>Option #2</Dropdown.Item>
+                            <Dropdown.Item>Option #3</Dropdown.Item>
+                        </Dropdown.Menu>
                         </Dropdown>
                     </Menu.Item>
 

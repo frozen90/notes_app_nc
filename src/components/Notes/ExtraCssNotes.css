@@ -13,9 +13,6 @@
 .tools-menu{
     border-radius: 15px !important;
     cursor: pointer;
-    background-color: #3F3B51 !important;
-    color: white !important;
-    font-weight: bold !important;
 }
 
 .elipsis-icon{
@@ -26,3 +23,10 @@
     color: white !important;
 }
 
+
+
+@media only screen and (max-width: 400px) {
+    .search-bar .input {
+        width: 120px;
+    }
+}
