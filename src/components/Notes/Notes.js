@@ -36,7 +36,7 @@ export const Notes = () => {
             </Helmet>
             {!loading ?
                 <Grid centered style={{ height: "100vh" }} verticalAlign="middle">
-                    {notes.length > 0 && !start ?
+                    {notes.length > 0 || start ?
                         null
                         :
                         <Grid.Column computer={16} mobile={16} tablet={16} className="notes-dashboard">
