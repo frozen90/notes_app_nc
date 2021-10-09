@@ -104,7 +104,7 @@ export const Login = () => {
                         </Form>
                     </Segment>
                     <Message color="black">
-                        Not registered yet? <a href="/signup" onClick={() => { setFormType("SignUp"); setShowErrors(false); }}>Sign Up</a>
+                        Not registered yet? <a href="#" onClick={() => { setFormType("SignUp"); setShowErrors(false); }}>Sign Up</a>
                     </Message>
                 </Grid.Column>)}
                 {formType === 'SignUp' && (<Grid.Column computer={6} mobile={16} tablet={10}>
@@ -166,7 +166,7 @@ export const Login = () => {
                         </Form>
                     </Segment>
                     <Message color="black">
-                        Already registered ? <a href="/login" onClick={() => { setFormType("Login"); setShowErrors(false) }}>Go back to login</a>
+                        Already registered ? <a href="#" onClick={() => { setFormType("Login"); setShowErrors(false) }}>Go back to login</a>
                     </Message>
                 </Grid.Column>)
                 }
