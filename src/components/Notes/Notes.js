@@ -64,7 +64,7 @@ export const Notes = () => {
                 </Grid>
 
                 :
-                <Loader className='loader' active size='large'>Please Wait Loading...</Loader>
+                <Loader className='loader' active size='large'>Loading...</Loader>
 
             }
 
