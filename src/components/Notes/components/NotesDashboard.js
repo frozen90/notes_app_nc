@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from "framer-motion"
 
 export const NotesDashboard = ({ notes }) => {
-    const [navSelection, setNavSelection] = useState('All')
+    const [navSelection, setNavSelection] = useState('Notes')
     const [showSearch, setShowSearch] = useState(false)
     return (
         <>
@@ -41,19 +41,19 @@ export const NotesDashboard = ({ notes }) => {
                     </Menu.Item>
 
                 </Menu>
-                <Segment className='remove-bg' textAlign='center' style={{height:'70vh'}}>
-                            <Button size='huge' value='All' className={navSelection === 'All' ? 'dashboard-btns active-btn':'dashboard-btns'} onClick={(e,{value})=>{setNavSelection(value)}}>All</Button>
-                            <Button size='huge' value='Folders' className={navSelection === 'Folders' ? 'dashboard-btns active-btn':'dashboard-btns'} onClick={(e,{value})=>{setNavSelection(value)}}>Folders</Button>
+                <Segment className='remove-bg' textAlign='center' style={{ minHeight: '60vh' }}>
+                    <Button size='huge' value='Notes' className={navSelection === 'Notes' ? 'dashboard-btns active-btn' : 'dashboard-btns'} onClick={(e, { value }) => { setNavSelection(value) }}>Notes</Button>
+                    <Button size='huge' value='Folders' className={navSelection === 'Folders' ? 'dashboard-btns active-btn' : 'dashboard-btns'} onClick={(e, { value }) => { setNavSelection(value) }}>Folders</Button>
                 </Segment>
                 <Segment attached='bottom' className='remove-bg' >
-                        <Menu fluid compact className='notes-menu'>
-                            <Menu.Item className='tools' position='right'>
-                                <Icon size='huge'name='file text' color='blue'/>
-                            </Menu.Item>
-                        </Menu>
+                    <Menu fluid compact className='notes-menu'>
+                        <Menu.Item position='right'>
+                            <Button className='remove-bg'><Button.Content><Icon circular size='huge' name='file text'  className='add-new-note' /></Button.Content></Button>
+                        </Menu.Item>
+                    </Menu>
                 </Segment>
             </Grid.Column>
-            
+
         </>
     )
 }

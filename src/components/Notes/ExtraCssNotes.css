@@ -19,10 +19,6 @@
     margin-left: 5px !important;
     margin-right: 25px !important;
 }
-.test{
-    color: white !important;
-}
-
 .remove-bg{
     background-color: transparent !important;
     border: none !important;
@@ -39,6 +35,9 @@
 .dashboard-btns:hover {
     text-decoration: underline !important;
     color: #F6AE2D !important;
+}
+.add-new-note{
+    background-color: #706FC8 !important;
 }
 
 @media only screen and (max-width: 400px) {
