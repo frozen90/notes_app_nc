@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
-import Amplify, {API, graphqlOperation} from 'aws-amplify';
+import {API, graphqlOperation} from 'aws-amplify';
 import {listNotes} from '../../graphql/queries';
+
 
 export const Notes = () => {
 

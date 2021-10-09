@@ -8,9 +8,7 @@ import awsExport from "./aws-exports";
 Amplify.configure(awsExport);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById('root')
 );
 
