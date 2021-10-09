@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { API, graphqlOperation } from 'aws-amplify';
 import { listNotes } from '../../../graphql/queries'
-import { Grid, Segment, Icon, Button, Header, Menu } from 'semantic-ui-react'
-import '.././ExtraCssNotes.css'
+import { Grid, Segment, Icon, Button, Header, Menu, Search, Dropdown } from 'semantic-ui-react'
+import '.././ExtraCssNotes.css';
 import { Helmet } from "react-helmet";
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from "framer-motion"
 
 export const NotesDashboard = ({ notes }) => {
-
+    const [showSearch, setShowSearch] = useState(false)
     return (
         <>
             <Helmet>
@@ -17,12 +17,27 @@ export const NotesDashboard = ({ notes }) => {
                 <link rel="canonical" href="/login" />
             </Helmet>
             <Grid.Column computer={16} mobile={16} tablet={16} className="notes-dashboard">
-            <Menu className='notes-menu'>
-                <Menu.Item
-                name='Notes'>
-                </Menu.Item>
+                <Menu fluid compact className='notes-menu'>
+                    <Menu.Item
+                        name='Notes'>
+                    </Menu.Item>
+                    <Menu.Item
+                        className='tools'
+                        position='right'
+                        name='search'
+                    >
+                        {!showSearch && <Icon name='search' onClick={() => { setShowSearch(true) }} />}
+                        {showSearch && (
+                            <Search fluid input={{ icon: 'search', iconPosition: 'left' }} />
 
-            </Menu>
+                        )}
+                        <Dropdown item icon='ellipsis horizontal' className='elipsis-icon' onClick={()=>{setShowSearch(false)}}>
+                        </Dropdown>
+                    </Menu.Item>
+
+
+
+                </Menu>
             </Grid.Column>
         </>
     )

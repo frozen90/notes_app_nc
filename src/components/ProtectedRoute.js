@@ -31,7 +31,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
                     return <Redirect to={{ pathname: "/login", state: { location: props.location } }} />
                 }
 
-            }} /> : <Loader active />}
+            }} /> : <Loader className='loader' active size='large'>Please Wait Loading...</Loader>}
 
         </>
     )

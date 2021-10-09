@@ -8,3 +8,21 @@
     background-color: transparent !important;
     color: 'white' !important;
 }
+
+
+.tools-menu{
+    border-radius: 15px !important;
+    cursor: pointer;
+    background-color: #3F3B51 !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.elipsis-icon{
+    margin-left: 5px !important;
+    margin-right: 25px !important;
+}
+.test{
+    color: white !important;
+}
+

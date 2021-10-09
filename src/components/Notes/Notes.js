@@ -47,8 +47,8 @@ export const Notes = () => {
                             <Grid.Column computer={16} mobile={16} tablet={16} className="notes-dashboard">
 
                                 <motion.div animate={{
-                                    scale: [1, 1.5, 1.5, 1, 1],
-                                }} transition={{ duration: 2 }} exit={{ y: -1000 }}>
+                                    scale: [0.1,1],
+                                }} transition={{duration: 0.5}} >
                                     <Segment textAlign='center' style={{ marginTop: '100px', background: 'transparent' }}>
                                         <Icon size="massive" name='book' />
                                         <Header as="h1" inverted>Nordcloud notes</Header>
