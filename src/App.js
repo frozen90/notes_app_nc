@@ -7,6 +7,7 @@ import {
   Switch,
   Route,
 
+
 } from "react-router-dom";
 import 'semantic-ui-css/semantic.min.css'
 import Login from './components/Forms/Login';
@@ -15,6 +16,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 Amplify.configure(awsExports)
 
 function App() {
+
   return (
 
     <Router>

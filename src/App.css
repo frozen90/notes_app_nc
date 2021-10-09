@@ -54,6 +54,7 @@ body{
   background-color: #1F1D2C;
   min-height: 90vh;
   padding: 50px;
+  border-radius: 25px;
 }
 
 body > div {
@@ -62,4 +63,9 @@ body > div {
 
 .loader{
   background-color: transparent !important;
+}
+
+.item{
+  color: white !important;
+  font-weight: Bold !important;
 }

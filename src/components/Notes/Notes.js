@@ -5,8 +5,7 @@ import { Container, Grid, Segment, Icon, Loader, Button, Header, Dimmer } from '
 import './ExtraCssNotes.css'
 import { Helmet } from "react-helmet";
 import NotesDashboard from "./components/NotesDashboard";
-import { motion } from "framer-motion"
-
+import { motion, AnimatePresence } from "framer-motion"
 export const Notes = () => {
 
     const [loading, setLoading] = useState(true)
@@ -30,6 +29,7 @@ export const Notes = () => {
     return (
 
         <Container fluid>
+
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Notes Dashboard</title>
@@ -38,20 +38,28 @@ export const Notes = () => {
             {!loading ?
                 <Grid centered style={{ padding: '20px', height: "100vh" }} verticalAlign="middle">
                     {notes.length > 0 || start ?
+
                         <NotesDashboard />
+
                         :
-                        <Grid.Column computer={16} mobile={16} tablet={16} className="notes-dashboard">
-                            <motion.div animate={{
-                                scale: [1, 1.5, 1.5, 1, 1],
-                            }} transition={{ duration: 1 }}>
-                                <Segment textAlign='center' style={{ marginTop: '100px', background: 'transparent' }}>
-                                    <Icon size="massive" name='book' />
-                                    <Header as="h1" inverted>Nordcloud notes</Header>
-                                    <p style={{ color: 'white' }}>Take notes, reminders, share them with friends in secure manner</p>
-                                    <Button className="get-started-btn" content='Get Started' onClick={() => { setStart(true) }} />
-                                </Segment>
-                            </motion.div>
-                        </Grid.Column>
+
+                        <AnimatePresence>
+                            <Grid.Column computer={16} mobile={16} tablet={16} className="notes-dashboard">
+
+                                <motion.div animate={{
+                                    scale: [1, 1.5, 1.5, 1, 1],
+                                }} transition={{ duration: 2 }} exit={{ y: -1000 }}>
+                                    <Segment textAlign='center' style={{ marginTop: '100px', background: 'transparent' }}>
+                                        <Icon size="massive" name='book' />
+                                        <Header as="h1" inverted>Nordcloud notes</Header>
+                                        <p style={{ color: 'white' }}>Take notes, reminders, share them with friends in secure manner</p>
+                                        <Button className="get-started-btn" content='Get Started' onClick={() => { setStart(true) }} />
+                                    </Segment>
+                                </motion.div>
+
+                            </Grid.Column>
+                        </AnimatePresence>
+
                     }
                 </Grid>
 
