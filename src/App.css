@@ -43,6 +43,7 @@
 
 .login-button{
   background-color: #F6AE2D !important;
+  width: 225px !important;
 }
 body{
   font-family: 'Noto Sans Display', sans-serif !important;
@@ -57,4 +58,8 @@ body{
 
 body > div {
   height: 100%
+}
+
+.loader{
+  background-color: transparent !important;
 }

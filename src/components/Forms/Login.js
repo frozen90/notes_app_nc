@@ -59,7 +59,7 @@ export const Login = (props) => {
 
     useEffect(()=>{
         if(loggedIn === true){
-            props.history.push('/')
+            props.history.push('/notes')
         }
        
     },[loggedIn])

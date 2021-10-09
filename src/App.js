@@ -21,6 +21,7 @@ function App() {
       <Switch>
         <ProtectedRoute exact path="/notes" component={Notes} /> 
         <Route exact path="/login" component={Login}/>
+        <Route path="/" component={Login}/>
       </Switch>
 
     </Router>
