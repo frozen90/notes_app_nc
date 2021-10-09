@@ -6,11 +6,9 @@ import {listNotes} from '../../graphql/queries';
 export const Notes = () => {
 
     const [notes, setNotes] = useState([])
-
     useEffect(()=>{
         fetchNotes()
     },[])
-
 
     async function fetchNotes(){
         try{

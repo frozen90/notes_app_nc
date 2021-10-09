@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Auth } from "aws-amplify"
 import { Form, Grid, Header, Segment, Message, Button, Container } from "semantic-ui-react"
 import { Helmet } from "react-helmet";
 
-export const Login = () => {
+export const Login = (props) => {
     const [formType, setFormType] = useState('Login')
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -12,12 +12,16 @@ export const Login = () => {
     const [errors, setErrors] = useState({ formType: { message: '' } })
     const [showErrors, setShowErrors] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false)
 
     const handleLoginSubmit = async function (event) {
         event.preventDefault();
         setLoading(true)
         try {
             await Auth.signIn(username, password)
+            setLoggedIn(true)
+
+            
         } catch (err) {
             setShowErrors(true)
             setErrors({ formType: { message: err.message } })
@@ -53,6 +57,12 @@ export const Login = () => {
         setLoading(false)
     }
 
+    useEffect(()=>{
+        if(loggedIn === true){
+            props.history.push('/')
+        }
+       
+    },[loggedIn])
 
     return (
         <Container>
