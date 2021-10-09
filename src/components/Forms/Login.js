@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Auth } from "aws-amplify"
 import { Form, Grid, Header, Segment, Message, Button, Container } from "semantic-ui-react"
 import { Helmet } from "react-helmet";
@@ -11,43 +11,46 @@ export const Login = () => {
     const [authCode, setAuthCode] = useState("")
     const [errors, setErrors] = useState({ formType: { message: '' } })
     const [showErrors, setShowErrors] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleLoginSubmit = async function (event) {
         event.preventDefault();
+        setLoading(true)
         try {
-            let response = await Auth.signIn(username, password)
-            console.log('auth response', response)
+            await Auth.signIn(username, password)
         } catch (err) {
             setShowErrors(true)
             setErrors({ formType: { message: err.message } })
         }
+        setLoading(false)
     }
     const handleSignUpSubmit = async function (event) {
         event.preventDefault();
+        setLoading(true)
         try {
-            let response = await Auth.signUp({ username, password, attributes: { email } })
+            await Auth.signUp({ username, password, attributes: { email } })
             setFormType('confirmSignUp')
             setShowErrors(false);
         } catch (err) {
             setShowErrors(true);
             setErrors({ formType: { message: err.message } })
-            console.log(err)
 
         }
+        setLoading(false)
     }
 
     const handleSignupConfim = async function (event) {
         event.preventDefault();
+        setLoading(true)
         try {
-            let response = await Auth.confirmSignUp(username, authCode)
-            console.log(response)
+            await Auth.confirmSignUp(username, authCode)
             setFormType("Login")
 
         } catch (err) {
             setShowErrors(true);
             setErrors({ formType: { message: err.message } })
-            console.log(err)
         }
+        setLoading(false)
     }
 
 
@@ -95,13 +98,13 @@ export const Login = () => {
                             }
 
                             <Segment inverted textAlign="center">
-                                <Button className="login-button" content='Login' />
+                                <Button loading={loading} className="login-button" content='Login' />
                             </Segment>
 
                         </Form>
                     </Segment>
-                    <Message>
-                        Not registered yet? <a href="#" onClick={() => { setFormType("SignUp"); setShowErrors(false); }}>Sign Up</a>
+                    <Message color="black">
+                        Not registered yet? <a href="/signup" onClick={() => { setFormType("SignUp"); setShowErrors(false); }}>Sign Up</a>
                     </Message>
                 </Grid.Column>)}
                 {formType === 'SignUp' && (<Grid.Column computer={6} mobile={16} tablet={10}>
@@ -156,14 +159,14 @@ export const Login = () => {
                                 : null
                             }
                             <Segment basic textAlign={"center"}>
-                                <Button className="login-button" content='Signup' />
+                                <Button loading={loading} className="login-button" content='Signup' />
                             </Segment>
 
 
                         </Form>
                     </Segment>
-                    <Message>
-                        Already registered ? <a href="#" onClick={() => { setFormType("Login"); setShowErrors(false) }}>Go back to login</a>
+                    <Message color="black">
+                        Already registered ? <a href="/login" onClick={() => { setFormType("Login"); setShowErrors(false) }}>Go back to login</a>
                     </Message>
                 </Grid.Column>)
                 }
@@ -195,7 +198,7 @@ export const Login = () => {
                                 : null
                             }
                             <Segment basic textAlign={"center"}>
-                                <Button className="login-button" content='Confirm Sign Up' />
+                                <Button loading={loading} className="login-button" content='Confirm Sign Up' />
                             </Segment>
 
 
