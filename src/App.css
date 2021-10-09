@@ -45,5 +45,11 @@
   background-color: #F6AE2D !important;
 }
 body{
-  background-color: #122932 !important;
+  background-color: #3F3B51 !important;
+}
+
+.notes-dashboard{
+  background-color: #1F1D2C;
+  min-height: 90vh;
+  padding: 50px;
 }

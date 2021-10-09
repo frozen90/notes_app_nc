@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "nordcloudnotes",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authnordcloudnotescc9e4c9d",
+      "Outputs.UserPoolId"
+    ]
+  }
 }
