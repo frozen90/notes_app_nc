@@ -4,7 +4,8 @@ import { listNotes } from '../../graphql/queries';
 import { Container, Grid, Segment, Icon, Loader, Button, Header, Dimmer } from 'semantic-ui-react'
 import './ExtraCssNotes.css'
 import { Helmet } from "react-helmet";
-
+import NotesDashboard from "./components/NotesDashboard";
+import { motion } from "framer-motion"
 
 export const Notes = () => {
 
@@ -35,17 +36,21 @@ export const Notes = () => {
                 <link rel="canonical" href="/login" />
             </Helmet>
             {!loading ?
-                <Grid centered style={{ height: "100vh" }} verticalAlign="middle">
+                <Grid centered style={{ padding: '20px', height: "100vh" }} verticalAlign="middle">
                     {notes.length > 0 || start ?
-                        null
+                        <NotesDashboard />
                         :
                         <Grid.Column computer={16} mobile={16} tablet={16} className="notes-dashboard">
-                            <Segment textAlign='center' style={{ marginTop: '100px', background: 'transparent' }}>
-                                <Icon size="massive" name='book' />
-                                <Header as="h1" inverted>Nordcloud notes</Header>
-                                <p style={{ color: 'white' }}>Take notes, reminders, share them with friends in secure manner</p>
-                                <Button className="get-started-btn" content='Get Started' onClick={() => { setStart(true) }} />
-                            </Segment>
+                            <motion.div animate={{
+                                scale: [1, 1.5, 1.5, 1, 1],
+                            }} transition={{ duration: 1 }}>
+                                <Segment textAlign='center' style={{ marginTop: '100px', background: 'transparent' }}>
+                                    <Icon size="massive" name='book' />
+                                    <Header as="h1" inverted>Nordcloud notes</Header>
+                                    <p style={{ color: 'white' }}>Take notes, reminders, share them with friends in secure manner</p>
+                                    <Button className="get-started-btn" content='Get Started' onClick={() => { setStart(true) }} />
+                                </Segment>
+                            </motion.div>
                         </Grid.Column>
                     }
                 </Grid>
