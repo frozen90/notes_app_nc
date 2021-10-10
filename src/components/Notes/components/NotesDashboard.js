@@ -7,7 +7,7 @@ import Note from "./Note";
 import Folder from "../../Folders/Folder";
 import { AnimateSharedLayout } from "framer-motion";
 
-const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 1 }, { folder_name: 'New Folder 3', id: 1 }, { folder_name: 'New Folder 4', id: 1 }, { folder_name: 'New Folder 5', id: 1 }, { folder_name: 'New Folder 6', id: 1 }]
+const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 1 }, { folder_name: 'New Folder 3 sadsadasdadasdsadasad', id: 1 }, { folder_name: 'New Folder 4', id: 1 }, { folder_name: 'New Folder 5', id: 1 }, { folder_name: 'New Folder 6', id: 1 }]
 
 export const NotesDashboard = ({ notes }) => {
     const [notesLits, setNotesList] = useState(notes)

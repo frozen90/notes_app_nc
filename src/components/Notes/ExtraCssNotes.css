@@ -7,6 +7,7 @@
     color: white !important;
     overflow-y: hidden;
     min-width: 300px !important;
+    box-shadow: 0 0 0 0 !important;
 }
 .folder-bg{
     background-color: #262636 !important;
@@ -17,6 +18,7 @@
     color: white !important;
     overflow-y: hidden;
     min-width: 300px !important;
+    box-shadow: 0 0 0 0 !important;
 
 }
 .folder-icon{
@@ -93,6 +95,9 @@
 }
 .header-card{
     color: white !important;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }
 .note-textarea{
     margin-top: 25px;

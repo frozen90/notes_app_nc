@@ -94,6 +94,7 @@ export const Note = () => {
 
                 <Input name='note_password' value={password} placeholder='Note Password' onChange={(e, { value }) => { setPassword(value) }} /><br />
                 <Button style={{ marginTop: '5px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={createPassword}>Lock</Button>
+                <Button style={{ marginTop: '5px', color: 'white' }} onClick={()=>{setLockDimmerActive(false)}}>Close</Button>
             </Dimmer>
 
         </>
