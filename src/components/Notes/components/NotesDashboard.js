@@ -6,34 +6,52 @@ import PropTypes from 'prop-types';
 import Note from "./Note";
 import Folder from "../../Folders/Folder";
 import { API, graphqlOperation } from 'aws-amplify';
-import { createNotes } from '../../../graphql/mutations';
+import { createNotes, deleteNotes } from '../../../graphql/mutations';
 import { AnimateSharedLayout } from "framer-motion";
+import NotesDisplay from "./NotesDisplay";
 
 const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 2 }, { folder_name: 'New Folder 3 sadsadasdadasdsadasad', id: 3 }, { folder_name: 'New Folder 4', id: 4 }, { folder_name: 'New Folder 5', id: 5 }, { folder_name: 'New Folder 6', id: 6 }]
 
-export const NotesDashboard = ({ notes }) => {
+export const NotesDashboard = ({ notesList }) => {
     const [btnLoading, setBtnLoading] = useState(false)
-    const [notesList, setNotesList] = useState(notes)
+    const [notes, setNotes] = useState(notesList)
     const [foldersList, setFoldersList] = useState(folders)
     const [navSelection, setNavSelection] = useState('Notes')
-    const listNotes = notesList.map((note)=>{
-        return(<Note key={note.id} note={note}/>)
-    })
+
     const listFolders = folders.map((folder) => {
         return (<Folder folder={folder} key={folder.id} />)
     })
-    async function createNewNote(){
+    async function createNewNote() {
         try {
             setBtnLoading(true)
-            const notesData = await API.graphql(graphqlOperation(createNotes,{input: {title:'Untitled Note', content:'Please add some content...',locked:false, password:''}}))
+            const notesData = await API.graphql(graphqlOperation(createNotes, { input: { title: 'Untitled Note', content: 'Please add some content...', locked: false, password: '' } }))
             let note = notesData.data.createNotes
-            setNotesList([note, ...notesList])
+            setNotes([note, ...notes])
             setBtnLoading(false)
         } catch (err) {
             setBtnLoading(false)
             console.log('error')
         }
     }
+    async function deleteNote(id) {
+        try {
+            // const deletedNote = await API.graphql(graphqlOperation(deleteNotes,{input: {id:id}}))
+            let removeIndex = notes.findIndex(item => item.id === id);
+            notes.splice(removeIndex, 1)
+            let newNotes = notes
+            setNotes(newNotes)
+
+
+
+        } catch (err) {
+            console.log('error')
+        }
+    }
+
+    useEffect(()=>{
+        console.log('fire')
+    },[notes.length])
+
     return (
         <>
             <Helmet>
@@ -52,7 +70,7 @@ export const NotesDashboard = ({ notes }) => {
                         position='right'
                         name='search'
                     >
-                        <Search fluid className='search-bar' inverted input={{ icon: 'search',color:'red',  iconPosition: 'left' }} />
+                        <Search fluid className='search-bar' input={{ icon: 'search', color: 'red', iconPosition: 'left' }} />
 
                     </Menu.Item>
 
@@ -63,13 +81,25 @@ export const NotesDashboard = ({ notes }) => {
                 </Segment>
                 <Segment textAlign='center' className='remove-bg notes-segment'>
                     {navSelection === 'Notes' && (
-                        <Card.Group centered itemsPerRow={4} stackable >
-                            {listNotes}
-                            <Button className='remove-bg fixed-btn' onClick={createNewNote} loading={btnLoading} ><Button.Content><Icon circular size='huge' name='plus' className='add-new-note' /></Button.Content></Button>
-                        </Card.Group>
+                        <>
+                            <NotesDisplay notes={notes} deleteNote={deleteNote} />
+                            <Button className='remove-bg fixed-btn' onClick={createNewNote} loading={btnLoading} >
+                                <Button.Content>
+                                    <Icon circular size='huge' name='plus' className='add-new-note' />
+                                </Button.Content>
+                            </Button>
+                        </>
 
                     )}
-                    {navSelection === 'Folders' && <Card.Group centered itemsPerRow={6}> {listFolders} <Button className='remove-bg fixed-btn'><Button.Content><Icon circular size='huge' name='plus' className='add-new-note' /></Button.Content></Button></Card.Group>}
+                    {navSelection === 'Folders' && (
+                        <Card.Group centered itemsPerRow={6}>
+                            {listFolders}
+                            <Button className='remove-bg fixed-btn'>
+                                <Button.Content>
+                                    <Icon circular size='huge' name='plus' className='add-new-note' />
+                                </Button.Content>
+                            </Button>
+                        </Card.Group>)}
                 </Segment>
 
             </Grid.Column>

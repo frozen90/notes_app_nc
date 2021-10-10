@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Header, Card, Icon, Button, Dimmer, Input, Segment } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
-import { API, graphqlOperation } from 'aws-amplify';
-import { listNotes } from '../../../graphql/queries';
 
 
-export const Note = ({ note }) => {
 
+
+export const Note = ({ note, deleteNote }) => {
     const [title, setTitle] = useState(note.title)
     const [content, setContent] = useState(note.content)
     const [password, setPassword] = useState(note.password || '')
@@ -87,7 +86,7 @@ export const Note = ({ note }) => {
                                 <Icon size='large' className='active-btn' inverted name={locked ? 'unlock' : 'lock'}></Icon>
                             </Button.Content>
                         </Button>
-                        <Button className='remove-bg' floated='right' >
+                        <Button className='remove-bg' floated='right' onClick={()=>{deleteNote(note.id)}} >
                             <Button.Content>
                                 <Icon size='large' color='red' inverted name='trash'></Icon>
                             </Button.Content>
@@ -148,7 +147,8 @@ export const Note = ({ note }) => {
 }
 
 Note.propTypes = {
-    note: PropTypes.object
+    note: PropTypes.object,
+    deleteNote: PropTypes.func
 }
 
 export default Note;
