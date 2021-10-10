@@ -63,8 +63,9 @@
 }
 
 .notes-segment{
-    max-height: 78vh;
+    min-height: 78vh !important;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 .search-bar{
     margin-right: 25px !important;
@@ -92,6 +93,8 @@
 .card-header-content{
     height: 5px !important;
 }
+
+
 @media only screen and (max-width: 400px) {
     .search-bar .input {
         width: 120px;

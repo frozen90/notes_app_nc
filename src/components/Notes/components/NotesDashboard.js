@@ -4,15 +4,23 @@ import '.././ExtraCssNotes.css';
 import { Helmet } from "react-helmet";
 import PropTypes from 'prop-types';
 import Note from "./Note";
+import Folder from "../../Folders/Folder";
+
+const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2', id: 1 }, { folder_name: 'New Folder 3', id: 1 }, { folder_name: 'New Folder 4', id: 1 }, { folder_name: 'New Folder 5', id: 1 }, { folder_name: 'New Folder 6', id: 1 }]
 
 export const NotesDashboard = ({ notes }) => {
     const [notesLits, setNotesList] = useState(notes)
+    const [foldersList, setFoldersList] = useState(folders)
     const [navSelection, setNavSelection] = useState('Notes')
     const [showSearch, setShowSearch] = useState(false)
     const createNewNote = () => {
 
     }
-
+    const listFolders = folders.map((folder) => {
+        return (<Grid.Column mobile={11} tablet={8} computer={3}>
+            <Folder />
+        </Grid.Column>)
+    })
     return (
         <>
             <Helmet>
@@ -39,20 +47,27 @@ export const NotesDashboard = ({ notes }) => {
                     <Button size='huge' value='Notes' className={navSelection === 'Notes' ? 'dashboard-btns active-btn' : 'dashboard-btns'} onClick={(e, { value }) => { setNavSelection(value) }}>Notes</Button>
                     <Button size='huge' value='Folders' className={navSelection === 'Folders' ? 'dashboard-btns active-btn' : 'dashboard-btns'} onClick={(e, { value }) => { setNavSelection(value) }}>Folders</Button>
                 </Segment>
-                <Segment textAlign='center' style={{ maxHeight: '75vh' }} className='remove-bg notes-segment'>
-                    <Card.Group itemsPerRow={4} stackable>
-                        <Note />
-                        <Note />
-                        <Note />
-                        <Note />
-                        <Note />
-                        <Note />
-                        <Note />
-                        <Note />
-                    </Card.Group>
-                    {navSelection === 'Notes' && (<Button className='remove-bg fixed-btn' onClick={createNewNote}><Button.Content><Icon circular size='huge' name='file text' className='add-new-note' /></Button.Content></Button>)}
-                    {navSelection === 'Folders' && (<Button className='remove-bg fixed-btn'><Button.Content><Icon circular size='huge' name='folder' className='add-new-note' /></Button.Content></Button>)}
-                </Segment>
+                <Grid centered className='remove-bg notes-segment'>
+                    {navSelection === 'Notes' && (<>
+                        <Grid.Column mobile={11} tablet={8} computer={3}>
+                            <Note />
+                        </Grid.Column>
+                        <Grid.Column mobile={10} tablet={8} computer={3}>
+                            <Note />
+                        </Grid.Column>
+                        <Grid.Column mobile={10} tablet={8} computer={3}>
+                            <Note />
+                        </Grid.Column>
+                        <Grid.Column mobile={10} tablet={8} computer={3}>
+                            <Note />
+                        </Grid.Column>
+                        <Grid.Column mobile={10} tablet={8} computer={3}>
+                            <Note />
+                        </Grid.Column>
+                        <Button className='remove-bg fixed-btn' onClick={createNewNote}><Button.Content><Icon circular size='huge' name='file text' className='add-new-note' /></Button.Content></Button></>
+                    )}
+                    {navSelection === 'Folders' && <> {listFolders} <Button className='remove-bg fixed-btn'><Button.Content><Icon circular size='huge' name='folder' className='add-new-note' /></Button.Content></Button></>}
+                </Grid>
 
             </Grid.Column>
 
