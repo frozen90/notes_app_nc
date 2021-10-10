@@ -6,7 +6,17 @@
     padding: 20px !important;
     color: white !important;
     overflow-y: hidden;
-    min-width: 250px !important;
+    min-width: 300px !important;
+}
+.folder-bg{
+    background-color: #262636 !important;
+    opacity: 0.7 !important;
+    border-radius: 25px !important;
+    height: 350px !important;
+    padding: 20px !important;
+    color: white !important;
+    overflow-y: hidden;
+    min-width: 100px !important;
 }
 .note-bg:hover{
     opacity: 1 !important;
@@ -63,8 +73,8 @@
 }
 
 .notes-segment{
-    min-height: 78vh !important;
-    overflow-y: scroll;
+    height: 75vh !important;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 .search-bar{

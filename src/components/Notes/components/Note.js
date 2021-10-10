@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Header, Card, Icon, Button, Dimmer, Input } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
+
+
 export const Note = () => {
     const [password, setPassword] = useState('')
     const [unlockNotePassword, setUnlockNotePassword] = useState('')

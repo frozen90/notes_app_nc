@@ -17,9 +17,7 @@ export const NotesDashboard = ({ notes }) => {
 
     }
     const listFolders = folders.map((folder) => {
-        return (<Grid.Column mobile={11} tablet={8} computer={3}>
-            <Folder />
-        </Grid.Column>)
+        return (<Folder folder={folder} />)
     })
     return (
         <>
@@ -47,27 +45,29 @@ export const NotesDashboard = ({ notes }) => {
                     <Button size='huge' value='Notes' className={navSelection === 'Notes' ? 'dashboard-btns active-btn' : 'dashboard-btns'} onClick={(e, { value }) => { setNavSelection(value) }}>Notes</Button>
                     <Button size='huge' value='Folders' className={navSelection === 'Folders' ? 'dashboard-btns active-btn' : 'dashboard-btns'} onClick={(e, { value }) => { setNavSelection(value) }}>Folders</Button>
                 </Segment>
-                <Grid centered className='remove-bg notes-segment'>
-                    {navSelection === 'Notes' && (<>
-                        <Grid.Column mobile={11} tablet={8} computer={3}>
+                <Segment textAlign='center' className='remove-bg notes-segment'>
+                    {navSelection === 'Notes' && (
+                        <Card.Group centered itemsPerRow={4} stackable >
                             <Note />
-                        </Grid.Column>
-                        <Grid.Column mobile={10} tablet={8} computer={3}>
                             <Note />
-                        </Grid.Column>
-                        <Grid.Column mobile={10} tablet={8} computer={3}>
                             <Note />
-                        </Grid.Column>
-                        <Grid.Column mobile={10} tablet={8} computer={3}>
                             <Note />
-                        </Grid.Column>
-                        <Grid.Column mobile={10} tablet={8} computer={3}>
                             <Note />
-                        </Grid.Column>
-                        <Button className='remove-bg fixed-btn' onClick={createNewNote}><Button.Content><Icon circular size='huge' name='file text' className='add-new-note' /></Button.Content></Button></>
+                            <Note />
+                            <Note />
+                            <Note />
+                            <Note />
+                            <Note />
+                            <Note />
+                            <Note />
+                            <Note />
+                            <Note />
+                            <Button className='remove-bg fixed-btn' onClick={createNewNote}><Button.Content><Icon circular size='huge' name='file text' className='add-new-note' /></Button.Content></Button>
+                        </Card.Group>
+
                     )}
-                    {navSelection === 'Folders' && <> {listFolders} <Button className='remove-bg fixed-btn'><Button.Content><Icon circular size='huge' name='folder' className='add-new-note' /></Button.Content></Button></>}
-                </Grid>
+                    {navSelection === 'Folders' && <Card.Group centered itemsPerRow={6}> {listFolders} <Button className='remove-bg fixed-btn'><Button.Content><Icon circular size='huge' name='folder' className='add-new-note' /></Button.Content></Button></Card.Group>}
+                </Segment>
 
             </Grid.Column>
 
