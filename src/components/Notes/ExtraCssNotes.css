@@ -77,7 +77,9 @@
 .header-card{
     color: white !important;
 }
-
+.note-textarea{
+    color: white !important
+}
 
 @media only screen and (max-width: 400px) {
     .search-bar .input {
