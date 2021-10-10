@@ -12,8 +12,7 @@ import { AnimateSharedLayout } from "framer-motion";
 const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 2 }, { folder_name: 'New Folder 3 sadsadasdadasdsadasad', id: 3 }, { folder_name: 'New Folder 4', id: 4 }, { folder_name: 'New Folder 5', id: 5 }, { folder_name: 'New Folder 6', id: 6 }]
 
 export const NotesDashboard = ({ notes }) => {
-    console.log(notes)
-    const [btnLoading, setBtnLoading] = useState(true)
+    const [btnLoading, setBtnLoading] = useState(false)
     const [notesList, setNotesList] = useState(notes)
     const [foldersList, setFoldersList] = useState(folders)
     const [navSelection, setNavSelection] = useState('Notes')
@@ -25,11 +24,13 @@ export const NotesDashboard = ({ notes }) => {
     })
     async function createNewNote(){
         try {
+            setBtnLoading(true)
             const notesData = await API.graphql(graphqlOperation(createNotes,{input: {title:'Untitled Note', content:'Please add some content...',locked:false, password:''}}))
             let note = notesData.data.createNotes
             setNotesList([note, ...notesList])
-           
+            setBtnLoading(false)
         } catch (err) {
+            setBtnLoading(false)
             console.log('error')
         }
     }
