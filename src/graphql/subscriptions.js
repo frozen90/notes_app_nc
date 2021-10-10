@@ -1,265 +1,76 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateBlog = /* GraphQL */ `
-  subscription OnCreateBlog {
-    onCreateBlog {
-      id
-      name
-      posts {
-        items {
-          id
-          title
-          blogID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateBlog = /* GraphQL */ `
-  subscription OnUpdateBlog {
-    onUpdateBlog {
-      id
-      name
-      posts {
-        items {
-          id
-          title
-          blogID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteBlog = /* GraphQL */ `
-  subscription OnDeleteBlog {
-    onDeleteBlog {
-      id
-      name
-      posts {
-        items {
-          id
-          title
-          blogID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost {
-    onCreatePost {
-      id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
-        items {
-          id
-          postID
-          content
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost {
-    onUpdatePost {
-      id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
-        items {
-          id
-          postID
-          content
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost {
-    onDeletePost {
-      id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
-        items {
-          id
-          postID
-          content
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment {
-    onCreateComment {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment {
-    onUpdateComment {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment {
-    onDeleteComment {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateNotes = /* GraphQL */ `
-  subscription OnCreateNotes {
-    onCreateNotes {
+  subscription OnCreateNotes($owner: String!) {
+    onCreateNotes(owner: $owner) {
       id
       title
       content
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateNotes = /* GraphQL */ `
-  subscription OnUpdateNotes {
-    onUpdateNotes {
+  subscription OnUpdateNotes($owner: String!) {
+    onUpdateNotes(owner: $owner) {
       id
       title
       content
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteNotes = /* GraphQL */ `
-  subscription OnDeleteNotes {
-    onDeleteNotes {
+  subscription OnDeleteNotes($owner: String!) {
+    onDeleteNotes(owner: $owner) {
       id
       title
       content
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateSharedNote = /* GraphQL */ `
+  subscription OnCreateSharedNote {
+    onCreateSharedNote {
+      id
+      title
+      content
+      expire_date
+      password
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSharedNote = /* GraphQL */ `
+  subscription OnUpdateSharedNote {
+    onUpdateSharedNote {
+      id
+      title
+      content
+      expire_date
+      password
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSharedNote = /* GraphQL */ `
+  subscription OnDeleteSharedNote {
+    onDeleteSharedNote {
+      id
+      title
+      content
+      expire_date
+      password
       createdAt
       updatedAt
     }

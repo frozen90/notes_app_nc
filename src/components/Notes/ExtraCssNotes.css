@@ -16,7 +16,7 @@
     padding: 20px !important;
     color: white !important;
     overflow-y: hidden;
-    min-width: 100px !important;
+    min-width: 300px !important;
 
 }
 .folder-icon{
@@ -69,11 +69,9 @@
     color: #3F3B51 !important;
 }
 .active-btn {
-    text-decoration: underline !important;
     color: #F6AE2D !important;
 }
 .dashboard-btns:hover {
-    text-decoration: underline !important;
     color: #F6AE2D !important;
 }
 .add-new-note{

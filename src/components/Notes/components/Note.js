@@ -54,7 +54,7 @@ export const Note = () => {
     }
     return (
         <>
-            <motion.div className="ui card note-bg" exit={{y: -1000}} initial={{scale:0, y: +700, x:+1300 }} animate={{scale:1, y:0, x:0}}
+            <motion.div className="ui card note-bg" initial={{ scale: 0, y: +700, x: +1300 }} animate={{ scale: 1, y: 0, x: 0 }}
                 transition={{ ease: "easeOut", duration: 0.5 }}>
                 <Card.Content textAlign='center' className='card-header-content'><Header as="h2" className='header-card'>Title</Header></Card.Content>
                 <Card.Content textAlign='left' className='note-content'>

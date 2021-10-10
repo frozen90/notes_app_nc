@@ -5,9 +5,9 @@ import { Helmet } from "react-helmet";
 import PropTypes from 'prop-types';
 import Note from "./Note";
 import Folder from "../../Folders/Folder";
-import { AnimatePresence } from "framer-motion";
+import { AnimateSharedLayout } from "framer-motion";
 
-const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2', id: 1 }, { folder_name: 'New Folder 3', id: 1 }, { folder_name: 'New Folder 4', id: 1 }, { folder_name: 'New Folder 5', id: 1 }, { folder_name: 'New Folder 6', id: 1 }]
+const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 1 }, { folder_name: 'New Folder 3', id: 1 }, { folder_name: 'New Folder 4', id: 1 }, { folder_name: 'New Folder 5', id: 1 }, { folder_name: 'New Folder 6', id: 1 }]
 
 export const NotesDashboard = ({ notes }) => {
     const [notesLits, setNotesList] = useState(notes)
@@ -15,7 +15,7 @@ export const NotesDashboard = ({ notes }) => {
     const [navSelection, setNavSelection] = useState('Notes')
     const [showSearch, setShowSearch] = useState(false)
     const createNewNote = () => {
-
+        console.log('clicked')
     }
     const listFolders = folders.map((folder) => {
         return (<Folder folder={folder} />)
@@ -63,11 +63,11 @@ export const NotesDashboard = ({ notes }) => {
                             <Note />
                             <Note />
                             <Note />
-                            <Button className='remove-bg fixed-btn' onClick={createNewNote}><Button.Content><Icon circular size='huge' name='file text' className='add-new-note' /></Button.Content></Button>
+                            <Button className='remove-bg fixed-btn' onClick={createNewNote}><Button.Content><Icon circular size='huge' name='plus' className='add-new-note' /></Button.Content></Button>
                         </Card.Group>
 
                     )}
-                    {navSelection === 'Folders' && <Card.Group centered itemsPerRow={6}> {listFolders} <Button className='remove-bg fixed-btn'><Button.Content><Icon circular size='huge' name='folder' className='add-new-note' /></Button.Content></Button></Card.Group>}
+                    {navSelection === 'Folders' && <Card.Group centered itemsPerRow={6}> {listFolders} <Button className='remove-bg fixed-btn'><Button.Content><Icon circular size='huge' name='plus' className='add-new-note' /></Button.Content></Button></Card.Group>}
                 </Segment>
 
             </Grid.Column>

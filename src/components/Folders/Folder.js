@@ -12,7 +12,7 @@ export const Folder = ({folder}) => {
                 transition={{ ease: "easeIn", duration: 0.5 }}>
                 <Card.Content textAlign='center' className='note-content'>
                     <Button className='remove-bg' fluid><Button.Content><Icon className='folder-icon' name='folder' size='massive'/></Button.Content></Button>
-                    <Header as="h1" className='header-card'> {folder.folder_name}</Header>
+                    <Header as="h3" className='header-card'> {folder.folder_name}</Header>
 
                 </Card.Content>
             </motion.div>
