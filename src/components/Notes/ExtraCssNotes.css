@@ -19,10 +19,17 @@
     min-width: 100px !important;
 
 }
+.folder-icon{
+    color:rgb(254,192,76);
+}
 .note-bg:hover{
     opacity: 1 !important;
     cursor: pointer;
 
+}
+.folder-bg:hover{
+    opacity: 1 !important;
+    cursor: pointer;
 }
 .note-content{
     overflow-y: hidden;
