@@ -18,6 +18,9 @@ export const NotesDashboard = ({ notesList }) => {
     const [foldersList, setFoldersList] = useState(folders)
     const [navSelection, setNavSelection] = useState('Notes')
 
+    const listNotes = notes.map((note) => {
+        return (<Note deleteNote={deleteNote} key={note.id} note={note} />)
+    })
     const listFolders = folders.map((folder) => {
         return (<Folder folder={folder} key={folder.id} />)
     })
@@ -35,22 +38,17 @@ export const NotesDashboard = ({ notesList }) => {
     }
     async function deleteNote(id) {
         try {
-            // const deletedNote = await API.graphql(graphqlOperation(deleteNotes,{input: {id:id}}))
+            const deletedNote = await API.graphql(graphqlOperation(deleteNotes, { input: { id: id } }))
             let removeIndex = notes.findIndex(item => item.id === id);
             notes.splice(removeIndex, 1)
-            let newNotes = notes
-            setNotes(newNotes)
-
-
+            setNotes([...notes])
 
         } catch (err) {
+            console.log(err)
             console.log('error')
         }
     }
 
-    useEffect(()=>{
-        console.log('fire')
-    },[notes.length])
 
     return (
         <>
@@ -82,7 +80,9 @@ export const NotesDashboard = ({ notesList }) => {
                 <Segment textAlign='center' className='remove-bg notes-segment'>
                     {navSelection === 'Notes' && (
                         <>
-                            <NotesDisplay notes={notes} deleteNote={deleteNote} />
+                            <Card.Group centered itemsPerRow={4} stackable >
+                                {listNotes}
+                            </Card.Group>
                             <Button className='remove-bg fixed-btn' onClick={createNewNote} loading={btnLoading} >
                                 <Button.Content>
                                     <Icon circular size='huge' name='plus' className='add-new-note' />
