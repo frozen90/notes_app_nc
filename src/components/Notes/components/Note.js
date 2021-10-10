@@ -71,8 +71,10 @@ export const Note = () => {
 
             </motion.div>
             <Dimmer
+                page
                 active={unlockDimmerActive}
                 onClickOutside={handleHide}
+
             >
                 <Header as='h2' inverted>
                     Please provide note password
@@ -82,6 +84,7 @@ export const Note = () => {
                 <Button style={{ marginTop: '5px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={checkPassword}>Unlock</Button>
             </Dimmer>
             <Dimmer
+                page
                 active={lockDimmerActive}
                 onClickOutside={handleHide}
             >
