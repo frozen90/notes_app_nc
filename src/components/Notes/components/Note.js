@@ -61,7 +61,7 @@ export const Note = ({ note, deleteNote }) => {
             <motion.div className="ui card note-bg" initial={{ scale: 0, y: +700, x: +1300 }} animate={{ scale: 1, y: 0, x: 0 }}
                 transition={{ ease: "easeOut", duration: 0.5 }}>
                 <Card.Content textAlign='center' className='card-header-content'>
-                    <Header as="h2" className='header-card'><Input inverted transparent style={{width:'155px'}} maxLength="13" onChange={(e,{value})=>{setTitle(value)}} value={title}/></Header>
+                    <Header as="h2" className='header-card'><input value={title} className="title-input" max="13" onChange={(e)=>{setTitle(e.target.value)}}/></Header>
                 </Card.Content>
                 <Card.Content textAlign='left' className='note-content'>
                     {locked ? 

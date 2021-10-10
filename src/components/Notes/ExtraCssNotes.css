@@ -115,7 +115,14 @@
 .card-header-content{
     height: 5px !important;
 }
-
+.title-input{
+    background: transparent !important;
+    box-shadow: 0 0 0 0 !important;
+    text-align: center !important;
+    width: 150px !important;
+    color: white !important;
+    border: none !important;
+}
 @media only screen and (max-width: 400px) {
     .search-bar .input {
         width: 120px;
