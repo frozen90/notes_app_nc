@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import PropTypes from 'prop-types';
 import Note from "./Note";
 import Folder from "../../Folders/Folder";
+import { AnimatePresence } from "framer-motion";
 
 const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2', id: 1 }, { folder_name: 'New Folder 3', id: 1 }, { folder_name: 'New Folder 4', id: 1 }, { folder_name: 'New Folder 5', id: 1 }, { folder_name: 'New Folder 6', id: 1 }]
 

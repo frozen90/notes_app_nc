@@ -5,9 +5,7 @@ import awsExports from "./aws-exports"
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-
-
+  Route
 } from "react-router-dom";
 import 'semantic-ui-css/semantic.min.css'
 import Login from './components/Forms/Login';
@@ -25,7 +23,6 @@ function App() {
         <Route exact path="/login" component={Login}/>
         <Route path="/" component={Login}/>
       </Switch>
-
     </Router>
 
   );
