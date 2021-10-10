@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Header, Card, Icon, Button } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
 export const Note = () => {
+    const [locked, setLocked] = useState(false)
     const [editable, setEditable] = useState(false)
     const [value, setValue] = useState("Smutny paragraf o zyciu i przemijaniu...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed ex consequat, interdum sem ac, ornare enim. Pellentesque sit amet tortor turpis. Cras congue tristique ligula eleifend rutrum. Nam sit amet dui in leo hendrerit euismod eu eget dui. Vestibulum ac ortor turpis. Cras congue tristique ligula eleifend rutrum. Nam sit amet dui in leo hendrerit euismod eu eget dui. Vestibulum ac Pellentesque sit amet tortor turpis. Cras congue tristique ligula eleifend rutrum. Nam sit amet dui in leo hendrerit euismod eu eget dui. Vestibulum ac ortor turpis. Cras congue tristique ligula eleifend rutrum. Nam sit amet dui in leo hendrerit euismod eu eget dui. Vestibulum ac Pellentesque sit amet tortor turpis. Cras congue tristique ligula eleifend rutrum. Nam sit amet dui in leo hendrerit euismod eu eget dui. Vestibulum ac ortor turpis. Cras congue tristique ligula eleifend rutrum. Nam sit amet dui in leo hendrerit euismod eu eget dui. Vestibulum ac")
     const textAreaRef = React.createRef();
@@ -15,16 +16,26 @@ export const Note = () => {
         textAreaRef.current.selectionEnd = textAreaRef.current.value.length;
         textAreaRef.current.focus();
     }
+
+    const lockNote = () => {
+        setLocked(true)
+    }
+    const unlockNote = () => {
+        setLocked(false)
+    }
     return (
         <Card className='note-bg'>
             <Card.Content textAlign='center' className='card-header-content'><Header as="h2" className='header-card'>Title</Header></Card.Content>
             <Card.Content textAlign='left' className='note-content'>
-                <TextareaAutosize ref={textAreaRef} onDoubleClick={() => { setEditable(true) }} value={value} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />
+                {locked ? <Button fluid className='remove-bg' onClick={()=>{setLocked(false)}}><Button.Content><Icon name='lock' size='massive'/></Button.Content></Button>:  <TextareaAutosize ref={textAreaRef} onDoubleClick={() => { setEditable(true) }} value={value} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />}
+               
             </Card.Content>
             <Card.Content extra>
-                <Button className='remove-bg' floated='right' onClick={focusTextArea}><Button.Content><Icon size='large' inverted name='lock'></Icon></Button.Content></Button>
-                <Button className='remove-bg' floated='right' onClick={focusTextArea}><Button.Content><Icon size='large' inverted name='edit'></Icon></Button.Content></Button>
-
+                <Button.Group >
+                    <Button className='remove-bg' floated='right' ><Button.Content><Icon size='large' color='red' inverted name='trash'></Icon></Button.Content></Button>
+                    <Button className='remove-bg' floated='right' onClick={locked ? unlockNote  : lockNote}><Button.Content><Icon size='large' color='orange' inverted name={locked ? 'unlock' : 'lock'}></Icon></Button.Content></Button>
+                    <Button className='remove-bg' floated='right' onClick={focusTextArea}><Button.Content><Icon size='large' inverted name='edit'></Icon></Button.Content></Button>
+                </Button.Group>
             </Card.Content>
         </Card>
     )
