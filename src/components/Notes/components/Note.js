@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Header, Card, Icon, Button, Dimmer, Input } from "semantic-ui-react";
+import { Header, Card, Icon, Button, Dimmer, Input, Segment } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -63,9 +63,9 @@ export const Note = () => {
                 </Card.Content>
                 <Card.Content extra>
                     <Button.Group >
-                        <Button className='remove-bg' floated='right' ><Button.Content><Icon size='large' color='red' inverted name='trash'></Icon></Button.Content></Button>
-                        <Button className='remove-bg' floated='right' onClick={locked ? showPasswordDimmer : showLockPasswordDimmer}><Button.Content><Icon size='large' color='orange' inverted name={locked ? 'unlock' : 'lock'}></Icon></Button.Content></Button>
                         <Button className='remove-bg' floated='right' onClick={focusTextArea}><Button.Content><Icon size='large' inverted name='edit'></Icon></Button.Content></Button>
+                        <Button className='remove-bg' floated='right' onClick={locked ? showPasswordDimmer : showLockPasswordDimmer}><Button.Content><Icon size='large' color='orange' inverted name={locked ? 'unlock' : 'lock'}></Icon></Button.Content></Button>
+                        <Button className='remove-bg' floated='right' ><Button.Content><Icon size='large' color='red' inverted name='trash'></Icon></Button.Content></Button>
                     </Button.Group>
                 </Card.Content>
 
@@ -76,25 +76,30 @@ export const Note = () => {
                 onClickOutside={handleHide}
 
             >
+                <Segment inverted style={{padding:'45px'}} >
+                <Button floated='right' className='remove-bg' onClick={()=>{setUnlockDimmerActive(false)}}><Button.Content><Icon name='close' size='big' style={{marginRight:'-70px', marginTop:'-70px'}}inverted /></Button.Content></Button><br/>
                 <Header as='h2' inverted>
-                    Please provide note password
+                    Please provide note <br/> password
                 </Header>
 
                 <Input name='note_password' value={unlockNotePassword} placeholder='Note Password' onChange={(e, { value }) => { setUnlockNotePassword(value) }} /><br />
-                <Button style={{ marginTop: '5px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={checkPassword}>Unlock</Button>
+                <Button style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={checkPassword}>Unlock</Button>
+                </Segment>
             </Dimmer>
             <Dimmer
                 page
                 active={lockDimmerActive}
                 onClickOutside={handleHide}
             >
+                <Segment inverted style={{padding:'45px'}} >
+                <Button floated='right' className='remove-bg' onClick={()=>{setLockDimmerActive(false)}}><Button.Content><Icon name='close' size='big' style={{marginRight:'-70px', marginTop:'-70px'}}inverted /></Button.Content></Button><br/>
                 <Header as='h2' inverted>
-                    Please create note password
+                    Please create note <br/> password
                 </Header>
 
                 <Input name='note_password' value={password} placeholder='Note Password' onChange={(e, { value }) => { setPassword(value) }} /><br />
-                <Button style={{ marginTop: '5px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={createPassword}>Lock</Button>
-                <Button style={{ marginTop: '5px', color: 'white' }} onClick={()=>{setLockDimmerActive(false)}}>Close</Button>
+                <Button style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={createPassword}>Lock</Button>
+                </Segment>
             </Dimmer>
 
         </>

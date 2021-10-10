@@ -7,7 +7,7 @@ import Note from "./Note";
 import Folder from "../../Folders/Folder";
 import { AnimateSharedLayout } from "framer-motion";
 
-const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 1 }, { folder_name: 'New Folder 3 sadsadasdadasdsadasad', id: 1 }, { folder_name: 'New Folder 4', id: 1 }, { folder_name: 'New Folder 5', id: 1 }, { folder_name: 'New Folder 6', id: 1 }]
+const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 2 }, { folder_name: 'New Folder 3 sadsadasdadasdsadasad', id: 3 }, { folder_name: 'New Folder 4', id: 4 }, { folder_name: 'New Folder 5', id: 5 }, { folder_name: 'New Folder 6', id: 6 }]
 
 export const NotesDashboard = ({ notes }) => {
     const [notesLits, setNotesList] = useState(notes)
@@ -18,7 +18,7 @@ export const NotesDashboard = ({ notes }) => {
         console.log('clicked')
     }
     const listFolders = folders.map((folder) => {
-        return (<Folder folder={folder} />)
+        return (<Folder folder={folder} key={folder.id} />)
     })
     return (
         <>
@@ -30,6 +30,7 @@ export const NotesDashboard = ({ notes }) => {
             <Grid.Column computer={16} mobile={16} tablet={16} className="notes-dashboard">
                 <Menu fluid compact className='notes-menu'>
                     <Menu.Item
+                        as='h2'
                         name={navSelection}>
                     </Menu.Item>
                     <Menu.Item
