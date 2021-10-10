@@ -51,7 +51,7 @@ export const NotesDashboard = ({ notes }) => {
                         position='right'
                         name='search'
                     >
-                        <Search fluid className='search-bar' input={{ icon: 'search', iconPosition: 'left' }} />
+                        <Search fluid className='search-bar' inverted input={{ icon: 'search',color:'red',  iconPosition: 'left' }} />
 
                     </Menu.Item>
 

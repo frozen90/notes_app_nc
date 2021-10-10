@@ -9,24 +9,22 @@ import { listNotes } from '../../../graphql/queries';
 
 export const Note = ({ note }) => {
 
+    const [title, setTitle] = useState(note.title)
+    const [content, setContent] = useState(note.content)
     const [password, setPassword] = useState(note.password || '')
+    const [locked, setLocked] = useState(note.locked)
+
     const [unlockNotePassword, setUnlockNotePassword] = useState('')
     const [unlockDimmerActive, setUnlockDimmerActive] = useState(false)
     const [lockDimmerActive, setLockDimmerActive] = useState(false)
     const [previewDimmerActive, setPreviewDimmerActive] = useState(false)
-    const [locked, setLocked] = useState(note.locked)
     const [editable, setEditable] = useState(false)
-    const [value, setValue] = useState(note.content)
-    const textAreaRef = React.createRef();
-    const handleTextChange = (e) => {
-        setValue(e.target.value)
 
-    }
-    const focusTextArea = () => {
-        setEditable(true)
-        textAreaRef.current.selectionStart = textAreaRef.current.value.length;
-        textAreaRef.current.selectionEnd = textAreaRef.current.value.length;
-        textAreaRef.current.focus();
+    const textAreaRef = React.createRef();
+
+    const handleTextChange = (e) => {
+        setContent(e.target.value)
+
     }
 
     const showPasswordDimmer = () => {
@@ -45,7 +43,6 @@ export const Note = ({ note }) => {
         setLockDimmerActive(false)
     }
     const checkPassword = () => {
-        console.log(password)
         if (unlockNotePassword === password) {
             setLocked(false)
             setUnlockDimmerActive(false)
@@ -64,9 +61,18 @@ export const Note = ({ note }) => {
         <>
             <motion.div className="ui card note-bg" initial={{ scale: 0, y: +700, x: +1300 }} animate={{ scale: 1, y: 0, x: 0 }}
                 transition={{ ease: "easeOut", duration: 0.5 }}>
-                <Card.Content textAlign='center' className='card-header-content'><Header as="h2" className='header-card'>{note.title}</Header></Card.Content>
+                <Card.Content textAlign='center' className='card-header-content'>
+                    <Header as="h2" className='header-card'><Input inverted transparent style={{width:'155px'}} maxLength="13" onChange={(e,{value})=>{setTitle(value)}} value={title}/></Header>
+                </Card.Content>
                 <Card.Content textAlign='left' className='note-content'>
-                    {locked ? <Button fluid className='remove-bg' onClick={() => { showPreviewDimmer() }}><Button.Content><Icon className='active-btn' name='eye' size='massive' /></Button.Content></Button> : <TextareaAutosize ref={textAreaRef} onDoubleClick={() => { setEditable(true) }} value={value} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />}
+                    {locked ? 
+                        <Button fluid className='remove-bg' onClick={() => { showPreviewDimmer() }}>
+                            <Button.Content>
+                                <Icon className='active-btn' name='eye' size='massive' />
+                            </Button.Content></Button> 
+                        : 
+                        <TextareaAutosize ref={textAreaRef} onDoubleClick={() => { setEditable(true) }} value={content} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />
+                    }
 
                 </Card.Content>
                 <Card.Content extra className='btn-footer' >
