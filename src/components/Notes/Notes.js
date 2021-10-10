@@ -50,7 +50,7 @@ export const Notes = () => {
                                     scale: [0.1,1],
                                 }} transition={{duration: 0.5}} >
                                     <Segment textAlign='center' style={{ marginTop: '100px', background: 'transparent' }}>
-                                        <Icon size="massive" name='book' />
+                                        <Icon size="massive" inverted name='book' />
                                         <Header as="h1" inverted>Nordcloud notes</Header>
                                         <p style={{ color: 'white' }}>Take notes, reminders, share them with friends in secure manner</p>
                                         <Button className="get-started-btn" content='Get Started' onClick={() => { setStart(true) }} />

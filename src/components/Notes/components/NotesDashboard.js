@@ -7,8 +7,7 @@ import Note from "./Note";
 import Folder from "../../Folders/Folder";
 import { API, graphqlOperation } from 'aws-amplify';
 import { createNotes, deleteNotes } from '../../../graphql/mutations';
-import { AnimateSharedLayout } from "framer-motion";
-import NotesDisplay from "./NotesDisplay";
+
 
 const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 2 }, { folder_name: 'New Folder 3 sadsadasdadasdsadasad', id: 3 }, { folder_name: 'New Folder 4', id: 4 }, { folder_name: 'New Folder 5', id: 5 }, { folder_name: 'New Folder 6', id: 6 }]
 
@@ -38,7 +37,7 @@ export const NotesDashboard = ({ notesList }) => {
     }
     async function deleteNote(id) {
         try {
-            const deletedNote = await API.graphql(graphqlOperation(deleteNotes, { input: { id: id } }))
+            await API.graphql(graphqlOperation(deleteNotes, { input: { id: id } }))
             let removeIndex = notes.findIndex(item => item.id === id);
             notes.splice(removeIndex, 1)
             setNotes([...notes])
