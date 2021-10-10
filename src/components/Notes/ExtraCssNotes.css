@@ -14,7 +14,7 @@
 
 }
 .note-content{
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 .note-footer{
     margin-left: 0;
@@ -78,9 +78,14 @@
     color: white !important;
 }
 .note-textarea{
+    resize: none;
+    width: 100%;
+    overflow-y: scroll;
     color: white !important
 }
-
+.card-header-content{
+    height: 5px !important;
+}
 @media only screen and (max-width: 400px) {
     .search-bar .input {
         width: 120px;
