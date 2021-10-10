@@ -78,10 +78,16 @@
     color: white !important;
 }
 .note-textarea{
+    margin-top: 25px;
     resize: none;
     width: 100%;
-    overflow-y: scroll;
-    color: white !important
+    color: white !important;
+    -ms-overflow-style: none !important;  
+    scrollbar-width: none !important;
+    border-bottom: 1px solid !important;  
+}
+.note-textarea::-webkit-scrollbar{
+    display: none !important;
 }
 .card-header-content{
     height: 5px !important;
