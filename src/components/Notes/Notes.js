@@ -39,7 +39,7 @@ export const Notes = () => {
                 <Grid centered style={{ padding: '20px', height: "100vh" }} verticalAlign="middle">
                     {notes.length > 0 || start ?
 
-                        <NotesDashboard />
+                        <NotesDashboard notes={notes}/>
 
                         :
 

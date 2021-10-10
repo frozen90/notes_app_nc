@@ -13,7 +13,6 @@ export const Folder = ({folder}) => {
                 <Card.Content textAlign='center' className='note-content'>
                     <Button className='remove-bg' fluid><Button.Content><Icon className='folder-icon' name='folder' size='massive'/></Button.Content></Button>
                     <Header as="h3" className='header-card'> {folder.folder_name}</Header>
-
                 </Card.Content>
             </motion.div>
     

@@ -7,6 +7,8 @@ export const onCreateNotes = /* GraphQL */ `
       id
       title
       content
+      password
+      locked
       createdAt
       updatedAt
       owner
@@ -19,6 +21,8 @@ export const onUpdateNotes = /* GraphQL */ `
       id
       title
       content
+      password
+      locked
       createdAt
       updatedAt
       owner
@@ -31,6 +35,8 @@ export const onDeleteNotes = /* GraphQL */ `
       id
       title
       content
+      password
+      locked
       createdAt
       updatedAt
       owner

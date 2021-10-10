@@ -5,21 +5,26 @@ import { Helmet } from "react-helmet";
 import PropTypes from 'prop-types';
 import Note from "./Note";
 import Folder from "../../Folders/Folder";
+import { API, graphqlOperation } from 'aws-amplify';
+import { listNotes } from '../../../graphql/queries';
 import { AnimateSharedLayout } from "framer-motion";
 
 const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 2 }, { folder_name: 'New Folder 3 sadsadasdadasdsadasad', id: 3 }, { folder_name: 'New Folder 4', id: 4 }, { folder_name: 'New Folder 5', id: 5 }, { folder_name: 'New Folder 6', id: 6 }]
 
 export const NotesDashboard = ({ notes }) => {
-    const [notesLits, setNotesList] = useState(notes)
+    console.log(notes)
+    const [notesList, setNotesList] = useState(notes)
     const [foldersList, setFoldersList] = useState(folders)
     const [navSelection, setNavSelection] = useState('Notes')
-    const [showSearch, setShowSearch] = useState(false)
-    const createNewNote = () => {
-        console.log('clicked')
-    }
+    const listNotes = notesList.map((note)=>{
+        return(<Note key={note.id} note={note}/>)
+    })
     const listFolders = folders.map((folder) => {
         return (<Folder folder={folder} key={folder.id} />)
     })
+    const createNewNote = () => {
+
+    }
     return (
         <>
             <Helmet>
@@ -50,21 +55,8 @@ export const NotesDashboard = ({ notes }) => {
                 <Segment textAlign='center' className='remove-bg notes-segment'>
                     {navSelection === 'Notes' && (
                         <Card.Group centered itemsPerRow={4} stackable >
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Note />
-                            <Button className='remove-bg fixed-btn' onClick={createNewNote}><Button.Content><Icon circular size='huge' name='plus' className='add-new-note' /></Button.Content></Button>
+                            {listNotes}
+                            <Button className='remove-bg fixed-btn' ><Button.Content><Icon circular size='huge' name='plus' className='add-new-note' /></Button.Content></Button>
                         </Card.Group>
 
                     )}

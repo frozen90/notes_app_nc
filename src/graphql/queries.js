@@ -7,6 +7,8 @@ export const getNotes = /* GraphQL */ `
       id
       title
       content
+      password
+      locked
       createdAt
       updatedAt
       owner
@@ -24,6 +26,8 @@ export const listNotes = /* GraphQL */ `
         id
         title
         content
+        password
+        locked
         createdAt
         updatedAt
         owner

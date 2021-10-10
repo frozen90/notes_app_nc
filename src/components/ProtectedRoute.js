@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Route, Redirect } from 'react-router-dom';
 import { Loader } from 'semantic-ui-react';
-import { Auth } from 'aws-amplify'
+import { Auth } from 'aws-amplify';
+
 
 
 
