@@ -123,6 +123,9 @@
     color: white !important;
     border: none !important;
 }
+.ui.transparent.inverted.input>input{
+    text-align: center;
+}
 @media only screen and (max-width: 400px) {
     .search-bar .input {
         width: 120px;
