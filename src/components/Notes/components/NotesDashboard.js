@@ -6,13 +6,14 @@ import PropTypes from 'prop-types';
 import Note from "./Note";
 import Folder from "../../Folders/Folder";
 import { API, graphqlOperation } from 'aws-amplify';
-import { listNotes } from '../../../graphql/queries';
+import { createNotes } from '../../../graphql/mutations';
 import { AnimateSharedLayout } from "framer-motion";
 
 const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 2 }, { folder_name: 'New Folder 3 sadsadasdadasdsadasad', id: 3 }, { folder_name: 'New Folder 4', id: 4 }, { folder_name: 'New Folder 5', id: 5 }, { folder_name: 'New Folder 6', id: 6 }]
 
 export const NotesDashboard = ({ notes }) => {
     console.log(notes)
+    const [btnLoading, setBtnLoading] = useState(true)
     const [notesList, setNotesList] = useState(notes)
     const [foldersList, setFoldersList] = useState(folders)
     const [navSelection, setNavSelection] = useState('Notes')
@@ -22,8 +23,15 @@ export const NotesDashboard = ({ notes }) => {
     const listFolders = folders.map((folder) => {
         return (<Folder folder={folder} key={folder.id} />)
     })
-    const createNewNote = () => {
-
+    async function createNewNote(){
+        try {
+            const notesData = await API.graphql(graphqlOperation(createNotes,{input: {title:'Untitled Note', content:'Please add some content...',locked:false, password:''}}))
+            let note = notesData.data.createNotes
+            setNotesList([note, ...notesList])
+           
+        } catch (err) {
+            console.log('error')
+        }
     }
     return (
         <>
@@ -56,7 +64,7 @@ export const NotesDashboard = ({ notes }) => {
                     {navSelection === 'Notes' && (
                         <Card.Group centered itemsPerRow={4} stackable >
                             {listNotes}
-                            <Button className='remove-bg fixed-btn' ><Button.Content><Icon circular size='huge' name='plus' className='add-new-note' /></Button.Content></Button>
+                            <Button className='remove-bg fixed-btn' onClick={createNewNote} loading={btnLoading} ><Button.Content><Icon circular size='huge' name='plus' className='add-new-note' /></Button.Content></Button>
                         </Card.Group>
 
                     )}

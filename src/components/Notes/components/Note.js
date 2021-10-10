@@ -66,14 +66,26 @@ export const Note = ({ note }) => {
                 transition={{ ease: "easeOut", duration: 0.5 }}>
                 <Card.Content textAlign='center' className='card-header-content'><Header as="h2" className='header-card'>{note.title}</Header></Card.Content>
                 <Card.Content textAlign='left' className='note-content'>
-                    {locked ? <Button fluid className='remove-bg' onClick={() => { showPreviewDimmer() }}><Button.Content><Icon color='orange' name='eye' size='massive' /></Button.Content></Button> : <TextareaAutosize ref={textAreaRef} onDoubleClick={() => { setEditable(true) }} value={value} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />}
+                    {locked ? <Button fluid className='remove-bg' onClick={() => { showPreviewDimmer() }}><Button.Content><Icon className='active-btn' name='eye' size='massive' /></Button.Content></Button> : <TextareaAutosize ref={textAreaRef} onDoubleClick={() => { setEditable(true) }} value={value} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />}
 
                 </Card.Content>
-                <Card.Content extra>
-                    <Button.Group >
-                        <Button className='remove-bg' floated='right' onClick={focusTextArea}><Button.Content><Icon size='large' inverted name='edit'></Icon></Button.Content></Button>
-                        <Button className='remove-bg' floated='right' onClick={locked ? showPasswordDimmer : showLockPasswordDimmer}><Button.Content><Icon size='large' color='orange' inverted name={locked ? 'unlock' : 'lock'}></Icon></Button.Content></Button>
-                        <Button className='remove-bg' floated='right' ><Button.Content><Icon size='large' color='red' inverted name='trash'></Icon></Button.Content></Button>
+                <Card.Content extra className='btn-footer' >
+                    <Button.Group>
+                        <Button className='remove-bg' floated='right' >
+                            <Button.Content>
+                                <Icon size='large' inverted name='share square'></Icon>
+                            </Button.Content>
+                        </Button>
+                        <Button className='remove-bg' floated='right' onClick={locked ? showPasswordDimmer : showLockPasswordDimmer}>
+                            <Button.Content>
+                                <Icon size='large' className='active-btn' inverted name={locked ? 'unlock' : 'lock'}></Icon>
+                            </Button.Content>
+                        </Button>
+                        <Button className='remove-bg' floated='right' >
+                            <Button.Content>
+                                <Icon size='large' color='red' inverted name='trash'></Icon>
+                            </Button.Content>
+                        </Button>
                     </Button.Group>
                 </Card.Content>
 
