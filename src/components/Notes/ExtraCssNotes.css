@@ -106,7 +106,7 @@
     color: white !important;
     -ms-overflow-style: none !important;  
     scrollbar-width: none !important;
-    border-bottom: 1px solid !important;  
+
 }
 .note-textarea::-webkit-scrollbar{
     display: none !important;
