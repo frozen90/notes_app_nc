@@ -4,8 +4,11 @@ import { Header, Card, Icon, Button, Dimmer, Input, Segment } from "semantic-ui-
 import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
-import { listNotes } from "../../../graphql/queries";
-
+import { listNotes } from "../../../../graphql/queries";
+//Dimmers
+import LockNoteDimmer from "./components/LockNoteDimmer";
+import UnlockNoteDimmer from "./components/UnlockNoteDimmer";
+import PreviewNoteDimmer from "./components/PreviewNoteDimmer";
 
 
 
@@ -13,13 +16,13 @@ export const Note = ({ note, deleteNote, deleteLoading }) => {
     const [notePosition, setNotePosition] = useState(0)
     const [title, setTitle] = useState(note.title)
     const [content, setContent] = useState(note.content)
-    const [password, setPassword] = useState(note.password || '')
     const [locked, setLocked] = useState(note.locked)
 
-    const [unlockNotePassword, setUnlockNotePassword] = useState('')
+
     const [unlockDimmerActive, setUnlockDimmerActive] = useState(false)
     const [lockDimmerActive, setLockDimmerActive] = useState(false)
     const [previewDimmerActive, setPreviewDimmerActive] = useState(false)
+
     const [editable, setEditable] = useState(false)
 
     const textAreaRef = React.createRef();
@@ -41,19 +44,20 @@ export const Note = ({ note, deleteNote, deleteLoading }) => {
         setPreviewDimmerActive(true)
     }
     const handleHide = () => {
+        setPreviewDimmerActive(false)
         setUnlockDimmerActive(false)
         setLockDimmerActive(false)
     }
-    async function checkPassword(){
+    async function checkPassword(inputPassword){
         let password_filter = {and:[{id:{eq:"b99847ba-690a-45e3-a194-d2e57a70d2d3"},password:{eq:""}}]}
         const passwordTest = await API.graphql(graphqlOperation(listNotes,{filter:password_filter}))
-        if (unlockNotePassword === password) {
+        if (inputPassword === "XD") {
             setLocked(false)
             setUnlockDimmerActive(false)
             setPreviewDimmerActive(false)
         }
     }
-    const createPassword = () => {
+    const createPassword = (password) => {
         if (password.length > 0) {
             setLocked(true)
             setLockDimmerActive(false)
@@ -77,7 +81,6 @@ export const Note = ({ note, deleteNote, deleteLoading }) => {
                         : 
                         <TextareaAutosize ref={textAreaRef} onDoubleClick={() => { setEditable(true) }} value={content} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />
                     }
-
                 </Card.Content>
                 <Card.Content extra className='btn-footer' >
                     <Button.Group>
@@ -98,55 +101,10 @@ export const Note = ({ note, deleteNote, deleteLoading }) => {
                         </Button>
                     </Button.Group>
                 </Card.Content>
-
             </motion.div>
-            <Dimmer
-                page
-                active={unlockDimmerActive}
-                onClickOutside={handleHide}
-
-            >
-                <Segment inverted style={{ padding: '45px' }} >
-                    <Button floated='right' className='remove-bg' onClick={() => { setUnlockDimmerActive(false) }}><Button.Content><Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} inverted /></Button.Content></Button><br />
-                    <Header as='h2' inverted>
-                        Please provide note <br /> password
-                    </Header>
-
-                    <Input name='note_password' value={unlockNotePassword} placeholder='Note Password' onChange={(e, { value }) => { setUnlockNotePassword(value) }} /><br />
-                    <Button style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={checkPassword}>Unlock</Button>
-                </Segment>
-            </Dimmer>
-            <Dimmer
-                page
-                active={previewDimmerActive}
-                onClickOutside={handleHide}
-            >
-                <Segment inverted style={{ padding: '45px' }} >
-                    <Button floated='right' className='remove-bg' onClick={() => { setPreviewDimmerActive(false) }}><Button.Content><Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} inverted /></Button.Content></Button><br />
-                    <Header as='h2' inverted>
-                        To preview the note <br /> please provide password
-                    </Header>
-
-                    <Input name='note_password' value={unlockNotePassword} placeholder='Note Password' onChange={(e, { value }) => { setUnlockNotePassword(value) }} /><br />
-                    <Button style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={checkPassword}>Preview</Button>
-                </Segment>
-            </Dimmer>
-            <Dimmer
-                page
-                active={lockDimmerActive}
-                onClickOutside={handleHide}
-            >
-                <Segment inverted style={{ padding: '45px' }} >
-                    <Button floated='right' className='remove-bg' onClick={() => { setLockDimmerActive(false) }}><Button.Content><Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} inverted /></Button.Content></Button><br />
-                    <Header as='h2' inverted>
-                        Please create note <br /> password
-                    </Header>
-
-                    <Input name='note_password' value={password} placeholder='Note Password' onChange={(e, { value }) => { setPassword(value) }} /><br />
-                    <Button style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={createPassword}>Lock</Button>
-                </Segment>
-            </Dimmer>
-
+            <LockNoteDimmer handleHide={handleHide} active={lockDimmerActive} closeFunction={()=>{setLockDimmerActive(false)}} createPassword={createPassword}/>
+            <PreviewNoteDimmer handleHide={handleHide} active={previewDimmerActive} closeFunction={()=>{setPreviewDimmerActive(false)}} checkPassword={checkPassword}/>
+            <UnlockNoteDimmer handleHide={handleHide} active={unlockDimmerActive} closeFunction={()=>{setUnlockDimmerActive(false)}} checkPassword={checkPassword}/>
         </>
     )
 }

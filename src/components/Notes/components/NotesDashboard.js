@@ -3,7 +3,7 @@ import { Grid, Segment, Icon, Button, Menu, Search, Card } from 'semantic-ui-rea
 import '.././ExtraCssNotes.css';
 import { Helmet } from "react-helmet";
 import PropTypes from 'prop-types';
-import Note from "./Note";
+import Note from "./Note/Note";
 import Folder from "../../Folders/Folder";
 import { API, graphqlOperation } from 'aws-amplify';
 import { createNotes, deleteNotes } from '../../../graphql/mutations';
