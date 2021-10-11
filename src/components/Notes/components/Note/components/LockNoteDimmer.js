@@ -5,15 +5,16 @@ export const LockNoteDimmer = ({ handleHide, active, closeFunction, createPasswo
 
     const [notePassword, setNotePassword] = useState('')
 
+
     return (
 
         <Dimmer
             page
             active={active}
-            onClickOutside={handleHide}
+            onClickOutside={()=>{handleHide(); setNotePassword('')}}
         >
             <Segment inverted style={{ padding: '45px' }} >
-                <Button floated='right' className='remove-bg' onClick={handleHide}>
+                <Button floated='right' className='remove-bg' onClick={()=>{handleHide(); setNotePassword('')}}>
                     <Button.Content>
                         <Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} inverted />
                     </Button.Content></Button><br />

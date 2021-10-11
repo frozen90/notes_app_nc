@@ -9,10 +9,10 @@ export const PreviewNoteDimmer = ({handleHide, active,checkPassword, errorMsg, r
         <Dimmer
             page
             active={active}
-            onClickOutside={handleHide}
+            onClickOutside={()=>{handleHide(); setPreviewNotePassword('')}}
         >
             <Segment inverted style={{ padding: '45px' }} >
-                <Button floated='right' className='remove-bg' onClick={handleHide}><Button.Content><Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} inverted /></Button.Content></Button><br />
+                <Button floated='right' className='remove-bg' onClick={()=>{handleHide(); setPreviewNotePassword('')}}><Button.Content><Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} inverted /></Button.Content></Button><br />
                 <Header as='h2' inverted>
                     To preview the note <br /> please provide password
                 </Header>
