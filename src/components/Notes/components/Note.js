@@ -9,7 +9,8 @@ import { listNotes } from "../../../graphql/queries";
 
 
 
-export const Note = ({ note, deleteNote }) => {
+export const Note = ({ note, deleteNote, deleteLoading }) => {
+    const [notePosition, setNotePosition] = useState(0)
     const [title, setTitle] = useState(note.title)
     const [content, setContent] = useState(note.content)
     const [password, setPassword] = useState(note.password || '')
@@ -62,7 +63,7 @@ export const Note = ({ note, deleteNote }) => {
     }
     return (
         <>
-            <motion.div className="ui card note-bg" initial={{ scale: 0, y: +700, x: +1300 }} animate={{ scale: 1, y: 0, x: 0 }}
+            <motion.div className="ui card note-bg" initial={{ scale: 0, y: +700, x: +1300 }} animate={{ scale: 1, y: 0, x: notePosition }}
                 transition={{ ease: "easeOut", duration: 0.5 }}>
                 <Card.Content textAlign='center' className='card-header-content'>
                     <Header as="h2" className='header-card'><Input inverted transparent style={{width:'155px'}} maxLength="13" onChange={(e,{value})=>{setTitle(value)}} value={title}/></Header>
@@ -90,7 +91,7 @@ export const Note = ({ note, deleteNote }) => {
                                 <Icon size='large' className='active-btn' inverted name={locked ? 'unlock' : 'lock'}></Icon>
                             </Button.Content>
                         </Button>
-                        <Button className='remove-bg' floated='right' onClick={()=>{deleteNote(note.id)}} >
+                        <Button className='remove-bg' floated='right' onClick={()=>{deleteNote(note.id); setNotePosition(-1000)}} >
                             <Button.Content>
                                 <Icon size='large' color='red' inverted name='trash'></Icon>
                             </Button.Content>

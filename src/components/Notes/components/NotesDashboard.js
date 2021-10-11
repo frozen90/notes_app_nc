@@ -27,7 +27,7 @@ export const NotesDashboard = ({ notesList }) => {
     async function createNewNote() {
         try {
             setBtnLoading(true)
-            const notesData = await API.graphql(graphqlOperation(createNotes, { input: { title: 'Untitled Note', content: 'Please add some content...', locked: false, password: '', type:'Note' } }))
+            const notesData = await API.graphql(graphqlOperation(createNotes, { input: { title: 'Untitled Note', content: 'Please add some content...', locked: false, password: '', type: 'Note' } }))
             let note = notesData.data.createNotes
             setNotes([note, ...notes])
             setBtnLoading(false)
@@ -83,7 +83,7 @@ export const NotesDashboard = ({ notesList }) => {
                             <Card.Group centered itemsPerRow={4} stackable >
                                 {listNotes}
                             </Card.Group>
-                            <Button className='remove-bg fixed-btn' onClick={createNewNote} loading={btnLoading} >
+                            <Button className='remove-bg fixed-btn' onClick={createNewNote} loading={btnLoading} disabled={btnLoading} >
                                 <Button.Content>
                                     <Icon circular size='huge' name='plus' className='add-new-note' />
                                 </Button.Content>
