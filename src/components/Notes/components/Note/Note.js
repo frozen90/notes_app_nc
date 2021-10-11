@@ -13,41 +13,33 @@ import PreviewNoteDimmer from "./components/PreviewNoteDimmer";
 
 
 export const Note = ({ note, deleteNote, deleteLoading }) => {
+    //note state
     const [notePosition, setNotePosition] = useState(0)
     const [title, setTitle] = useState(note.title)
     const [content, setContent] = useState(note.content)
     const [locked, setLocked] = useState(note.locked)
+    const [editable, setEditable] = useState(false)
 
-
+    //dimmers state
     const [unlockDimmerActive, setUnlockDimmerActive] = useState(false)
     const [lockDimmerActive, setLockDimmerActive] = useState(false)
     const [previewDimmerActive, setPreviewDimmerActive] = useState(false)
 
-    const [editable, setEditable] = useState(false)
 
     const textAreaRef = React.createRef();
 
-    const handleTextChange = (e) => {
-        setContent(e.target.value)
+    const handleTextChange = (e) => {setContent(e.target.value)}
 
-    }
-
-    const showPasswordDimmer = () => {
-        setUnlockDimmerActive(true)
-    }
-
-    const showLockPasswordDimmer = () => {
-        setLockDimmerActive(true)
-    }
-
-    const showPreviewDimmer = () => {
-        setPreviewDimmerActive(true)
-    }
+    //dimmers actions
+    const showPasswordDimmer = () => {setUnlockDimmerActive(true)}
+    const showLockPasswordDimmer = () => {setLockDimmerActive(true)}
+    const showPreviewDimmer = () => {setPreviewDimmerActive(true)}
     const handleHide = () => {
         setPreviewDimmerActive(false)
         setUnlockDimmerActive(false)
         setLockDimmerActive(false)
     }
+
     async function checkPassword(inputPassword){
         let password_filter = {and:[{id:{eq:"b99847ba-690a-45e3-a194-d2e57a70d2d3"},password:{eq:""}}]}
         const passwordTest = await API.graphql(graphqlOperation(listNotes,{filter:password_filter}))
@@ -57,6 +49,7 @@ export const Note = ({ note, deleteNote, deleteLoading }) => {
             setPreviewDimmerActive(false)
         }
     }
+
     const createPassword = (password) => {
         if (password.length > 0) {
             setLocked(true)
@@ -79,7 +72,7 @@ export const Note = ({ note, deleteNote, deleteLoading }) => {
                                 <Icon className='active-btn' name='eye' size='massive' />
                             </Button.Content></Button> 
                         : 
-                        <TextareaAutosize ref={textAreaRef} onDoubleClick={() => { setEditable(true) }} value={content} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />
+                        <TextareaAutosize onDoubleClick={() => { setEditable(true) }} value={content} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />
                     }
                 </Card.Content>
                 <Card.Content extra className='btn-footer' >
