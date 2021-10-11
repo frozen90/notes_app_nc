@@ -19,7 +19,7 @@ export const ShareNoteDimmer = ({ handleHide, active, errorMsg, requestLoading, 
     }
     async function shareNoteReturn(sharePassword) {
         const link = await shareNote(sharePassword,date)
-        setGeneratedLink(window.location.origin + '/' + link)
+        setGeneratedLink(window.location.origin + '/shared-notes/' + link)
     }
 
     useEffect(() => {
