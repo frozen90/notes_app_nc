@@ -28,7 +28,6 @@ export const listNotes = /* GraphQL */ `
         type
         title
         content
-        password
         locked
         createdAt
         updatedAt
@@ -93,7 +92,6 @@ export const notesByDate = /* GraphQL */ `
         type
         title
         content
-        password
         locked
         createdAt
         updatedAt
