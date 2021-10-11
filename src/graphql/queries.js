@@ -5,6 +5,7 @@ export const getNotes = /* GraphQL */ `
   query GetNotes($id: ID!) {
     getNotes(id: $id) {
       id
+      type
       title
       content
       password
@@ -24,6 +25,7 @@ export const listNotes = /* GraphQL */ `
     listNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        type
         title
         content
         password
@@ -64,6 +66,38 @@ export const listSharedNotes = /* GraphQL */ `
         password
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const notesByDate = /* GraphQL */ `
+  query NotesByDate(
+    $type: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelNotesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    notesByDate(
+      type: $type
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        title
+        content
+        password
+        locked
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }

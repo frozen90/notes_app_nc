@@ -8,6 +8,7 @@ export const createNotes = /* GraphQL */ `
   ) {
     createNotes(input: $input, condition: $condition) {
       id
+      type
       title
       content
       password
@@ -25,6 +26,7 @@ export const updateNotes = /* GraphQL */ `
   ) {
     updateNotes(input: $input, condition: $condition) {
       id
+      type
       title
       content
       password
@@ -42,6 +44,7 @@ export const deleteNotes = /* GraphQL */ `
   ) {
     deleteNotes(input: $input, condition: $condition) {
       id
+      type
       title
       content
       password

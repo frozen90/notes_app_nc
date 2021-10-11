@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { API, graphqlOperation } from 'aws-amplify';
-import { listNotes } from '../../graphql/queries';
+import { notesByDate } from '../../graphql/queries';
 import { Container, Grid, Segment, Icon, Loader, Button, Header, Dimmer } from 'semantic-ui-react'
 import './ExtraCssNotes.css'
 import { Helmet } from "react-helmet";
@@ -17,11 +17,12 @@ export const Notes = () => {
 
     async function fetchNotes() {
         try {
-            const notesData = await API.graphql(graphqlOperation(listNotes))
-            const notes = notesData.data.listNotes.items
+            const notesData = await API.graphql(graphqlOperation(notesByDate,{type:"Note", sortDirection: 'DESC'}))
+            const notes = notesData.data.notesByDate.items
             setNotes(notes)
             setLoading(false)
         } catch (err) {
+            console.log(err)
             console.log('error')
         }
     }

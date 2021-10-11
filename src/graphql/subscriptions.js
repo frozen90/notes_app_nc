@@ -5,6 +5,7 @@ export const onCreateNotes = /* GraphQL */ `
   subscription OnCreateNotes($owner: String!) {
     onCreateNotes(owner: $owner) {
       id
+      type
       title
       content
       password
@@ -19,6 +20,7 @@ export const onUpdateNotes = /* GraphQL */ `
   subscription OnUpdateNotes($owner: String!) {
     onUpdateNotes(owner: $owner) {
       id
+      type
       title
       content
       password
@@ -33,6 +35,7 @@ export const onDeleteNotes = /* GraphQL */ `
   subscription OnDeleteNotes($owner: String!) {
     onDeleteNotes(owner: $owner) {
       id
+      type
       title
       content
       password

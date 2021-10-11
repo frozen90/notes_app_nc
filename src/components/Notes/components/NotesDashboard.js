@@ -14,6 +14,7 @@ const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Fol
 export const NotesDashboard = ({ notesList }) => {
     const [btnLoading, setBtnLoading] = useState(false)
     const [notes, setNotes] = useState(notesList)
+    console.log(notesList)
     const [foldersList, setFoldersList] = useState(folders)
     const [navSelection, setNavSelection] = useState('Notes')
 
@@ -26,7 +27,7 @@ export const NotesDashboard = ({ notesList }) => {
     async function createNewNote() {
         try {
             setBtnLoading(true)
-            const notesData = await API.graphql(graphqlOperation(createNotes, { input: { title: 'Untitled Note', content: 'Please add some content...', locked: false, password: '' } }))
+            const notesData = await API.graphql(graphqlOperation(createNotes, { input: { title: 'Untitled Note', content: 'Please add some content...', locked: false, password: '', type:'Note' } }))
             let note = notesData.data.createNotes
             setNotes([note, ...notes])
             setBtnLoading(false)
