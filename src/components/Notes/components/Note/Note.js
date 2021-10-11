@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { API, graphqlOperation } from 'aws-amplify';
+// Ui Components / frameworks
 import { Header, Card, Icon, Button, Dimmer, Input, Segment } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
-import PropTypes from 'prop-types';
+// GraphQl
+import { API, graphqlOperation } from 'aws-amplify';
 import { listNotes } from "../../../../graphql/queries";
 import { updateNotes, createSharedNote } from "../../../../graphql/mutations";
 //Dimmers
@@ -11,6 +12,10 @@ import LockNoteDimmer from "./components/LockNoteDimmer";
 import UnlockNoteDimmer from "./components/UnlockNoteDimmer";
 import PreviewNoteDimmer from "./components/PreviewNoteDimmer";
 import ShareNoteDimmer from "./components/ShareNoteDimmer";
+//helpers
+import { generateLink } from "../../../../utils/helpers/link_generator";
+//PropTypes
+import PropTypes from 'prop-types';
 
 export const Note = ({ note, deleteNote }) => {
     //note state
@@ -91,13 +96,18 @@ export const Note = ({ note, deleteNote }) => {
         }
     }
 
-    async function shareNote(inputPassword) {
+    async function shareNote(inputPassword, expiryDate) {
         setRequestLoading(true)
+        let generatedLink = generateLink()
+        console.log(new Date())
         if (inputPassword.length > 0) {
             try {
-                await API.graphql(graphqlOperation())
+                const sharedNoteData = await API.graphql(graphqlOperation(createSharedNote,{input:{password:inputPassword, expire_date:new Date(expiryDate).toISOString(), title:note.title, content:note.content, link: generatedLink }}))
+                console.log(sharedNoteData)
                 setRequestLoading(false)
+                return(generatedLink)
             } catch (err) {
+                console.log(err)
                 setErrorMsg(err)
                 setRequestLoading(false)
             }

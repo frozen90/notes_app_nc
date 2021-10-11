@@ -129,7 +129,9 @@
     text-align: center;
 }
 
-
+.expiry-date-label{
+    margin-top: 15px !important;
+}
 @media only screen and (max-width: 450px) {
     .search-bar .input {
         width: 130px;

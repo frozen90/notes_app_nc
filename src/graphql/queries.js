@@ -52,6 +52,14 @@ export const getSharedNote = /* GraphQL */ `
     }
   }
 `;
+
+export const getSharedNoteExpiryDate = /* GraphQL */ `
+  query GetSharedNote($id: ID!) {
+    getSharedNote(id: $id) {
+      expire_date
+    }
+  }
+`;
 export const listSharedNotes = /* GraphQL */ `
   query ListSharedNotes(
     $filter: ModelSharedNoteFilterInput
