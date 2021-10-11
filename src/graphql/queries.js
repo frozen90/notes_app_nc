@@ -65,7 +65,6 @@ export const listSharedNotes = /* GraphQL */ `
         title
         content
         expire_date
-        password
         createdAt
         updatedAt
       }

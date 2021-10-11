@@ -101,7 +101,7 @@ export const Note = ({ note, deleteNote, disabledFunctions }) => {
         let generatedLink = generateLink()
         if (inputPassword.length > 0) {
             try {
-                const sharedNoteData = await API.graphql(graphqlOperation(createSharedNote, { input: { password: inputPassword, expire_date: new Date(expiryDate).toISOString(), title: note.title, content: note.content, link: generatedLink } }))
+                const sharedNoteData = await API.graphql(graphqlOperation(createSharedNote, { input: { password: inputPassword, expire_date: new Date(expiryDate).toISOString(), title: title, content: content, link: generatedLink } }))
                 console.log(sharedNoteData)
                 setRequestLoading(false)
                 return (generatedLink)
