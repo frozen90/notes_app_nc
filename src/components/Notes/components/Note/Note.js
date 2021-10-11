@@ -5,13 +5,12 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
 import { listNotes } from "../../../../graphql/queries";
-import { updateNotes } from "../../../../graphql/mutations";
+import { updateNotes, createSharedNote } from "../../../../graphql/mutations";
 //Dimmers
 import LockNoteDimmer from "./components/LockNoteDimmer";
 import UnlockNoteDimmer from "./components/UnlockNoteDimmer";
 import PreviewNoteDimmer from "./components/PreviewNoteDimmer";
-
-
+import ShareNoteDimmer from "./components/ShareNoteDimmer";
 
 export const Note = ({ note, deleteNote }) => {
     //note state
@@ -26,6 +25,7 @@ export const Note = ({ note, deleteNote }) => {
     const [unlockDimmerActive, setUnlockDimmerActive] = useState(false)
     const [lockDimmerActive, setLockDimmerActive] = useState(false)
     const [previewDimmerActive, setPreviewDimmerActive] = useState(false)
+    const [shareDimmerActive, setShareDimmerActive] = useState(false)
     const [requestLoading, setRequestLoading] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')
 
@@ -39,6 +39,7 @@ export const Note = ({ note, deleteNote }) => {
         setPreviewDimmerActive(false)
         setUnlockDimmerActive(false)
         setLockDimmerActive(false)
+        setShareDimmerActive(false)
         setErrorMsg('')
     }
 
@@ -69,11 +70,14 @@ export const Note = ({ note, deleteNote }) => {
                 await API.graphql(graphqlOperation(updateNotes, { input: { id: note.id, password: inputPassword, locked: true } }))
                 setLocked(true)
                 setLockDimmerActive(false)
+                setRequestLoading(false)
             } catch (err) {
                 setErrorMsg(err)
+                setRequestLoading(false)
             }
         } else {
             setErrorMsg('Password cannot be empty')
+            setRequestLoading(false)
         }
     }
 
@@ -87,11 +91,19 @@ export const Note = ({ note, deleteNote }) => {
         }
     }
 
-    async function shareNote() {
-        try {
-
-        } catch (err) {
-
+    async function shareNote(inputPassword) {
+        setRequestLoading(true)
+        if (inputPassword.length > 0) {
+            try {
+                await API.graphql(graphqlOperation())
+                setRequestLoading(false)
+            } catch (err) {
+                setErrorMsg(err)
+                setRequestLoading(false)
+            }
+        } else {
+            setErrorMsg('Password cannot be empty')
+            setRequestLoading(false)
         }
     }
 
@@ -116,7 +128,7 @@ export const Note = ({ note, deleteNote }) => {
                     <Button.Group>
                         <Button className='remove-bg' floated='right' >
                             <Button.Content>
-                                <Icon size='large' inverted name='share square'></Icon>
+                                <Icon size='large' inverted name='share square' onClick={() => { setShareDimmerActive(true) }}></Icon>
                             </Button.Content>
                         </Button>
                         <Button className='remove-bg' floated='right' onClick={locked ? showPasswordDimmer : showLockPasswordDimmer}>
@@ -132,6 +144,7 @@ export const Note = ({ note, deleteNote }) => {
                     </Button.Group>
                 </Card.Content>
             </motion.div>
+            <ShareNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={shareDimmerActive} shareNote={shareNote} errorMsg={errorMsg} />
             <LockNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={lockDimmerActive} createPassword={createPassword} errorMsg={errorMsg} />
             <PreviewNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={previewDimmerActive} checkPassword={checkPassword} errorMsg={errorMsg} />
             <UnlockNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={unlockDimmerActive} checkPassword={checkPassword} errorMsg={errorMsg} />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
-export const UnlockNoteDimmer = ({ handleHide, active, closeFunction, checkPassword, errorMsg, requestLoading}) => {
+export const UnlockNoteDimmer = ({ handleHide, active, checkPassword, errorMsg, requestLoading}) => {
     const [unlockNotePassword, setUnlockNotePassword] = useState('')
     return (
         <Dimmer
