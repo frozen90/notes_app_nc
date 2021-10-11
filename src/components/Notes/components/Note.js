@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { API, graphqlOperation } from 'aws-amplify';
 import { Header, Card, Icon, Button, Dimmer, Input, Segment } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
+import { listNotes } from "../../../graphql/queries";
 
 
 
@@ -41,7 +43,9 @@ export const Note = ({ note, deleteNote }) => {
         setUnlockDimmerActive(false)
         setLockDimmerActive(false)
     }
-    const checkPassword = () => {
+    async function checkPassword(){
+        let password_filter = {and:[{id:{eq:"b99847ba-690a-45e3-a194-d2e57a70d2d3"},password:{eq:""}}]}
+        const passwordTest = await API.graphql(graphqlOperation(listNotes,{filter:password_filter}))
         if (unlockNotePassword === password) {
             setLocked(false)
             setUnlockDimmerActive(false)

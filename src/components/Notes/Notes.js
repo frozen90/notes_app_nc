@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { API, graphqlOperation } from 'aws-amplify';
-import { notesByDate } from '../../graphql/queries';
+import { listNotes,notesByDate } from '../../graphql/queries';
 import { Container, Grid, Segment, Icon, Loader, Button, Header, Dimmer } from 'semantic-ui-react'
 import './ExtraCssNotes.css'
 import { Helmet } from "react-helmet";
