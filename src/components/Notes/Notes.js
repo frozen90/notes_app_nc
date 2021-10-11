@@ -5,7 +5,8 @@ import { Container, Grid, Segment, Icon, Loader, Button, Header, Dimmer } from '
 import './ExtraCssNotes.css'
 import { Helmet } from "react-helmet";
 import NotesDashboard from "./components/NotesDashboard";
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion";
+import { generateLink } from "../../utils/helpers/link_generator"
 export const Notes = () => {
 
     const [loading, setLoading] = useState(true)
