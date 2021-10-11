@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
-export const UnlockNoteDimmer = ({ handleHide, active, closeFunction, checkPassword, errorMsg }) => {
+export const UnlockNoteDimmer = ({ handleHide, active, closeFunction, checkPassword, errorMsg, requestLoading}) => {
     const [unlockNotePassword, setUnlockNotePassword] = useState('')
     return (
         <Dimmer
@@ -11,7 +11,7 @@ export const UnlockNoteDimmer = ({ handleHide, active, closeFunction, checkPassw
         >
             <Segment inverted style={{ padding: '45px' }} >
 
-                <Button floated='right' className='remove-bg' onClick={closeFunction}><Button.Content><Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} inverted /></Button.Content></Button>
+                <Button floated='right' className='remove-bg' onClick={handleHide}><Button.Content><Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} inverted /></Button.Content></Button>
                 <br />
 
                 <Header as='h2' inverted>
@@ -20,7 +20,7 @@ export const UnlockNoteDimmer = ({ handleHide, active, closeFunction, checkPassw
 
                 <Input name='note_password' type='password' value={unlockNotePassword} placeholder='Note Password' onChange={(e, { value }) => { setUnlockNotePassword(value) }} />
                 <br />
-                <Button style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => { checkPassword(unlockNotePassword) }}>Unlock</Button>
+                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => { checkPassword(unlockNotePassword) }}>Unlock</Button>
                 {errorMsg.length > 0 && (<Message error>{errorMsg}</Message>)}
 
             </Segment>

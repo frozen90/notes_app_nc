@@ -26,7 +26,8 @@ export const Note = ({ note, deleteNote }) => {
     const [unlockDimmerActive, setUnlockDimmerActive] = useState(false)
     const [lockDimmerActive, setLockDimmerActive] = useState(false)
     const [previewDimmerActive, setPreviewDimmerActive] = useState(false)
-    const [errorMsg, setErrorMsg] = useState('Error')
+    const [requestLoading, setRequestLoading] = useState(false)
+    const [errorMsg, setErrorMsg] = useState('')
 
     const handleTextChange = (e) => { setContent(e.target.value) }
 
@@ -43,36 +44,46 @@ export const Note = ({ note, deleteNote }) => {
 
     async function checkPassword(inputPassword) {
         let password_filter = { and: [{ id: { eq: note.id }, password: { eq: inputPassword } }] }
-
+        setRequestLoading(true)
         try {
-            await API.graphql(graphqlOperation(listNotes, { filter: password_filter }))
-            setLocked(false)
-            handleHide()
-        } catch (err) {
+            let results = await API.graphql(graphqlOperation(listNotes, { filter: password_filter }))
+            if (results.data.listNotes.items.length > 0) {
+                setLocked(false)
+                handleHide()
+                setRequestLoading(false)
 
+            } else {
+                setErrorMsg('Incorrect password')
+                setRequestLoading(false)
+            }
+
+        } catch (err) {
+            setErrorMsg(err)
+            setRequestLoading(false)
         }
     }
 
     async function createPassword(inputPassword) {
         if (inputPassword.length > 0) {
-            try{
-            await API.graphql(graphqlOperation(updateNotes, { input: { id: note.id, password: inputPassword, locked: true } }))
-            setLocked(true)
-            setLockDimmerActive(false)
-            }catch(err){
+            try {
+                await API.graphql(graphqlOperation(updateNotes, { input: { id: note.id, password: inputPassword, locked: true } }))
+                setLocked(true)
+                setLockDimmerActive(false)
+            } catch (err) {
                 setErrorMsg(err)
             }
         } else {
             setErrorMsg('Password cannot be empty')
         }
     }
+
     async function updateNote(updateAction) {
         try {
             setBlockModifications(true)
             await API.graphql(graphqlOperation(updateNotes, updateAction))
             setBlockModifications(false)
         } catch (err) {
-
+            console.log(err)
         }
     }
 
@@ -89,7 +100,7 @@ export const Note = ({ note, deleteNote }) => {
             <motion.div className="ui card note-bg" initial={{ scale: 0, y: +700, x: +1300 }} animate={{ scale: 1, y: 0, x: notePosition }}
                 transition={{ ease: "easeOut", duration: 0.5 }}>
                 <Card.Content textAlign='center' className='card-header-content'>
-                    <Header as="h2" className='header-card'><Input readOnly={blockModifications} onBlur={() => { updateNote({ input: { id: note.id, title: title } }) }} inverted transparent maxLength="13" style={{width:'165px'}} onChange={(e, { value }) => { setTitle(value) }} value={title} /></Header>
+                    <Header as="h2" className='header-card'><Input readOnly={blockModifications} onBlur={() => { updateNote({ input: { id: note.id, title: title } }) }} inverted transparent maxLength="13" style={{ width: '165px' }} onChange={(e, { value }) => { setTitle(value) }} value={title} /></Header>
                 </Card.Content>
                 <Card.Content textAlign='left' className='note-content'>
                     {locked ?
@@ -121,9 +132,9 @@ export const Note = ({ note, deleteNote }) => {
                     </Button.Group>
                 </Card.Content>
             </motion.div>
-            <LockNoteDimmer handleHide={handleHide} active={lockDimmerActive} closeFunction={() => { setLockDimmerActive(false) }} createPassword={createPassword} errorMsg={errorMsg} />
-            <PreviewNoteDimmer handleHide={handleHide} active={previewDimmerActive} closeFunction={() => { setPreviewDimmerActive(false) }} checkPassword={checkPassword} errorMsg={errorMsg} />
-            <UnlockNoteDimmer handleHide={handleHide} active={unlockDimmerActive} closeFunction={() => { setUnlockDimmerActive(false) }} checkPassword={checkPassword} errorMsg={errorMsg} />
+            <LockNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={lockDimmerActive} createPassword={createPassword} errorMsg={errorMsg} />
+            <PreviewNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={previewDimmerActive} checkPassword={checkPassword} errorMsg={errorMsg} />
+            <UnlockNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={unlockDimmerActive} checkPassword={checkPassword} errorMsg={errorMsg} />
         </>
     )
 }

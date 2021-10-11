@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
 
 
-export const PreviewNoteDimmer = ({handleHide, active, closeFunction, checkPassword, errorMsg}) => {
+export const PreviewNoteDimmer = ({handleHide, active,checkPassword, errorMsg, requestLoading}) => {
     const [previewNotePassword, setPreviewNotePassword] = useState('')
 
     return (
@@ -12,13 +12,13 @@ export const PreviewNoteDimmer = ({handleHide, active, closeFunction, checkPassw
             onClickOutside={handleHide}
         >
             <Segment inverted style={{ padding: '45px' }} >
-                <Button floated='right' className='remove-bg' onClick={closeFunction}><Button.Content><Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} inverted /></Button.Content></Button><br />
+                <Button floated='right' className='remove-bg' onClick={handleHide}><Button.Content><Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} inverted /></Button.Content></Button><br />
                 <Header as='h2' inverted>
                     To preview the note <br /> please provide password
                 </Header>
 
                 <Input name='note_password' type='password' value={previewNotePassword} placeholder='Note Password' onChange={(e,{value})=>{setPreviewNotePassword(value)}}/><br />
-                <Button style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {checkPassword(previewNotePassword)}}>Preview</Button>
+                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {checkPassword(previewNotePassword)}}>Preview</Button>
                 {errorMsg.length > 0 && (<Message error>{errorMsg}</Message>)}
             </Segment>
         </Dimmer>
