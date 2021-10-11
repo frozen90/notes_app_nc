@@ -26,6 +26,7 @@ export const Note = ({ note, deleteNote }) => {
     const [unlockDimmerActive, setUnlockDimmerActive] = useState(false)
     const [lockDimmerActive, setLockDimmerActive] = useState(false)
     const [previewDimmerActive, setPreviewDimmerActive] = useState(false)
+    const [errorMsg, setErrorMsg] = useState('Error')
 
     const handleTextChange = (e) => { setContent(e.target.value) }
 
@@ -37,6 +38,7 @@ export const Note = ({ note, deleteNote }) => {
         setPreviewDimmerActive(false)
         setUnlockDimmerActive(false)
         setLockDimmerActive(false)
+        setErrorMsg('')
     }
 
     async function checkPassword(inputPassword) {
@@ -53,11 +55,15 @@ export const Note = ({ note, deleteNote }) => {
 
     async function createPassword(inputPassword) {
         if (inputPassword.length > 0) {
+            try{
             await API.graphql(graphqlOperation(updateNotes, { input: { id: note.id, password: inputPassword, locked: true } }))
             setLocked(true)
             setLockDimmerActive(false)
+            }catch(err){
+                setErrorMsg(err)
+            }
         } else {
-            console.log('password cannot be empty.')
+            setErrorMsg('Password cannot be empty')
         }
     }
     async function updateNote(updateAction) {
@@ -70,12 +76,20 @@ export const Note = ({ note, deleteNote }) => {
         }
     }
 
+    async function shareNote() {
+        try {
+
+        } catch (err) {
+
+        }
+    }
+
     return (
         <>
             <motion.div className="ui card note-bg" initial={{ scale: 0, y: +700, x: +1300 }} animate={{ scale: 1, y: 0, x: notePosition }}
                 transition={{ ease: "easeOut", duration: 0.5 }}>
                 <Card.Content textAlign='center' className='card-header-content'>
-                    <Header as="h2" className='header-card'><Input readOnly={blockModifications} onBlur={()=>{updateNote({input:{id:note.id, title:title}})}} inverted transparent maxLength="18" onChange={(e, { value }) => { setTitle(value) }} value={title} /></Header>
+                    <Header as="h2" className='header-card'><Input readOnly={blockModifications} onBlur={() => { updateNote({ input: { id: note.id, title: title } }) }} inverted transparent maxLength="13" style={{width:'165px'}} onChange={(e, { value }) => { setTitle(value) }} value={title} /></Header>
                 </Card.Content>
                 <Card.Content textAlign='left' className='note-content'>
                     {locked ?
@@ -84,7 +98,7 @@ export const Note = ({ note, deleteNote }) => {
                                 <Icon className='active-btn' name='eye' size='massive' />
                             </Button.Content></Button>
                         :
-                        <TextareaAutosize onDoubleClick={() => { setEditable(true) }} onBlur={() => { setEditable(false); updateNote({input:{id:note.id, content:content}})}} value={content} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />
+                        <TextareaAutosize onDoubleClick={() => { setEditable(true) }} onBlur={() => { setEditable(false); updateNote({ input: { id: note.id, content: content } }) }} value={content} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />
                     }
                 </Card.Content>
                 <Card.Content extra className='btn-footer' >
@@ -107,9 +121,9 @@ export const Note = ({ note, deleteNote }) => {
                     </Button.Group>
                 </Card.Content>
             </motion.div>
-            <LockNoteDimmer handleHide={handleHide} active={lockDimmerActive} closeFunction={() => { setLockDimmerActive(false) }} createPassword={createPassword} />
-            <PreviewNoteDimmer handleHide={handleHide} active={previewDimmerActive} closeFunction={() => { setPreviewDimmerActive(false) }} checkPassword={checkPassword} />
-            <UnlockNoteDimmer handleHide={handleHide} active={unlockDimmerActive} closeFunction={() => { setUnlockDimmerActive(false) }} checkPassword={checkPassword} />
+            <LockNoteDimmer handleHide={handleHide} active={lockDimmerActive} closeFunction={() => { setLockDimmerActive(false) }} createPassword={createPassword} errorMsg={errorMsg} />
+            <PreviewNoteDimmer handleHide={handleHide} active={previewDimmerActive} closeFunction={() => { setPreviewDimmerActive(false) }} checkPassword={checkPassword} errorMsg={errorMsg} />
+            <UnlockNoteDimmer handleHide={handleHide} active={unlockDimmerActive} closeFunction={() => { setUnlockDimmerActive(false) }} checkPassword={checkPassword} errorMsg={errorMsg} />
         </>
     )
 }
