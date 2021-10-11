@@ -17,7 +17,7 @@ import { generateLink } from "../../../../utils/helpers/link_generator";
 //PropTypes
 import PropTypes from 'prop-types';
 
-export const Note = ({ note, deleteNote }) => {
+export const Note = ({ note, deleteNote, disabledFunctions }) => {
     //note state
     const [notePosition, setNotePosition] = useState(0)
     const [title, setTitle] = useState(note.title)
@@ -99,15 +99,13 @@ export const Note = ({ note, deleteNote }) => {
     async function shareNote(inputPassword, expiryDate) {
         setRequestLoading(true)
         let generatedLink = generateLink()
-        console.log(new Date())
         if (inputPassword.length > 0) {
             try {
-                const sharedNoteData = await API.graphql(graphqlOperation(createSharedNote,{input:{password:inputPassword, expire_date:new Date(expiryDate).toISOString(), title:note.title, content:note.content, link: generatedLink }}))
+                const sharedNoteData = await API.graphql(graphqlOperation(createSharedNote, { input: { password: inputPassword, expire_date: new Date(expiryDate).toISOString(), title: note.title, content: note.content, link: generatedLink } }))
                 console.log(sharedNoteData)
                 setRequestLoading(false)
-                return(generatedLink)
+                return (generatedLink)
             } catch (err) {
-                console.log(err)
                 setErrorMsg(err)
                 setRequestLoading(false)
             }

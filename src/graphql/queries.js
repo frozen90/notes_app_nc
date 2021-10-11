@@ -52,17 +52,6 @@ export const getSharedNote = /* GraphQL */ `
     }
   }
 `;
-
-export const getSharedNoteExpiryDate = /* GraphQL */ `
-  query GetSharedNote($link: String!) {
-    getSharedNote(link: $link) {
-      expire_date
-    }
-  }
-`;
-
-
-
 export const listSharedNotes = /* GraphQL */ `
   query ListSharedNotes(
     $filter: ModelSharedNoteFilterInput
@@ -106,11 +95,35 @@ export const notesByDate = /* GraphQL */ `
         type
         title
         content
-        password
         locked
         createdAt
         updatedAt
         owner
+      }
+      nextToken
+    }
+  }
+`;
+export const notesByLink = /* GraphQL */ `
+  query NotesByLink(
+    $link: String
+    $id: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSharedNoteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    notesByLink(
+      link: $link
+      id: $id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        expire_date
       }
       nextToken
     }

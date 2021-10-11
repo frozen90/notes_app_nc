@@ -6,7 +6,7 @@ import './ExtraCssNotes.css'
 import { Helmet } from "react-helmet";
 import NotesDashboard from "./components/NotesDashboard";
 import GetStarted from "./components/GetStarted";
-import { generateLink } from "../../utils/helpers/link_generator"
+
 export const Notes = () => {
 
     const [loading, setLoading] = useState(true)

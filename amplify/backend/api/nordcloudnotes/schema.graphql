@@ -10,7 +10,7 @@ type Notes @model
 }
 
 
-type SharedNote @model{
+type SharedNote @model @key(name: "byLink", fields: ["link", "id"], queryField: "notesByLink"){
   id: ID!
   link: String
   title: String
