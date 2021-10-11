@@ -12,6 +12,7 @@ type Notes @model
 
 type SharedNote @model{
   id: ID!
+  link: String
   title: String
   content: String
   expire_date:AWSDateTime

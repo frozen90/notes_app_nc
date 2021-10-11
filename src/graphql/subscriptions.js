@@ -50,6 +50,7 @@ export const onCreateSharedNote = /* GraphQL */ `
   subscription OnCreateSharedNote {
     onCreateSharedNote {
       id
+      link
       title
       content
       expire_date
@@ -63,6 +64,7 @@ export const onUpdateSharedNote = /* GraphQL */ `
   subscription OnUpdateSharedNote {
     onUpdateSharedNote {
       id
+      link
       title
       content
       expire_date
@@ -76,6 +78,7 @@ export const onDeleteSharedNote = /* GraphQL */ `
   subscription OnDeleteSharedNote {
     onDeleteSharedNote {
       id
+      link
       title
       content
       expire_date

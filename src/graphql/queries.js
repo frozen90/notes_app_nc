@@ -28,6 +28,7 @@ export const listNotes = /* GraphQL */ `
         type
         title
         content
+        password
         locked
         createdAt
         updatedAt
@@ -41,6 +42,7 @@ export const getSharedNote = /* GraphQL */ `
   query GetSharedNote($id: ID!) {
     getSharedNote(id: $id) {
       id
+      link
       title
       content
       expire_date
@@ -59,6 +61,7 @@ export const listSharedNotes = /* GraphQL */ `
     listSharedNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        link
         title
         content
         expire_date
@@ -92,6 +95,7 @@ export const notesByDate = /* GraphQL */ `
         type
         title
         content
+        password
         locked
         createdAt
         updatedAt

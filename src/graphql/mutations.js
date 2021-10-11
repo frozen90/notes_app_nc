@@ -62,6 +62,7 @@ export const createSharedNote = /* GraphQL */ `
   ) {
     createSharedNote(input: $input, condition: $condition) {
       id
+      link
       title
       content
       expire_date
@@ -78,6 +79,7 @@ export const updateSharedNote = /* GraphQL */ `
   ) {
     updateSharedNote(input: $input, condition: $condition) {
       id
+      link
       title
       content
       expire_date
@@ -94,6 +96,7 @@ export const deleteSharedNote = /* GraphQL */ `
   ) {
     deleteSharedNote(input: $input, condition: $condition) {
       id
+      link
       title
       content
       expire_date

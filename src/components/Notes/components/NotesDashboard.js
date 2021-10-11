@@ -7,6 +7,7 @@ import Note from "./Note/Note";
 import Folder from "../../Folders/Folder";
 import { API, graphqlOperation } from 'aws-amplify';
 import { createNotes, deleteNotes } from '../../../graphql/mutations';
+import { motion } from "framer-motion";
 
 
 const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 2 }, { folder_name: 'New Folder 3 sadsadasdadasdsadasad', id: 3 }, { folder_name: 'New Folder 4', id: 4 }, { folder_name: 'New Folder 5', id: 5 }, { folder_name: 'New Folder 6', id: 6 }]
@@ -82,24 +83,27 @@ export const NotesDashboard = ({ notesList }) => {
                         <>
                             <Card.Group centered itemsPerRow={4} stackable >
                                 {listNotes}
+                                <Button className={notes.length > 0 ? 'remove-bg fixed-btn' : 'remove-bg margin-btn'} onClick={createNewNote} loading={btnLoading} disabled={btnLoading} >
+                                    <Button.Content>
+                                        <Icon circular size='huge' name='plus' className='add-new-note' />
+                                    </Button.Content>
+                                </Button>
                             </Card.Group>
-                            <Button className='remove-bg fixed-btn' onClick={createNewNote} loading={btnLoading} disabled={btnLoading} >
-                                <Button.Content>
-                                    <Icon circular size='huge' name='plus' className='add-new-note' />
-                                </Button.Content>
-                            </Button>
+
                         </>
 
                     )}
                     {navSelection === 'Folders' && (
-                        <Card.Group centered itemsPerRow={6}>
-                            {listFolders}
-                            <Button className='remove-bg fixed-btn'>
-                                <Button.Content>
-                                    <Icon circular size='huge' name='plus' className='add-new-note' />
-                                </Button.Content>
-                            </Button>
-                        </Card.Group>)}
+                        <>
+                            <Card.Group centered itemsPerRow={6}>
+                                {listFolders}
+                                <Button className={'remove-bg fixed-btn'}>
+                                    <Button.Content>
+                                        <Icon circular size='huge' name='plus' className='add-new-note' />
+                                    </Button.Content>
+                                </Button>
+                            </Card.Group>
+                        </>)}
                 </Segment>
 
             </Grid.Column>

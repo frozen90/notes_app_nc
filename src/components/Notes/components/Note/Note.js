@@ -5,6 +5,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
 import { listNotes } from "../../../../graphql/queries";
+import { updateNotes } from "../../../../graphql/mutations";
 //Dimmers
 import LockNoteDimmer from "./components/LockNoteDimmer";
 import UnlockNoteDimmer from "./components/UnlockNoteDimmer";
@@ -12,7 +13,7 @@ import PreviewNoteDimmer from "./components/PreviewNoteDimmer";
 
 
 
-export const Note = ({ note, deleteNote, deleteLoading }) => {
+export const Note = ({ note, deleteNote }) => {
     //note state
     const [notePosition, setNotePosition] = useState(0)
     const [title, setTitle] = useState(note.title)
@@ -24,9 +25,6 @@ export const Note = ({ note, deleteNote, deleteLoading }) => {
     const [unlockDimmerActive, setUnlockDimmerActive] = useState(false)
     const [lockDimmerActive, setLockDimmerActive] = useState(false)
     const [previewDimmerActive, setPreviewDimmerActive] = useState(false)
-
-
-    const textAreaRef = React.createRef();
 
     const handleTextChange = (e) => {setContent(e.target.value)}
 
@@ -41,21 +39,31 @@ export const Note = ({ note, deleteNote, deleteLoading }) => {
     }
 
     async function checkPassword(inputPassword){
-        let password_filter = {and:[{id:{eq:"b99847ba-690a-45e3-a194-d2e57a70d2d3"},password:{eq:""}}]}
-        const passwordTest = await API.graphql(graphqlOperation(listNotes,{filter:password_filter}))
-        if (inputPassword === "XD") {
+        let password_filter = {and:[{id:{eq:note.id},password:{eq:inputPassword}}]}
+        
+        try{    
+            await API.graphql(graphqlOperation(listNotes,{filter:password_filter}))
             setLocked(false)
-            setUnlockDimmerActive(false)
-            setPreviewDimmerActive(false)
+            handleHide()
+        }catch(err){
+
         }
     }
 
-    const createPassword = (password) => {
-        if (password.length > 0) {
+    async function createPassword(inputPassword){
+        if (inputPassword.length > 0) {
+            await API.graphql(graphqlOperation(updateNotes,{input:{id:note.id,password:inputPassword,locked:true}}))
             setLocked(true)
             setLockDimmerActive(false)
         } else {
             console.log('password cannot be empty.')
+        }
+    }
+    async function updateNote(){
+        try{
+            await API.graphql(graphqlOperation())
+        }catch(err){
+
         }
     }
     return (
@@ -72,7 +80,7 @@ export const Note = ({ note, deleteNote, deleteLoading }) => {
                                 <Icon className='active-btn' name='eye' size='massive' />
                             </Button.Content></Button> 
                         : 
-                        <TextareaAutosize onDoubleClick={() => { setEditable(true) }} value={content} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />
+                        <TextareaAutosize onDoubleClick={() => { setEditable(true) }} onBlur={()=>{setEditable(false)}} value={content} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />
                     }
                 </Card.Content>
                 <Card.Content extra className='btn-footer' >

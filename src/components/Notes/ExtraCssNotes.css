@@ -9,7 +9,9 @@
     min-width: 250px !important;
     box-shadow: 0 0 0 0 !important;
 }
-
+.margin-btn{
+    margin-top: 250px !important;
+}
 .folder-bg{
     background-color: #262636 !important;
     opacity: 0.7 !important;
@@ -126,6 +128,8 @@
 .ui.transparent.inverted.input>input{
     text-align: center;
 }
+
+
 @media only screen and (max-width: 450px) {
     .search-bar .input {
         width: 130px;
