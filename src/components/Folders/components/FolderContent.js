@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Icon, Loader } from "semantic-ui-react";
+import { Card, Button, Icon, Loader, Header } from "semantic-ui-react";
 import { API, graphqlOperation } from "@aws-amplify/api";
 import Note from "../../Notes/components/Notes/components/Note";
 import { deleteNotes, createNotes } from "../../../graphql/mutations";
 import { notesByDate } from "../../../graphql/queries";
 
-export const FolderContent = ({ folderId }) => {
-    console.log(folderId)
+export const FolderContent = ({ folderId, folderName }) => {
+    const sections = [
+        { key: 'home', content: 'Home', link: true },
+        { key: 'registration', content: 'Registration', link: true },
+        { key: 'info', content: 'Personal Information', active: true },
+      ]
+      
     const [loading, setLoading] = useState(true)
     const [notes, setNotes] = useState([])
     const [btnLoading, setBtnLoading] = useState(false)
@@ -56,6 +61,7 @@ export const FolderContent = ({ folderId }) => {
     }, [folderId])
     return (
         <>
+        <Header inverted className="fixed-folder-name" >Folder Name: {folderName}</Header>
             {!loading ?
                 <Card.Group centered itemsPerRow={4} stackable >
                     {listNotes}

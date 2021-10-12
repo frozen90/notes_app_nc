@@ -198,6 +198,7 @@
     bottom: 3%;
     right: 3%;
 }
+
 .header-card{
     color: white !important;
     white-space: nowrap;
@@ -233,6 +234,13 @@
 
 .expiry-date-label{
     margin-top: 15px !important;
+}
+.fixed-folder-name{
+
+    position: fixed !important;
+    left: 12%;
+    top: 12%;
+    color: white !important
 }
 @media only screen and (max-width: 450px) {
     .search-bar .input {

@@ -1,17 +1,18 @@
-import React, {useState} from "react";
-import {Icon, Button, Card } from 'semantic-ui-react'
+import React, { useState } from "react";
+import { Icon, Button, Card } from 'semantic-ui-react'
 import Folder from "./components/Folder";
 import { API, graphqlOperation } from 'aws-amplify';
 import { createFolder, deleteFolder } from "../../graphql/mutations";
 import FolderContent from "./components/FolderContent";
 
-export const FoldersDashboard = ({foldersList}) => {
+export const FoldersDashboard = ({ foldersList }) => {
     const [folderOpen, setFolderOpen] = useState(false)
     const [folderId, setFolderId] = useState('')
+    const [folderName, setFolderName] = useState('')
     const [btnLoading, setBtnLoading] = useState(false)
     const [folders, setFolders] = useState(foldersList)
     const listFolders = folders.map((folder) => {
-        return (<Folder setFolderId={setFolderId} setFolderOpen={setFolderOpen} removeFolder={removeFolder} folder={folder} key={folder.id} />)
+        return (<Folder setFolderName={setFolderName} setFolderId={setFolderId} setFolderOpen={setFolderOpen} removeFolder={removeFolder} folder={folder} key={folder.id} />)
     })
 
     async function createNewFolder() {
@@ -19,7 +20,7 @@ export const FoldersDashboard = ({foldersList}) => {
             setBtnLoading(true)
             const foldersData = await API.graphql(graphqlOperation(createFolder, { input: { title: 'New Folder' } }))
             let folder = foldersData.data.createFolder
-            setFolders([folder,...folders])
+            setFolders([folder, ...folders])
             setBtnLoading(false)
         } catch (err) {
             setBtnLoading(false)
@@ -41,22 +42,20 @@ export const FoldersDashboard = ({foldersList}) => {
             console.log('error')
         }
     }
-    async function fetchFolderContent(id){
 
-    }
     return (
         <>
-        {!folderOpen ?
-            <Card.Group centered itemsPerRow={6}>
-                {listFolders}
-                <Button loading={btnLoading} className={folders.length > 0 ? 'remove-bg fixed-btn' : 'remove-bg margin-btn'}onClick={()=>{createNewFolder() }}>
-                    <Button.Content>
-                        <Icon circular size='huge' name='plus' className='add-new-note' />
-                    </Button.Content>
-                </Button>
-            </Card.Group>
-            :
-            <FolderContent folderId={folderId} />
+            {!folderOpen ?
+                <Card.Group centered itemsPerRow={6}>
+                    {listFolders}
+                    <Button loading={btnLoading} className={folders.length > 0 ? 'remove-bg fixed-btn' : 'remove-bg margin-btn'} onClick={() => { createNewFolder() }}>
+                        <Button.Content>
+                            <Icon circular size='huge' name='plus' className='add-new-note' />
+                        </Button.Content>
+                    </Button>
+                </Card.Group>
+                :
+                <FolderContent folderId={folderId} folderName={folderName}/>
             }
         </>
     )
