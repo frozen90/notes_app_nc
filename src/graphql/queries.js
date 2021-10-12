@@ -8,9 +8,17 @@ export const getNotes = /* GraphQL */ `
       type
       title
       content
-      password
       locked
       createdAt
+      folder {
+        id
+        title
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       updatedAt
       owner
     }
@@ -28,11 +36,59 @@ export const listNotes = /* GraphQL */ `
         type
         title
         content
-        password
         locked
         createdAt
+        folder {
+          id
+          title
+          createdAt
+          updatedAt
+        }
         updatedAt
         owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getFolder = /* GraphQL */ `
+  query GetFolder($id: ID!) {
+    getFolder(id: $id) {
+      id
+      title
+      notes {
+        items {
+          id
+          type
+          title
+          content
+          locked
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listFolders = /* GraphQL */ `
+  query ListFolders(
+    $filter: ModelFolderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFolders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -46,7 +102,6 @@ export const getSharedNote = /* GraphQL */ `
       title
       content
       expire_date
-      password
       createdAt
       updatedAt
     }
@@ -96,6 +151,12 @@ export const notesByDate = /* GraphQL */ `
         content
         locked
         createdAt
+        folder {
+          id
+          title
+          createdAt
+          updatedAt
+        }
         updatedAt
         owner
       }
@@ -122,7 +183,12 @@ export const notesByLink = /* GraphQL */ `
     ) {
       items {
         id
+        link
+        title
+        content
         expire_date
+        createdAt
+        updatedAt
       }
       nextToken
     }

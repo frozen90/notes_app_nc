@@ -8,7 +8,7 @@ import {
   Route
 } from "react-router-dom";
 import 'semantic-ui-css/semantic.min.css'
-import Login from './components/Forms/Login';
+import LoginPage from './components/LoginPage';
 import { ProtectedRoute } from './components/ProtectedRoute'
 import ShareNote from './components/Notes/components/ShareNotes/ShareNote';
 
@@ -21,9 +21,9 @@ function App() {
     <Router>
       <Switch>
         <ProtectedRoute exact path="/notes" component={Notes} /> 
-        <Route exact path="/login" component={Login}/>
+        <Route exact path="/login" component={LoginPage}/>
         <Route path="/shared-notes/:link" component={ShareNote}/>
-        <Route path="/" component={Login}/>
+        <Route path="/" component={LoginPage}/>
       </Switch>
     </Router>
 

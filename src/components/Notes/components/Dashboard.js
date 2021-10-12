@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Grid, Segment, Icon, Button, Menu, Search, Card } from 'semantic-ui-react'
 import '.././ExtraCssNotes.css';
 import { Helmet } from "react-helmet";
@@ -7,12 +7,12 @@ import Note from "./Note/Note";
 import Folder from "../../Folders/Folder";
 import { API, graphqlOperation } from 'aws-amplify';
 import { createNotes, deleteNotes } from '../../../graphql/mutations';
-import { motion } from "framer-motion";
+
 
 
 const folders = [{ folder_name: 'New Folder 1', id: 1 }, { folder_name: 'New Folder 2 ', id: 2 }, { folder_name: 'New Folder 3 sadsadasdadasdsadasad', id: 3 }, { folder_name: 'New Folder 4', id: 4 }, { folder_name: 'New Folder 5', id: 5 }, { folder_name: 'New Folder 6', id: 6 }]
 
-export const NotesDashboard = ({ notesList }) => {
+export const Dashboard = ({ notesList }) => {
     const [btnLoading, setBtnLoading] = useState(false)
     const [notes, setNotes] = useState(notesList)
     console.log(notesList)
@@ -77,6 +77,7 @@ export const NotesDashboard = ({ notesList }) => {
                 <Segment className='remove-bg' textAlign='center'>
                     <Button size='huge' value='Notes' className={navSelection === 'Notes' ? 'dashboard-btns active-btn' : 'dashboard-btns'} onClick={(e, { value }) => { setNavSelection(value) }}>Notes</Button>
                     <Button size='huge' value='Folders' className={navSelection === 'Folders' ? 'dashboard-btns active-btn' : 'dashboard-btns'} onClick={(e, { value }) => { setNavSelection(value) }}>Folders</Button>
+                    <Button size='huge' value='Calendar' className={navSelection === 'Calendar' ? 'dashboard-btns active-btn' : 'dashboard-btns'} onClick={(e, { value }) => { setNavSelection(value) }}>Calendar</Button>
                 </Segment>
                 <Segment textAlign='center' className='remove-bg notes-segment'>
                     {navSelection === 'Notes' && (
@@ -112,9 +113,9 @@ export const NotesDashboard = ({ notesList }) => {
     )
 }
 
-NotesDashboard.propTypes = {
+Dashboard.propTypes = {
     notes: PropTypes.array
 }
 
 
-export default NotesDashboard;
+export default Dashboard;

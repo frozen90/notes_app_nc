@@ -11,6 +11,15 @@ export const onCreateNotes = /* GraphQL */ `
       password
       locked
       createdAt
+      folder {
+        id
+        title
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       updatedAt
       owner
     }
@@ -26,6 +35,15 @@ export const onUpdateNotes = /* GraphQL */ `
       password
       locked
       createdAt
+      folder {
+        id
+        title
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       updatedAt
       owner
     }
@@ -41,8 +59,89 @@ export const onDeleteNotes = /* GraphQL */ `
       password
       locked
       createdAt
+      folder {
+        id
+        title
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       updatedAt
       owner
+    }
+  }
+`;
+export const onCreateFolder = /* GraphQL */ `
+  subscription OnCreateFolder {
+    onCreateFolder {
+      id
+      title
+      notes {
+        items {
+          id
+          type
+          title
+          content
+          password
+          locked
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateFolder = /* GraphQL */ `
+  subscription OnUpdateFolder {
+    onUpdateFolder {
+      id
+      title
+      notes {
+        items {
+          id
+          type
+          title
+          content
+          password
+          locked
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteFolder = /* GraphQL */ `
+  subscription OnDeleteFolder {
+    onDeleteFolder {
+      id
+      title
+      notes {
+        items {
+          id
+          type
+          title
+          content
+          password
+          locked
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
     }
   }
 `;

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Container, Grid, Loader, Message, Segment } from "semantic-ui-react";
+import { Container, Grid, Loader, Segment } from "semantic-ui-react";
 import { Helmet } from "react-helmet";
 import { notesByLink } from "../../../../graphql/queries";
 import { API, graphqlOperation } from 'aws-amplify';

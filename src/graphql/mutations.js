@@ -14,6 +14,15 @@ export const createNotes = /* GraphQL */ `
       password
       locked
       createdAt
+      folder {
+        id
+        title
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       updatedAt
       owner
     }
@@ -32,6 +41,15 @@ export const updateNotes = /* GraphQL */ `
       password
       locked
       createdAt
+      folder {
+        id
+        title
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       updatedAt
       owner
     }
@@ -50,8 +68,98 @@ export const deleteNotes = /* GraphQL */ `
       password
       locked
       createdAt
+      folder {
+        id
+        title
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       updatedAt
       owner
+    }
+  }
+`;
+export const createFolder = /* GraphQL */ `
+  mutation CreateFolder(
+    $input: CreateFolderInput!
+    $condition: ModelFolderConditionInput
+  ) {
+    createFolder(input: $input, condition: $condition) {
+      id
+      title
+      notes {
+        items {
+          id
+          type
+          title
+          content
+          password
+          locked
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateFolder = /* GraphQL */ `
+  mutation UpdateFolder(
+    $input: UpdateFolderInput!
+    $condition: ModelFolderConditionInput
+  ) {
+    updateFolder(input: $input, condition: $condition) {
+      id
+      title
+      notes {
+        items {
+          id
+          type
+          title
+          content
+          password
+          locked
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteFolder = /* GraphQL */ `
+  mutation DeleteFolder(
+    $input: DeleteFolderInput!
+    $condition: ModelFolderConditionInput
+  ) {
+    deleteFolder(input: $input, condition: $condition) {
+      id
+      title
+      notes {
+        items {
+          id
+          type
+          title
+          content
+          password
+          locked
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
     }
   }
 `;

@@ -4,7 +4,7 @@ import { notesByDate } from '../../graphql/queries';
 import { Container, Grid, Loader } from 'semantic-ui-react'
 import './ExtraCssNotes.css'
 import { Helmet } from "react-helmet";
-import NotesDashboard from "./components/NotesDashboard";
+import Dashboard from "./components/Dashboard";
 import GetStarted from "./components/GetStarted";
 
 export const Notes = () => {
@@ -34,7 +34,7 @@ export const Notes = () => {
     }
     return (
 
-        <Container fluid>
+        <Container fluid style={{padding:'15px'}}>
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Notes Dashboard</title>
@@ -43,7 +43,7 @@ export const Notes = () => {
             {!loading ?
                 <Grid centered style={{ padding: '20px', height: "100vh" }} verticalAlign="middle">
                     {notes.length > 0 || getStartedDisplay ?
-                        <NotesDashboard notesList={notes} />
+                        <Dashboard notesList={notes} />
                         :
 
                         <GetStarted dismissWelcome={dismissWelcome} />

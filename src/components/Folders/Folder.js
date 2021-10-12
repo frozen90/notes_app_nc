@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Header, Card, Icon, Button, Dimmer, Input } from "semantic-ui-react";
-import TextareaAutosize from 'react-textarea-autosize';
+import React from "react";
+import { Header, Card, Icon, Button } from "semantic-ui-react";
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
 

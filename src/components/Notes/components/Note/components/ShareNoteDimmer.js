@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Dimmer, Button, Segment, Input, Icon, Header, Message, Select } from "semantic-ui-react";
+import React, { useEffect, useState } from "react";
+import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
 
 
 export const ShareNoteDimmer = ({ handleHide, active, errorMsg, requestLoading, shareNote }) => {
-    console.log(window.location.origin)
+
     const [error, setError] = useState(errorMsg)
     const [sharePassword, setSharePassword] = useState('')
     const [date, setDate] = useState(new Date().toLocaleString('sv').replace(' ', 'T'))

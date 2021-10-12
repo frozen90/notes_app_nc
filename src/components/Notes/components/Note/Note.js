@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // Ui Components / frameworks
-import { Header, Card, Icon, Button, Dimmer, Input, Segment } from "semantic-ui-react";
+import { Header, Card, Icon, Button, Input } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
 // GraphQl
@@ -17,7 +17,7 @@ import { generateLink } from "../../../../utils/helpers/link_generator";
 //PropTypes
 import PropTypes from 'prop-types';
 
-export const Note = ({ note, deleteNote, disabledFunctions }) => {
+export const Note = ({ note, deleteNote }) => {
     //note state
     const [notePosition, setNotePosition] = useState(0)
     const [title, setTitle] = useState(note.title)

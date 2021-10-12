@@ -56,8 +56,8 @@ export const ProtectedNote = ({ noteId }) => {
 
                 </Dimmer>
                 :
-                <Card.Group centered style={{ marginTop: '100px'}}>
-                    <LockedNote note={note}/>
+                <Card.Group centered style={{ marginTop: '100px' }}>
+                    <LockedNote note={note} />
                 </Card.Group>
 
             }
