@@ -43,6 +43,7 @@ export const CalendarDashboard = () => {
     const handleCalendarValueChange = (date) => {
         plannedDates.map((plannedDate) => {
             if (new Date(date).toLocaleDateString() === new Date(plannedDate.date).toLocaleDateString()) {
+                console.log('Here')
                 setPlannedDateId(plannedDate.id)
             } else {
                 setPlannedDateId('')
@@ -51,9 +52,7 @@ export const CalendarDashboard = () => {
         //fix for time select issue with react-calendar
         setCalendarValue( new Date(date.getTime() - (date.getTimezoneOffset() * 60000)))
     }
-    useEffect(()=>{
-        console.log(calendarValue)
-    },[calendarValue])
+
     return (
         <>
             {!loading ?

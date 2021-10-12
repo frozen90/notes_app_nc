@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Form, Segment, Header, Button, Input, Dimmer, Icon, Message } from "semantic-ui-react"
 
 
-export const NewEventDimmer = ({ createNewEvent, active, setActive }) => {
+export const NewEventDimmer = ({ createNewEvent, active, setActive, fetchPlannedDates }) => {
     const [time, setTime] = useState('')
     const [sucessMsg, setSuccessMsg] = useState('')
     const [error, setError] = useState('')
@@ -10,14 +10,8 @@ export const NewEventDimmer = ({ createNewEvent, active, setActive }) => {
     const [content, setContent] = useState('')
     async function handleSubmit() {
         let data = { title: title, content: content }
-        let eventMsg = await createNewEvent(data, time)
+        await createNewEvent(data, time)
 
-        if (eventMsg.errors != undefined) {
-            setError('Ups... something went wrong please try again')
-        } else {
-            setError('')
-            setSuccessMsg(eventMsg)
-        }
 
 
     }
@@ -29,7 +23,7 @@ export const NewEventDimmer = ({ createNewEvent, active, setActive }) => {
             <Segment inverted style={{ padding: '45px' }} >
                 <Button floated='right' className='remove-bg' >
                     <Button.Content>
-                        <Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} onClick={() => { setActive(false) }} inverted />
+                        <Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} onClick={() => {setActive(false) }} inverted />
                     </Button.Content></Button><br />
                 <Header as='h2' inverted>
                     Please setup your event.
