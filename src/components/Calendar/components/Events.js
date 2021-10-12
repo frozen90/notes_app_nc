@@ -8,14 +8,17 @@ import Event from "./Event";
 
 
 export const Events = ({ plannedDateId, date, fetchPlannedDates }) => {
+
     const [loading, setLoading] = useState(false)
     const [plannedEvents, setPlannedEvents] = useState([])
     const [newEventDimmerActive, setNewEventDimmerActive] = useState(false)
+
     async function fetchEvents(plannedDateId) {
         setLoading(true)
         try {
             let eventFilter = { and: [{ plannedDateId: { eq: plannedDateId } }] }
             const events = await API.graphql(graphqlOperation(eventsByDate, { type: "Event", sortDirection: 'ASC', filter: eventFilter, }))
+            console.log('events',events)
             setPlannedEvents(events.data.eventsByDate.items)
             setLoading(false)
 
@@ -23,6 +26,7 @@ export const Events = ({ plannedDateId, date, fetchPlannedDates }) => {
             setLoading(false)
         }
     }
+
     async function createNewEvent(data, time) {
         let combinedDate = date.toISOString().split('T')[0] + 'T' + time + ':00.000Z'
 
@@ -30,23 +34,24 @@ export const Events = ({ plannedDateId, date, fetchPlannedDates }) => {
             let dateId = plannedDateId
             if (plannedDateId === '') {
                 let plannedDate = await API.graphql(graphqlOperation(createPlannedDates, { input: { date: new Date(date).toISOString().split('T')[0] } }))
+
                 dateId = plannedDate.data.createPlannedDates.id
             }
-            let event = await API.graphql(graphqlOperation(createEvents, { input: { title: data.title, content: data.content, plannedDateId: dateId, date: combinedDate, type: 'Event' } }))
-            await fetchEvents(dateId)
+            await API.graphql(graphqlOperation(createEvents, { input: { title: data.title, content: data.content, plannedDateId: dateId, date: combinedDate, type: 'Event' } }))
+            
 
         } catch (err) {
-            console.log(err)
             return err
         }
     }
     useEffect(() => {
-        if (plannedDateId.length > 0) {
+        if (plannedDateId) {
             fetchEvents(plannedDateId)
         } else {
             setPlannedEvents([])
         }
     }, [plannedDateId])
+
     const mapEvents = plannedEvents.map((event) => {
         return (
             <Event key={event.id} event={event} />
@@ -62,7 +67,7 @@ export const Events = ({ plannedDateId, date, fetchPlannedDates }) => {
                 </Button>
             </Grid.Row>
             {!loading ? mapEvents : <Grid.Row><Loader style={{ marginTop: '50px' }} className='loader' active size='large'>Loading...</Loader></Grid.Row>}
-            <NewEventDimmer setActive={setNewEventDimmerActive} active={newEventDimmerActive} createNewEvent={createNewEvent} />
+            <NewEventDimmer fetchPlannedDates={fetchPlannedDates} setActive={setNewEventDimmerActive} active={newEventDimmerActive} createNewEvent={createNewEvent} />
         </>
     )
 }

@@ -23,13 +23,13 @@ export const NewEventDimmer = ({ createNewEvent, active, setActive, fetchPlanned
             <Segment inverted style={{ padding: '45px' }} >
                 <Button floated='right' className='remove-bg' >
                     <Button.Content>
-                        <Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} onClick={() => {setActive(false) }} inverted />
+                        <Icon name='close' size='big' style={{ marginRight: '-70px', marginTop: '-70px' }} onClick={() => {fetchPlannedDates();setActive(false) }} inverted />
                     </Button.Content></Button><br />
                 <Header as='h2' inverted>
                     Please setup your event.
                 </Header>
                 <Form inverted>
-                    <Form.Input required name='title' type='time' value={time} label="Time" placeholder='Timee' onChange={(e, { value }) => { setTime(value) }} />
+                    <Form.Input required name='title' type='time' value={time} label="Time" placeholder='Time' onChange={(e, { value }) => { setTime(value) }} />
                     <Form.Input required name='title' type='text' value={title} label="Event Title" placeholder='Event Title' onChange={(e, { value }) => { setTitle(value) }} />
                     <Form.Input required name='content' value={content} label="Short Description" placeholder='Short Description' type='text' onChange={(e, { value }) => { setContent(value) }} />
                     <Button style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={(e) => { e.preventDefault(); handleSubmit() }}>Create New Event</Button>
