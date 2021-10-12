@@ -9,7 +9,7 @@ import CalendarDashboard from "../Calendar/CalendarDashboard";
 
 
 
-export const Dashboard = ({ notesList }) => {
+export const Dashboard = ({ notesList, foldersList }) => {
     const [navSelection, setNavSelection] = useState('Notes')
 
     return (
@@ -37,7 +37,7 @@ export const Dashboard = ({ notesList }) => {
                 </Segment>
                 <Segment textAlign='center' className='remove-bg notes-segment'>
                     {navSelection === 'Notes' && (<NotesDashboard notesList={notesList}/>)}
-                    {navSelection === 'Folders' && (<FoldersDashboard/>)}
+                    {navSelection === 'Folders' && (<FoldersDashboard foldersList={foldersList}/>)}
                     {navSelection === 'Calendar' && (<CalendarDashboard/>)}
                 </Segment>
 

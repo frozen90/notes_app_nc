@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { API, graphqlOperation } from 'aws-amplify';
-import { notesByDate } from '../../graphql/queries';
+import { notesByDate, listFolders } from '../../graphql/queries';
 import { Container, Grid, Loader } from 'semantic-ui-react'
 import { Helmet } from "react-helmet";
 import Dashboard from "../Dashboard/Dashboard";
@@ -11,9 +11,11 @@ export const MainPage = () => {
     const [loading, setLoading] = useState(true)
     const [getStartedDisplay, setGetStartedDisplay] = useState(false)
     const [notes, setNotes] = useState([])
+    const [folders, setFolders] = useState([])
 
     useEffect(() => {
         fetchNotes()
+        fetchFolders()
     }, [])
 
     async function fetchNotes() {
@@ -26,6 +28,17 @@ export const MainPage = () => {
             console.log(err)
         }
     }
+    async function fetchFolders() {
+        try {
+            const foldersData = await API.graphql(graphqlOperation(listFolders))
+            const folders = foldersData.data.listFolders.items
+            setFolders(folders)
+            setLoading(false)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
 
     const dismissWelcome = () => {
         setGetStartedDisplay(true)
@@ -41,7 +54,7 @@ export const MainPage = () => {
             {!loading ?
                 <Grid centered style={{ padding: '20px', height: "100vh" }} verticalAlign="middle">
                     {notes.length > 0 || getStartedDisplay ?
-                        <Dashboard notesList={notes} />
+                        <Dashboard notesList={notes} foldersList={folders} />
                         :
                         <GetStarted dismissWelcome={dismissWelcome} />
                     }
