@@ -61,6 +61,8 @@
 }
 .colored-btn{
     color: #3366BB !important; 
+    font-weight: bold;
+    cursor: pointer;
 }
 .colored-btn:hover{
     text-decoration: underline !important;
