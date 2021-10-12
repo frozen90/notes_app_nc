@@ -53,7 +53,7 @@ export const Events = ({ plannedDateId, setPlannedDateId, date, fetchPlannedDate
 
     const mapEvents = plannedEvents.map((event) => {
         return (
-            <Event key={event.id} event={event} />
+            <Event fetchEvents={fetchEvents} key={event.id} event={event} />
         )
     })
     return (
