@@ -33,10 +33,12 @@ type PlannedDates @model @auth(rules:[{allow: owner}]){
 }
 
 type Events @model   
-  @key(name: "byDateId", fields: ["plannedDateId", "content"]) 
+  @key(name: "byDateId", fields: ["plannedDateId", "content"])
+  @key(name: "eventsByDate", fields:["type","date"], queryField:"eventsByDate") 
   @auth(rules:[{allow: owner}]){
   id: ID!
   date: AWSDateTime!
+  type: String!
   title: String!
   content: String!
   plannedDateId: ID!

@@ -145,6 +145,7 @@ export const getPlannedDates = /* GraphQL */ `
         items {
           id
           date
+          type
           title
           content
           plannedDateId
@@ -186,6 +187,7 @@ export const getEvents = /* GraphQL */ `
     getEvents(id: $id) {
       id
       date
+      type
       title
       content
       plannedDateId
@@ -205,6 +207,7 @@ export const listEvents = /* GraphQL */ `
       items {
         id
         date
+        type
         title
         content
         plannedDateId
@@ -281,6 +284,38 @@ export const notesByLink = /* GraphQL */ `
         password
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const eventsByDate = /* GraphQL */ `
+  query EventsByDate(
+    $type: String
+    $date: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    eventsByDate(
+      type: $type
+      date: $date
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        date
+        type
+        title
+        content
+        plannedDateId
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }

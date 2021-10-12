@@ -16,16 +16,18 @@ export const CalendarDashboard = () => {
         fetchPlannedDates()
     }, [])
 
+
     async function fetchPlannedDates() {
+        setLoading(true)
         try {
             const dates = await API.graphql(graphqlOperation(listPlannedDates))
             setPlannedDates(dates.data.listPlannedDates.items)
-            console.log(dates)
             setLoading(false)
         } catch (err) {
             console.log(err)
             setLoading(false)
         }
+        setLoading(false)
     }
 
     const tileClassName = ({ date }) => {
@@ -46,22 +48,27 @@ export const CalendarDashboard = () => {
                 setPlannedDateId('')
             }
         })
-        setCalendarValue(date)
+        //fix for time select issue with react-calendar
+        setCalendarValue( new Date(date.getTime() - (date.getTimezoneOffset() * 60000)))
     }
-
+    useEffect(()=>{
+        console.log(calendarValue)
+    },[calendarValue])
     return (
         <>
             {!loading ?
                 <Grid centered columns={16}>
                     <Grid.Row>
-                        <Calendar value={calendarValue} view="month" tileClassName={tileClassName} onChange={handleCalendarValueChange} />
+                        <Calendar utcOffset={0} value={calendarValue} view="month" tileClassName={tileClassName} onChange={handleCalendarValueChange} />
                     </Grid.Row>
                     <Grid.Row>
-                        <Label circular size='large' className='orangeDot' key={0}> Today</Label>
-                        <Label circular className='greenDot' size='large' key={1}>Planned</Label>
+                        <Label circular size='large' className='orangeDot'> Today</Label>
+                        <Label circular size='large' className='greenDot' >Planned</Label>
+                        <Label circular size='large' className='purpleDot'> Active</Label>
+
                     </Grid.Row>
                     
-                        <Events plannedDateId={plannedDateId} />
+                        <Events fetchPlannedDates={fetchPlannedDates} date={calendarValue} plannedDateId={plannedDateId} />
 
                 </Grid>
                 :

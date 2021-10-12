@@ -79,10 +79,7 @@
     background-color: #706FC8  !important;
     border-radius: 25px;
 }
-.react-calendar__tile--active{
-    background-color: #706FC8  !important;
-    border-radius: 25px !important;
-}
+
 .react-calendar__navigation__label:hover{
     background-color: #706FC8  !important;
     border-radius: 25px; 
@@ -128,6 +125,16 @@
 .react-calendar__navigation__label{
     background-color: transparent !important;
 }
+.plannedEventClass{
+    background-color: green !important;
+    border-radius: 25px !important;
+    color: white !important;
+
+}
+.react-calendar__tile--active{
+    background-color: #706FC8  !important;
+    border-radius: 25px !important;
+}
 /*  REACT CALENDAR CUSTOM STYLING */
 .orangeDot{
     background-color: #F6AE2D !important;
@@ -137,18 +144,16 @@
     background-color: green !important;
     color: white !important
 }
-
+.purpleDot{
+    background-color: #706FC8  !important;
+    color: white !important;
+}
 .event{
     background-color: #706FC8  !important;
     opacity: 1;
 }
 
-.plannedEventClass{
-    background-color: green !important;
-    border-radius: 25px !important;
-    color: white !important;
 
-}
 .colored-btn{
     color: #3366BB !important; 
     font-weight: bold;
