@@ -7,7 +7,7 @@ import NewEventDimmer from "./NewEventDimmer";
 import Event from "./Event";
 
 
-export const Events = ({ plannedDateId, setPlannedDateId,  date, fetchPlannedDates }) => {
+export const Events = ({ plannedDateId, setPlannedDateId, date, fetchPlannedDates }) => {
 
     const [loading, setLoading] = useState(false)
     const [plannedEvents, setPlannedEvents] = useState([])
@@ -18,7 +18,7 @@ export const Events = ({ plannedDateId, setPlannedDateId,  date, fetchPlannedDat
         try {
             let eventFilter = { and: [{ plannedDateId: { eq: plannedDateId } }] }
             const events = await API.graphql(graphqlOperation(eventsByDate, { type: "Event", sortDirection: 'ASC', filter: eventFilter, }))
-            console.log('events',events)
+            console.log('events', events)
             setPlannedEvents(events.data.eventsByDate.items)
             setLoading(false)
 
@@ -29,12 +29,10 @@ export const Events = ({ plannedDateId, setPlannedDateId,  date, fetchPlannedDat
 
     async function createNewEvent(data, time) {
         let combinedDate = date.toISOString().split('T')[0] + 'T' + time + ':00.000Z'
-
         try {
             let dateId = plannedDateId
             if (plannedDateId === '') {
                 let plannedDate = await API.graphql(graphqlOperation(createPlannedDates, { input: { date: new Date(date).toISOString().split('T')[0] } }))
-
                 dateId = plannedDate.data.createPlannedDates.id
             }
             await API.graphql(graphqlOperation(createEvents, { input: { title: data.title, content: data.content, plannedDateId: dateId, date: combinedDate, type: 'Event' } }))

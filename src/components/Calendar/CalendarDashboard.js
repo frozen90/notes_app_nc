@@ -45,10 +45,10 @@ export const CalendarDashboard = () => {
         plannedDates.map((plannedDate) => {
             if (new Date(date).toLocaleDateString() === new Date(plannedDate.date).toLocaleDateString()) {
                 setPlannedDateId(plannedDate.id)
-            } 
+            }
         })
         //fix for time select issue with react-calendar
-        setCalendarValue( new Date(date.getTime() - (date.getTimezoneOffset() * 60000)))
+        setCalendarValue(new Date(date.getTime() - (date.getTimezoneOffset() * 60000)))
     }
 
     return (
@@ -64,8 +64,8 @@ export const CalendarDashboard = () => {
                         <Label circular size='large' className='purpleDot'> Active</Label>
 
                     </Grid.Row>
-                    
-                        <Events setPlannedDateId={setPlannedDateId} fetchPlannedDates={fetchPlannedDates} date={calendarValue} plannedDateId={plannedDateId} />
+
+                    <Events setPlannedDateId={setPlannedDateId} fetchPlannedDates={fetchPlannedDates} date={calendarValue} plannedDateId={plannedDateId} />
 
                 </Grid>
                 :
