@@ -67,10 +67,8 @@ export const CalendarDashboard = () => {
                                 </Button.Content>
                             </Button>
                     </Grid.Row>
-                    <Grid.Row style={{ padding: '10px' }} >
                         {plannedDateId.length > 0 &&(<Events plannedDateId={plannedDateId} />)}
 
-                    </Grid.Row>
                 </Grid>
                 :
                 <Loader className='loader' active size='large'>Loading...</Loader>
