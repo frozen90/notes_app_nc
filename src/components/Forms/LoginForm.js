@@ -71,7 +71,7 @@ export const LoginForm = ({setFormType, setLoggedIn}) => {
                 </Form>
             </Segment>
             <Message color="black">
-                Not registered yet? <a href="#" onClick={() => { setFormType("SignUp")}}>Sign Up</a>
+                Not registered yet ? <Button className='remove-bg colored-btn' size='small' onClick={() => { setFormType("SignUp")}}>Sign Up</Button>
             </Message>
         </Grid.Column>
     )

@@ -59,7 +59,12 @@
     border-radius: 15px !important;
     cursor: pointer;
 }
-
+.colored-btn{
+    color: #3366BB !important; 
+}
+.colored-btn:hover{
+    text-decoration: underline !important;
+}
 .elipsis-icon{
     margin-left: 5px !important;
     margin-right: 25px !important;

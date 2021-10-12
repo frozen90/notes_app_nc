@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Grid, Loader, Segment } from "semantic-ui-react";
 import { Helmet } from "react-helmet";
 import { notesByLink } from "../../../../graphql/queries";
@@ -13,31 +13,32 @@ export const ShareNote = (props) => {
     const [loading, setLoading] = useState(true)
     const [expiryDate, setExpiryDate] = useState('')
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchExpiryDate()
-    },[])
-    async function fetchExpiryDate(){
-        try{
-            const expiryDate = await API.graphql(graphqlOperation(notesByLink, { link:link, sortDirection: 'DESC'  } ))
+    }, [])
+    
+    async function fetchExpiryDate() {
+        try {
+            const expiryDate = await API.graphql(graphqlOperation(notesByLink, { link: link, sortDirection: 'DESC' }))
             setExpiryDate(expiryDate.data.notesByLink.items[0].expire_date)
             setNoteId(expiryDate.data.notesByLink.items[0].id)
-        }catch(err){
+        } catch (err) {
             console.log(err)
-        }   
+        }
     }
-    useEffect(()=>{
-        if(expiryDate.length > 0){
-            if(new Date(expiryDate).toLocaleString('sv').replace(' ', 'T') > new Date().toLocaleString('sv').replace(' ', 'T')){
+    useEffect(() => {
+        if (expiryDate.length > 0) {
+            if (new Date(expiryDate).toLocaleString('sv').replace(' ', 'T') > new Date().toLocaleString('sv').replace(' ', 'T')) {
                 console.log(true)
                 setLoading(false)
                 setExpired(false)
-            }else{
+            } else {
                 setExpired(true)
                 setLoading(false)
             }
         }
-    },[expiryDate])
-    return(
+    }, [expiryDate])
+    return (
         <Container fluid>
             <Helmet>
                 <meta charSet="utf-8" />
@@ -46,10 +47,10 @@ export const ShareNote = (props) => {
             </Helmet>
             {!loading ?
                 <Grid centered style={{ padding: '20px', height: "100vh" }}>
-                     <Grid.Column textAlign='center' verticalAlign="middle"  computer={16} mobile={16} tablet={16} className="notes-dashboard">
-                         <Segment className='remove-bg' style={{height:'80vh'}} >
-                       {expired ? <ExpiredLink/> : <ProtectedNote noteId={noteId}/> }
-                       </Segment>
+                    <Grid.Column textAlign='center' verticalAlign="middle" computer={16} mobile={16} tablet={16} className="notes-dashboard">
+                        <Segment className='remove-bg' style={{ height: '80vh' }} >
+                            {expired ? <ExpiredLink /> : <ProtectedNote noteId={noteId} />}
+                        </Segment>
                     </Grid.Column>
                 </Grid>
                 :

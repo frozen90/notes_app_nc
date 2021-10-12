@@ -1,5 +1,5 @@
 import './App.css';
-import {Notes} from './components/Notes/Notes';
+import MainPage from './components/Notes/MainPage';
 import Amplify from "aws-amplify"
 import awsExports from "./aws-exports"
 import {
@@ -20,7 +20,7 @@ function App() {
 
     <Router>
       <Switch>
-        <ProtectedRoute exact path="/notes" component={Notes} /> 
+        <ProtectedRoute exact path="/dashboard" component={MainPage} /> 
         <Route exact path="/login" component={LoginPage}/>
         <Route path="/shared-notes/:link" component={ShareNote}/>
         <Route path="/" component={LoginPage}/>

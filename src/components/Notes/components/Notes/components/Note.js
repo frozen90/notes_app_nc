@@ -5,15 +5,15 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
 // GraphQl
 import { API, graphqlOperation } from 'aws-amplify';
-import { listNotes } from "../../../../graphql/queries";
-import { updateNotes, createSharedNote } from "../../../../graphql/mutations";
+import { listNotes } from "../../../../../graphql/queries";
+import { updateNotes, createSharedNote } from "../../../../../graphql/mutations";
 //Dimmers
-import LockNoteDimmer from "./components/LockNoteDimmer";
-import UnlockNoteDimmer from "./components/UnlockNoteDimmer";
-import PreviewNoteDimmer from "./components/PreviewNoteDimmer";
-import ShareNoteDimmer from "./components/ShareNoteDimmer";
+import LockNoteDimmer from "./LockNoteDimmer";
+import UnlockNoteDimmer from "./UnlockNoteDimmer";
+import PreviewNoteDimmer from "./PreviewNoteDimmer";
+import ShareNoteDimmer from "./ShareNoteDimmer";
 //helpers
-import { generateLink } from "../../../../utils/helpers/link_generator";
+import { generateLink } from "../../../../../utils/helpers/link_generator";
 //PropTypes
 import PropTypes from 'prop-types';
 

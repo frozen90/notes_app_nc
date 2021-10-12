@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import { API, graphqlOperation } from 'aws-amplify';
 import { notesByDate } from '../../graphql/queries';
 import { Container, Grid, Loader } from 'semantic-ui-react'
-import './ExtraCssNotes.css'
 import { Helmet } from "react-helmet";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "../Dashboard/Dashboard";
 import GetStarted from "./components/GetStarted";
 
-export const Notes = () => {
+export const MainPage = () => {
 
     const [loading, setLoading] = useState(true)
     const [getStartedDisplay, setGetStartedDisplay] = useState(false)
     const [notes, setNotes] = useState([])
-
 
     useEffect(() => {
         fetchNotes()
@@ -34,18 +32,17 @@ export const Notes = () => {
     }
     return (
 
-        <Container fluid style={{padding:'15px'}}>
+        <Container fluid style={{ padding: '15px' }}>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Notes Dashboard</title>
-                <link rel="canonical" href="/login" />
+                <title>Dashboard</title>
+                <link rel="canonical" href="/dashboard" />
             </Helmet>
             {!loading ?
                 <Grid centered style={{ padding: '20px', height: "100vh" }} verticalAlign="middle">
                     {notes.length > 0 || getStartedDisplay ?
                         <Dashboard notesList={notes} />
                         :
-
                         <GetStarted dismissWelcome={dismissWelcome} />
                     }
                 </Grid>
@@ -57,4 +54,4 @@ export const Notes = () => {
     )
 }
 
-export default Notes;
+export default MainPage;

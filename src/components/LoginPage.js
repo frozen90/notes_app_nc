@@ -10,13 +10,10 @@ export const LoginPage = (props) => {
     const [formType, setFormType] = useState('Login')
     const [loggedIn, setLoggedIn] = useState(false)
     const [username, setUsername] = useState('')
-   
-    
-    
 
     useEffect(() => {
         if (loggedIn === true) {
-            props.history.push('/notes')
+            props.history.push('/dashboard')
         }
 
     }, [loggedIn])
