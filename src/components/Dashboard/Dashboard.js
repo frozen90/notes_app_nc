@@ -4,6 +4,7 @@ import './ExtraCss.css';
 import PropTypes from 'prop-types';
 import FoldersDashboard from "../Folders/FoldersDashboard";
 import NotesDashboard from "../Notes/components/Notes/NotesDashboard";
+import CalendarDashboard from "../Calendar/CalendarDashboard";
 
 
 
@@ -37,6 +38,7 @@ export const Dashboard = ({ notesList }) => {
                 <Segment textAlign='center' className='remove-bg notes-segment'>
                     {navSelection === 'Notes' && (<NotesDashboard notesList={notesList}/>)}
                     {navSelection === 'Folders' && (<FoldersDashboard/>)}
+                    {navSelection === 'Calendar' && (<CalendarDashboard/>)}
                 </Segment>
 
             </Grid.Column>

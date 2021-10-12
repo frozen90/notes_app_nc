@@ -59,6 +59,75 @@
     border-radius: 15px !important;
     cursor: pointer;
 }
+/*  REACT CALENDAR CUSTOM STYLING */
+.react-calendar{
+    width: 700px !important;
+    background-color: #3F3B51 !important;
+    border-radius: 25px !important;
+    color: #F6AE2D;
+
+}
+.react-calendar__tile--hasActive{
+    border-radius: 25px !important;
+    background-color: #706FC8  !important;
+}
+.react-calendar__tile{
+    font-weight: bold !important;
+}
+.react-calendar__tile:hover{
+    background-color: #706FC8  !important;
+    border-radius: 25px;
+}
+.react-calendar__tile--active{
+    background-color: #706FC8  !important;
+    border-radius: 25px;
+}
+.react-calendar__navigation__label:hover{
+    background-color: #706FC8  !important;
+    border-radius: 25px; 
+}
+.react-calendar__navigation__arrow{
+    color: #706FC8  !important;
+}
+.react-calendar__tile--now{
+    background-color: #706FC8  !important;
+    color: white !important;
+    border-radius: 25px; 
+}
+.react-calendar__navigation {
+    background-color: transparent !important;
+}
+.react-calendar__navigation__arrow:hover{
+    background-color: transparent !important;
+}
+.react-calendar__navigation__prev2-button{
+    background-color: transparent !important;
+    font-size: 35px !important;
+    font-weight: bold;
+}
+.react-calendar__navigation__prev-button{
+    background-color: transparent !important;
+    font-size: 35px !important;
+    font-weight: bold;
+}
+.react-calendar__navigation__next-button{
+    background-color: transparent !important;
+    font-size: 35px !important;
+    font-weight: bold;
+}
+.react-calendar__navigation__next2-button{
+    background-color: transparent !important;
+    font-size: 35px !important;
+    font-weight: bold;
+}
+.react-calendar__navigation__label__labelText{
+    color: white !important;
+    font-weight: bold !important;
+}
+.react-calendar__navigation__label{
+    background-color: transparent !important;
+}
+/*  REACT CALENDAR CUSTOM STYLING */
 .colored-btn{
     color: #3366BB !important; 
     font-weight: bold;
