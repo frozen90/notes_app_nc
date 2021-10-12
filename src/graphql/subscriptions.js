@@ -19,6 +19,7 @@ export const onCreateNotes = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       updatedAt
       owner
@@ -43,6 +44,7 @@ export const onUpdateNotes = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       updatedAt
       owner
@@ -67,6 +69,7 @@ export const onDeleteNotes = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       updatedAt
       owner
@@ -74,8 +77,8 @@ export const onDeleteNotes = /* GraphQL */ `
   }
 `;
 export const onCreateFolder = /* GraphQL */ `
-  subscription OnCreateFolder {
-    onCreateFolder {
+  subscription OnCreateFolder($owner: String!) {
+    onCreateFolder(owner: $owner) {
       id
       title
       notes {
@@ -94,12 +97,13 @@ export const onCreateFolder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateFolder = /* GraphQL */ `
-  subscription OnUpdateFolder {
-    onUpdateFolder {
+  subscription OnUpdateFolder($owner: String!) {
+    onUpdateFolder(owner: $owner) {
       id
       title
       notes {
@@ -118,12 +122,13 @@ export const onUpdateFolder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteFolder = /* GraphQL */ `
-  subscription OnDeleteFolder {
-    onDeleteFolder {
+  subscription OnDeleteFolder($owner: String!) {
+    onDeleteFolder(owner: $owner) {
       id
       title
       notes {
@@ -142,6 +147,7 @@ export const onDeleteFolder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -184,6 +190,144 @@ export const onDeleteSharedNote = /* GraphQL */ `
       password
       createdAt
       updatedAt
+    }
+  }
+`;
+export const onCreatePlannedDates = /* GraphQL */ `
+  subscription OnCreatePlannedDates($owner: String!) {
+    onCreatePlannedDates(owner: $owner) {
+      id
+      date
+      events {
+        items {
+          id
+          date
+          title
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdatePlannedDates = /* GraphQL */ `
+  subscription OnUpdatePlannedDates($owner: String!) {
+    onUpdatePlannedDates(owner: $owner) {
+      id
+      date
+      events {
+        items {
+          id
+          date
+          title
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeletePlannedDates = /* GraphQL */ `
+  subscription OnDeletePlannedDates($owner: String!) {
+    onDeletePlannedDates(owner: $owner) {
+      id
+      date
+      events {
+        items {
+          id
+          date
+          title
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateEvents = /* GraphQL */ `
+  subscription OnCreateEvents($owner: String!) {
+    onCreateEvents(owner: $owner) {
+      id
+      date
+      title
+      content
+      planned_date {
+        id
+        date
+        events {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateEvents = /* GraphQL */ `
+  subscription OnUpdateEvents($owner: String!) {
+    onUpdateEvents(owner: $owner) {
+      id
+      date
+      title
+      content
+      planned_date {
+        id
+        date
+        events {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteEvents = /* GraphQL */ `
+  subscription OnDeleteEvents($owner: String!) {
+    onDeleteEvents(owner: $owner) {
+      id
+      date
+      title
+      content
+      planned_date {
+        id
+        date
+        events {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;

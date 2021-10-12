@@ -8,6 +8,7 @@ export const getNotes = /* GraphQL */ `
       type
       title
       content
+      password
       locked
       createdAt
       folder {
@@ -18,6 +19,7 @@ export const getNotes = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       updatedAt
       owner
@@ -36,6 +38,7 @@ export const listNotes = /* GraphQL */ `
         type
         title
         content
+        password
         locked
         createdAt
         folder {
@@ -43,6 +46,7 @@ export const listNotes = /* GraphQL */ `
           title
           createdAt
           updatedAt
+          owner
         }
         updatedAt
         owner
@@ -62,6 +66,7 @@ export const getFolder = /* GraphQL */ `
           type
           title
           content
+          password
           locked
           createdAt
           updatedAt
@@ -71,6 +76,7 @@ export const getFolder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -89,6 +95,7 @@ export const listFolders = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -102,6 +109,7 @@ export const getSharedNote = /* GraphQL */ `
       title
       content
       expire_date
+      password
       createdAt
       updatedAt
     }
@@ -120,8 +128,103 @@ export const listSharedNotes = /* GraphQL */ `
         title
         content
         expire_date
+        password
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPlannedDates = /* GraphQL */ `
+  query GetPlannedDates($id: ID!) {
+    getPlannedDates(id: $id) {
+      id
+      date
+      events {
+        items {
+          id
+          date
+          title
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listPlannedDates = /* GraphQL */ `
+  query ListPlannedDates(
+    $filter: ModelPlannedDatesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPlannedDates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        date
+        events {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getEvents = /* GraphQL */ `
+  query GetEvents($id: ID!) {
+    getEvents(id: $id) {
+      id
+      date
+      title
+      content
+      planned_date {
+        id
+        date
+        events {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listEvents = /* GraphQL */ `
+  query ListEvents(
+    $filter: ModelEventsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        date
+        title
+        content
+        planned_date {
+          id
+          date
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }
@@ -149,6 +252,7 @@ export const notesByDate = /* GraphQL */ `
         type
         title
         content
+        password
         locked
         createdAt
         folder {
@@ -156,6 +260,7 @@ export const notesByDate = /* GraphQL */ `
           title
           createdAt
           updatedAt
+          owner
         }
         updatedAt
         owner
@@ -187,6 +292,7 @@ export const notesByLink = /* GraphQL */ `
         title
         content
         expire_date
+        password
         createdAt
         updatedAt
       }

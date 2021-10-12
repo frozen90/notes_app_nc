@@ -10,7 +10,7 @@ type Notes @model
   folder: Folder @connection(name: "FolderNotes")
 }
 
-type Folder @model{
+type Folder @model @auth(rules:[{allow: owner}]){
   id: ID!
   title: String!
   notes: [Notes] @connection(name: "FolderNotes")
@@ -23,4 +23,19 @@ type SharedNote @model @key(name: "byLink", fields: ["link", "id"], queryField: 
   content: String
   expire_date:AWSDateTime
   password: String
+}
+
+type PlannedDates @model @auth(rules:[{allow: owner}]){
+  id: ID!
+  date:AWSDateTime
+  events: [Events] @connection(name: "PlannedDatesEvents")
+
+}
+
+type Events @model @auth(rules:[{allow: owner}]){
+  id: ID!
+  date: AWSDateTime!
+  title: String!
+  content: String!
+  planned_date: PlannedDates @connection(name: "PlannedDatesEvents")
 }

@@ -22,6 +22,7 @@ export const createNotes = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       updatedAt
       owner
@@ -49,6 +50,7 @@ export const updateNotes = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       updatedAt
       owner
@@ -76,6 +78,7 @@ export const deleteNotes = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       updatedAt
       owner
@@ -106,6 +109,7 @@ export const createFolder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -133,6 +137,7 @@ export const updateFolder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -160,6 +165,7 @@ export const deleteFolder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -211,6 +217,162 @@ export const deleteSharedNote = /* GraphQL */ `
       password
       createdAt
       updatedAt
+    }
+  }
+`;
+export const createPlannedDates = /* GraphQL */ `
+  mutation CreatePlannedDates(
+    $input: CreatePlannedDatesInput!
+    $condition: ModelPlannedDatesConditionInput
+  ) {
+    createPlannedDates(input: $input, condition: $condition) {
+      id
+      date
+      events {
+        items {
+          id
+          date
+          title
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updatePlannedDates = /* GraphQL */ `
+  mutation UpdatePlannedDates(
+    $input: UpdatePlannedDatesInput!
+    $condition: ModelPlannedDatesConditionInput
+  ) {
+    updatePlannedDates(input: $input, condition: $condition) {
+      id
+      date
+      events {
+        items {
+          id
+          date
+          title
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deletePlannedDates = /* GraphQL */ `
+  mutation DeletePlannedDates(
+    $input: DeletePlannedDatesInput!
+    $condition: ModelPlannedDatesConditionInput
+  ) {
+    deletePlannedDates(input: $input, condition: $condition) {
+      id
+      date
+      events {
+        items {
+          id
+          date
+          title
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createEvents = /* GraphQL */ `
+  mutation CreateEvents(
+    $input: CreateEventsInput!
+    $condition: ModelEventsConditionInput
+  ) {
+    createEvents(input: $input, condition: $condition) {
+      id
+      date
+      title
+      content
+      planned_date {
+        id
+        date
+        events {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateEvents = /* GraphQL */ `
+  mutation UpdateEvents(
+    $input: UpdateEventsInput!
+    $condition: ModelEventsConditionInput
+  ) {
+    updateEvents(input: $input, condition: $condition) {
+      id
+      date
+      title
+      content
+      planned_date {
+        id
+        date
+        events {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteEvents = /* GraphQL */ `
+  mutation DeleteEvents(
+    $input: DeleteEventsInput!
+    $condition: ModelEventsConditionInput
+  ) {
+    deleteEvents(input: $input, condition: $condition) {
+      id
+      date
+      title
+      content
+      planned_date {
+        id
+        date
+        events {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;

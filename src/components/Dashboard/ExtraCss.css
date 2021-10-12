@@ -67,6 +67,7 @@
     color: #F6AE2D;
 
 }
+
 .react-calendar__tile--hasActive{
     border-radius: 25px !important;
     background-color: #706FC8  !important;
@@ -90,7 +91,7 @@
     color: #706FC8  !important;
 }
 .react-calendar__tile--now{
-    background-color: #706FC8  !important;
+    background-color: #F6AE2D  !important;
     color: white !important;
     border-radius: 25px; 
 }
@@ -128,6 +129,19 @@
     background-color: transparent !important;
 }
 /*  REACT CALENDAR CUSTOM STYLING */
+.orangeDot{
+    background-color: #F6AE2D !important;
+    color:white !important
+}
+.greenDot{
+    background-color: green !important;
+    color: white !important
+}
+
+
+.testClass{
+    background-color: red !important;
+}
 .colored-btn{
     color: #3366BB !important; 
     font-weight: bold;
