@@ -7,8 +7,14 @@ type Notes @model
   password: String
   locked: Boolean
   createdAt: String!
+  folder: Folder @connection(name: "FolderNotes")
 }
 
+type Folder @model{
+  id: ID!
+  title: String!
+  notes: [Notes] @connection(name: "FolderNotes")
+}
 
 type SharedNote @model @key(name: "byLink", fields: ["link", "id"], queryField: "notesByLink"){
   id: ID!
