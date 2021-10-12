@@ -11,16 +11,7 @@ export const getNotes = /* GraphQL */ `
       password
       locked
       createdAt
-      folder {
-        id
-        title
-        notes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      folderID
       updatedAt
       owner
     }
@@ -41,13 +32,7 @@ export const listNotes = /* GraphQL */ `
         password
         locked
         createdAt
-        folder {
-          id
-          title
-          createdAt
-          updatedAt
-          owner
-        }
+        folderID
         updatedAt
         owner
       }
@@ -69,6 +54,7 @@ export const getFolder = /* GraphQL */ `
           password
           locked
           createdAt
+          folderID
           updatedAt
           owner
         }
@@ -244,13 +230,7 @@ export const notesByDate = /* GraphQL */ `
         password
         locked
         createdAt
-        folder {
-          id
-          title
-          createdAt
-          updatedAt
-          owner
-        }
+        folderID
         updatedAt
         owner
       }

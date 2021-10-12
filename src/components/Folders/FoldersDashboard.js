@@ -3,12 +3,15 @@ import {Icon, Button, Card } from 'semantic-ui-react'
 import Folder from "./components/Folder";
 import { API, graphqlOperation } from 'aws-amplify';
 import { createFolder, deleteFolder } from "../../graphql/mutations";
+import FolderContent from "./components/FolderContent";
 
 export const FoldersDashboard = ({foldersList}) => {
+    const [folderOpen, setFolderOpen] = useState(false)
+    const [folderId, setFolderId] = useState('')
     const [btnLoading, setBtnLoading] = useState(false)
     const [folders, setFolders] = useState(foldersList)
     const listFolders = folders.map((folder) => {
-        return (<Folder removeFolder={removeFolder} folder={folder} key={folder.id} />)
+        return (<Folder setFolderId={setFolderId} setFolderOpen={setFolderOpen} removeFolder={removeFolder} folder={folder} key={folder.id} />)
     })
 
     async function createNewFolder() {
@@ -38,9 +41,12 @@ export const FoldersDashboard = ({foldersList}) => {
             console.log('error')
         }
     }
+    async function fetchFolderContent(id){
 
+    }
     return (
         <>
+        {!folderOpen ?
             <Card.Group centered itemsPerRow={6}>
                 {listFolders}
                 <Button loading={btnLoading} className={folders.length > 0 ? 'remove-bg fixed-btn' : 'remove-bg margin-btn'}onClick={()=>{createNewFolder() }}>
@@ -49,6 +55,9 @@ export const FoldersDashboard = ({foldersList}) => {
                     </Button.Content>
                 </Button>
             </Card.Group>
+            :
+            <FolderContent folderId={folderId} />
+            }
         </>
     )
 }

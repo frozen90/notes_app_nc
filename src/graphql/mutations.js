@@ -14,16 +14,7 @@ export const createNotes = /* GraphQL */ `
       password
       locked
       createdAt
-      folder {
-        id
-        title
-        notes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      folderID
       updatedAt
       owner
     }
@@ -42,16 +33,7 @@ export const updateNotes = /* GraphQL */ `
       password
       locked
       createdAt
-      folder {
-        id
-        title
-        notes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      folderID
       updatedAt
       owner
     }
@@ -70,16 +52,7 @@ export const deleteNotes = /* GraphQL */ `
       password
       locked
       createdAt
-      folder {
-        id
-        title
-        notes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      folderID
       updatedAt
       owner
     }
@@ -102,6 +75,7 @@ export const createFolder = /* GraphQL */ `
           password
           locked
           createdAt
+          folderID
           updatedAt
           owner
         }
@@ -130,6 +104,7 @@ export const updateFolder = /* GraphQL */ `
           password
           locked
           createdAt
+          folderID
           updatedAt
           owner
         }
@@ -158,6 +133,7 @@ export const deleteFolder = /* GraphQL */ `
           password
           locked
           createdAt
+          folderID
           updatedAt
           owner
         }

@@ -1,4 +1,5 @@
-type Notes @model 
+type Notes @model
+  @key(name: "byFolderId", fields: ["folderID", "content"])
   @key(name: "notesByDate", fields:["type","createdAt"], queryField:"notesByDate") @auth(rules:[{allow: owner}]){
   id: ID!
   type: String!
@@ -7,13 +8,13 @@ type Notes @model
   password: String
   locked: Boolean
   createdAt: String!
-  folder: Folder @connection(name: "FolderNotes")
+  folderID: ID
 }
 
 type Folder @model @auth(rules:[{allow: owner}]){
   id: ID!
   title: String!
-  notes: [Notes] @connection(name: "FolderNotes")
+  notes: [Notes] @connection(keyName: "byFolderId", fields:["id"])
 }
 
 type SharedNote @model @key(name: "byLink", fields: ["link", "id"], queryField: "notesByLink"){
