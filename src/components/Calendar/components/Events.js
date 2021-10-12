@@ -7,7 +7,7 @@ import NewEventDimmer from "./NewEventDimmer";
 import Event from "./Event";
 
 
-export const Events = ({ plannedDateId, date, fetchPlannedDates }) => {
+export const Events = ({ plannedDateId, setPlannedDateId,  date, fetchPlannedDates }) => {
 
     const [loading, setLoading] = useState(false)
     const [plannedEvents, setPlannedEvents] = useState([])
@@ -38,7 +38,8 @@ export const Events = ({ plannedDateId, date, fetchPlannedDates }) => {
                 dateId = plannedDate.data.createPlannedDates.id
             }
             await API.graphql(graphqlOperation(createEvents, { input: { title: data.title, content: data.content, plannedDateId: dateId, date: combinedDate, type: 'Event' } }))
-            
+            setPlannedDateId(dateId)
+            await fetchEvents(dateId)
 
         } catch (err) {
             return err

@@ -44,7 +44,6 @@ export const CalendarDashboard = () => {
         setPlannedDateId('')
         plannedDates.map((plannedDate) => {
             if (new Date(date).toLocaleDateString() === new Date(plannedDate.date).toLocaleDateString()) {
-                console.log(plannedDate)
                 setPlannedDateId(plannedDate.id)
             } 
         })
@@ -66,7 +65,7 @@ export const CalendarDashboard = () => {
 
                     </Grid.Row>
                     
-                        <Events fetchPlannedDates={fetchPlannedDates} date={calendarValue} plannedDateId={plannedDateId} />
+                        <Events setPlannedDateId={setPlannedDateId} fetchPlannedDates={fetchPlannedDates} date={calendarValue} plannedDateId={plannedDateId} />
 
                 </Grid>
                 :

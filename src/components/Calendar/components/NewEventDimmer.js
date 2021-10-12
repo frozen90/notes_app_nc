@@ -11,9 +11,6 @@ export const NewEventDimmer = ({ createNewEvent, active, setActive, fetchPlanned
     async function handleSubmit() {
         let data = { title: title, content: content }
         await createNewEvent(data, time)
-
-
-
     }
     return (
         <Dimmer
