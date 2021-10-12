@@ -60,14 +60,8 @@ export const CalendarDashboard = () => {
                         <Label circular size='large' className='orangeDot' key={0}> Today</Label>
                         <Label circular className='greenDot' size='large' key={1}>Planned</Label>
                     </Grid.Row>
-                    <Grid.Row>
-                    <Button className={'remove-bg add-new-note'}  >
-                                <Button.Content>
-                                    New Event
-                                </Button.Content>
-                            </Button>
-                    </Grid.Row>
-                        {plannedDateId.length > 0 &&(<Events plannedDateId={plannedDateId} />)}
+                    
+                        <Events plannedDateId={plannedDateId} />
 
                 </Grid>
                 :

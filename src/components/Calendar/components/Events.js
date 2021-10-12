@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Header, Label, Segment } from "semantic-ui-react";
+import { Grid, Header, Label, Segment, Loader, Button } from "semantic-ui-react";
 import { listEvents } from "../../../graphql/queries";
 import { API, graphqlOperation } from "@aws-amplify/api";
-
+import NewEventDimmer from "./NewEventDimmer";
 
 export const Events = ({ plannedDateId }) => {
     const [loading, setLoading] = useState(false)
-    const [plannedEvents, setPlannedEvents] = useState([{ id: 1 }])
-
+    const [plannedEvents, setPlannedEvents] = useState([])
+    const [newEventDimmerActive, setNewEventDimmerActive] = useState(false)
     async function fetchEvents(plannedDateId) {
         setLoading(true)
         try {
@@ -20,10 +20,14 @@ export const Events = ({ plannedDateId }) => {
             setLoading(false)
         }
     }
+    async function createNewEvent() {
 
+    }
     useEffect(() => {
         if (plannedDateId.length > 0) {
             fetchEvents(plannedDateId)
+        } else {
+            setPlannedEvents([])
         }
     }, [plannedDateId])
     const mapEvents = plannedEvents.map((event) => {
@@ -38,7 +42,17 @@ export const Events = ({ plannedDateId }) => {
         )
     })
     return (
-        mapEvents
+        <>
+            <Grid.Row>
+                <Button className={'remove-bg add-new-note'} onClick={()=>{setNewEventDimmerActive(true)}}>
+                    <Button.Content>
+                        New Event
+                    </Button.Content>
+                </Button>
+            </Grid.Row>
+            {!loading ? mapEvents : <Grid.Row><Loader style={{ marginTop: '50px' }} className='loader' active size='large'>Loading...</Loader></Grid.Row>}
+        <NewEventDimmer setActive={setNewEventDimmerActive} active={newEventDimmerActive} />
+        </>
     )
 }
 
