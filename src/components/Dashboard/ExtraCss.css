@@ -81,7 +81,7 @@
 }
 .react-calendar__tile--active{
     background-color: #706FC8  !important;
-    border-radius: 25px;
+    border-radius: 25px !important;
 }
 .react-calendar__navigation__label:hover{
     background-color: #706FC8  !important;
@@ -138,9 +138,16 @@
     color: white !important
 }
 
+.event{
+    background-color: #706FC8  !important;
+    opacity: 1;
+}
 
-.testClass{
-    background-color: red !important;
+.plannedEventClass{
+    background-color: green !important;
+    border-radius: 25px !important;
+    color: white !important;
+
 }
 .colored-btn{
     color: #3366BB !important; 

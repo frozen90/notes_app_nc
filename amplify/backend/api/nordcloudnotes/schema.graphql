@@ -27,15 +27,17 @@ type SharedNote @model @key(name: "byLink", fields: ["link", "id"], queryField: 
 
 type PlannedDates @model @auth(rules:[{allow: owner}]){
   id: ID!
-  date:AWSDateTime
-  events: [Events] @connection(name: "PlannedDatesEvents")
+  date:AWSDate
+  events: [Events] @connection(keyName: "byDateId", fields:["id"])
 
 }
 
-type Events @model @auth(rules:[{allow: owner}]){
+type Events @model   
+  @key(name: "byDateId", fields: ["plannedDateId", "content"]) 
+  @auth(rules:[{allow: owner}]){
   id: ID!
   date: AWSDateTime!
   title: String!
   content: String!
-  planned_date: PlannedDates @connection(name: "PlannedDatesEvents")
+  plannedDateId: ID!
 }

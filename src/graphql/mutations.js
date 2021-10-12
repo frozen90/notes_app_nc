@@ -234,6 +234,7 @@ export const createPlannedDates = /* GraphQL */ `
           date
           title
           content
+          plannedDateId
           createdAt
           updatedAt
           owner
@@ -260,6 +261,7 @@ export const updatePlannedDates = /* GraphQL */ `
           date
           title
           content
+          plannedDateId
           createdAt
           updatedAt
           owner
@@ -286,6 +288,7 @@ export const deletePlannedDates = /* GraphQL */ `
           date
           title
           content
+          plannedDateId
           createdAt
           updatedAt
           owner
@@ -308,16 +311,7 @@ export const createEvents = /* GraphQL */ `
       date
       title
       content
-      planned_date {
-        id
-        date
-        events {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      plannedDateId
       createdAt
       updatedAt
       owner
@@ -334,16 +328,7 @@ export const updateEvents = /* GraphQL */ `
       date
       title
       content
-      planned_date {
-        id
-        date
-        events {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      plannedDateId
       createdAt
       updatedAt
       owner
@@ -360,16 +345,7 @@ export const deleteEvents = /* GraphQL */ `
       date
       title
       content
-      planned_date {
-        id
-        date
-        events {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      plannedDateId
       createdAt
       updatedAt
       owner

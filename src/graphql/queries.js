@@ -147,6 +147,7 @@ export const getPlannedDates = /* GraphQL */ `
           date
           title
           content
+          plannedDateId
           createdAt
           updatedAt
           owner
@@ -187,16 +188,7 @@ export const getEvents = /* GraphQL */ `
       date
       title
       content
-      planned_date {
-        id
-        date
-        events {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      plannedDateId
       createdAt
       updatedAt
       owner
@@ -215,13 +207,7 @@ export const listEvents = /* GraphQL */ `
         date
         title
         content
-        planned_date {
-          id
-          date
-          createdAt
-          updatedAt
-          owner
-        }
+        plannedDateId
         createdAt
         updatedAt
         owner
