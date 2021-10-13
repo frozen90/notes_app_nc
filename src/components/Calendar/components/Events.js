@@ -18,7 +18,6 @@ export const Events = ({ plannedDateId, setPlannedDateId, date, fetchPlannedDate
         try {
             let eventFilter = { and: [{ plannedDateId: { eq: plannedDateId } }] }
             const events = await API.graphql(graphqlOperation(eventsByDate, { type: "Event", sortDirection: 'ASC', filter: eventFilter, }))
-            console.log('events', events)
             setPlannedEvents(events.data.eventsByDate.items)
             setLoading(false)
 

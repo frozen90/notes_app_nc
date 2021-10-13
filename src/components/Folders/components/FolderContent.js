@@ -6,12 +6,7 @@ import { deleteNotes, createNotes } from "../../../graphql/mutations";
 import { notesByDate } from "../../../graphql/queries";
 
 export const FolderContent = ({ folderId, folderName, setFolderOpen }) => {
-    const sections = [
-        { key: 'home', content: 'Home', link: true },
-        { key: 'registration', content: 'Registration', link: true },
-        { key: 'info', content: 'Personal Information', active: true },
-    ]
-
+  
     const [loading, setLoading] = useState(true)
     const [notes, setNotes] = useState([])
     const [btnLoading, setBtnLoading] = useState(false)
@@ -28,7 +23,6 @@ export const FolderContent = ({ folderId, folderName, setFolderOpen }) => {
 
         } catch (err) {
             console.log(err)
-            console.log('error')
         }
     }
 
@@ -41,7 +35,6 @@ export const FolderContent = ({ folderId, folderName, setFolderOpen }) => {
             setBtnLoading(false)
         } catch (err) {
             setBtnLoading(false)
-            console.log('error')
         }
     }
 
@@ -62,9 +55,9 @@ export const FolderContent = ({ folderId, folderName, setFolderOpen }) => {
         <div>
             <Label attached='top left' className='remove-bg'>
                 <Breadcrumb>
-                    <Breadcrumb.Section link onClick={()=>{setFolderOpen(false)}}>Folders</Breadcrumb.Section>
-                    <Breadcrumb.Divider style={{color:'white'}}/>
-                    <Breadcrumb.Section active style={{color:'white'}}>{folderName}</Breadcrumb.Section>
+                    <Breadcrumb.Section link onClick={() => { setFolderOpen(false) }}>Folders</Breadcrumb.Section>
+                    <Breadcrumb.Divider style={{ color: 'white' }} />
+                    <Breadcrumb.Section active style={{ color: 'white' }}>{folderName}</Breadcrumb.Section>
                 </Breadcrumb>
             </Label>
             {!loading ?
