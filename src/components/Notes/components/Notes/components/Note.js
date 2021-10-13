@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // Ui Components / frameworks
-import { Header, Card, Icon, Button, Input, Popup } from "semantic-ui-react";
+import { Header, Card, Icon, Button, Input } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
 // Actions
@@ -13,6 +13,7 @@ import ShareNoteDimmer from "./ShareNoteDimmer";
 //PropTypes
 import PropTypes from 'prop-types';
 
+
 export const Note = ({ note }) => {
     //note state
     const [notePosition, setNotePosition] = useState(0)
@@ -20,7 +21,6 @@ export const Note = ({ note }) => {
     const [content, setContent] = useState(note.content)
     const [locked, setLocked] = useState(note.locked)
     const [editable, setEditable] = useState(false)
-    const [blockModifications, setBlockModifications] = useState(false)
 
     //dimmers state
     const [unlockDimmerActive, setUnlockDimmerActive] = useState(false)
@@ -58,6 +58,19 @@ export const Note = ({ note }) => {
         }
         setRequestLoading(false)
     }
+    async function handleUnlockNote(password, note) {
+        setRequestLoading(true)
+        let check = await checkPassword(password, note)
+        if (check === true) {
+            await updateNote({ input: { id: note.id, locked: false }})
+            setLocked(false)
+            handleHide()
+            setRequestLoading(false)
+        } else {
+            setErrorMsg('Incorrect password')
+            setRequestLoading(false)
+        }
+    }
     async function handleCreatePassword(password, note) {
         setRequestLoading(true)
         let request = await createPassword(password, note)
@@ -89,7 +102,7 @@ export const Note = ({ note }) => {
             <motion.div className="ui card note-bg" initial={{ scale: 0, y: +700, x: +1300 }} animate={{ scale: 1, y: 0, x: notePosition }}
                 transition={{ ease: "easeOut", duration: 0.5 }}>
                 <Card.Content textAlign='center' className='card-header-content'>
-                    <Header as="h2" className='header-card'><Input readOnly={blockModifications} onBlur={() => { updateNote({ input: { id: note.id, title: title } }) }} inverted transparent maxLength="13" style={{ width: '165px' }} onChange={(e, { value }) => { setTitle(value) }} value={title} /></Header>
+                    <Header as="h2" className='header-card'><Input onBlur={() => { updateNote({input: { id: note.id, title: title } }) }} inverted transparent maxLength="13" style={{ width: '165px' }} onChange={(e, { value }) => { setTitle(value) }} value={title} /></Header>
                 </Card.Content>
                 <Card.Content textAlign='left' className='note-content'>
                     {locked ?
@@ -129,7 +142,7 @@ export const Note = ({ note }) => {
             <ShareNoteDimmer title={title} content={content} requestLoading={requestLoading} handleHide={handleHide} active={shareDimmerActive} shareNote={handleShareNote} errorMsg={errorMsg} />
             <LockNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={lockDimmerActive} createPassword={handleCreatePassword} errorMsg={errorMsg} />
             <PreviewNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={previewDimmerActive} checkPassword={handleCheckPassword} errorMsg={errorMsg} />
-            <UnlockNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={unlockDimmerActive} checkPassword={handleCheckPassword} errorMsg={errorMsg} />
+            <UnlockNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={unlockDimmerActive} unlockNote={handleUnlockNote} errorMsg={errorMsg} />
         </>
     )
 }

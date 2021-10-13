@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Segment, Button, Menu, Search } from 'semantic-ui-react'
+import { Grid, Segment, Button, Menu } from 'semantic-ui-react'
 import Auth from "@aws-amplify/auth";
 import './ExtraCss.css';
 import PropTypes from 'prop-types';
