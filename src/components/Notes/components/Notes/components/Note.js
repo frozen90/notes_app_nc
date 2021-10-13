@@ -125,7 +125,7 @@ export const Note = ({ note }) => {
                     </Button.Group>
                 </Card.Content>
             </motion.div>
-            <ShareNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={shareDimmerActive} shareNote={handleShareNote} errorMsg={errorMsg} />
+            <ShareNoteDimmer title={title} content={content} requestLoading={requestLoading} handleHide={handleHide} active={shareDimmerActive} shareNote={handleShareNote} errorMsg={errorMsg} />
             <LockNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={lockDimmerActive} createPassword={handleCreatePassword} errorMsg={errorMsg} />
             <PreviewNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={previewDimmerActive} checkPassword={handleCheckPassword} errorMsg={errorMsg} />
             <UnlockNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={unlockDimmerActive} checkPassword={handleCheckPassword} errorMsg={errorMsg} />
