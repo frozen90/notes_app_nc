@@ -69,6 +69,7 @@ export async function updateNote(updateAction) {
 }
 
 export async function shareNote(password, expiryDate, title, content) {
+    console.log(title,content)
     let generatedLink = generateLink()
     if (password.length > 0) {
         try {

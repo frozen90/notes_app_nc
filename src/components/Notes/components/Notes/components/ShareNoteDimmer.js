@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
 
 
-export const ShareNoteDimmer = ({ handleHide, active, errorMsg, requestLoading, shareNote }) => {
+export const ShareNoteDimmer = ({ handleHide, active, errorMsg, requestLoading, shareNote, note }) => {
 
     const [error, setError] = useState(errorMsg)
     const [sharePassword, setSharePassword] = useState('')
@@ -17,8 +17,8 @@ export const ShareNoteDimmer = ({ handleHide, active, errorMsg, requestLoading, 
             setDate(date)
         }
     }
-    async function shareNoteReturn(sharePassword) {
-        const link = await shareNote(sharePassword,date)
+    async function shareNoteReturn(sharePassword, note) {
+        const link = await shareNote(sharePassword,date, note.title, note.content)
         setGeneratedLink(window.location.origin + '/shared-notes/' + link)
     }
 
@@ -46,7 +46,7 @@ export const ShareNoteDimmer = ({ handleHide, active, errorMsg, requestLoading, 
                 <div className="expiry-date-label">
                     <label >Select note expiry date</label><br />
                     <Input style={{ width: '220px', marginTop: '5px' }} name='expiry_date' value={date} type='datetime-local' onChange={(e, { value }) => { checkDate(value) }} /> <br />
-                    <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => { shareNoteReturn(sharePassword) }}>Share</Button>
+                    <Button aria-label='share-modal-btn' loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => { shareNoteReturn(sharePassword, note) }}>Share</Button>
                 </div>
                 {error.length > 0 && (<Message error>{error}</Message>)}
                 {generatedLink.length > 0 && (<Message success>Please find your share link generated below. Expiring at: {new Date(date).toLocaleString()}<br/><a href={generatedLink}>{generatedLink}</a></Message>)}

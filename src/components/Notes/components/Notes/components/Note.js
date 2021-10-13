@@ -71,12 +71,15 @@ export const Note = ({ note }) => {
     }
 
     async function handleShareNote(password, exipryDate, title, content) {
+        console.log(title,content)
         setRequestLoading(true)
-        let request = await shareNote(password, exipryDate)
+        let request = await shareNote(password, exipryDate, title, content)
         if (request.type !== undefined) {
+            setRequestLoading(false)
             return request.link
         } else {
             setErrorMsg(request)
+            setRequestLoading(false)
         }
         setRequestLoading(false)
     }
@@ -99,17 +102,17 @@ export const Note = ({ note }) => {
                 </Card.Content>
                 <Card.Content extra className='btn-footer' >
                     <Button.Group>
-                        <Button className='remove-bg' floated='right' >
+                        <Button aria-label='share' className='remove-bg' floated='right' >
                             <Button.Content>
                                 <Icon size='large' inverted name='share square' onClick={() => { setShareDimmerActive(true) }}></Icon>
                             </Button.Content>
                         </Button>
-                        <Button className='remove-bg' floated='right' onClick={locked ? showPasswordDimmer : showLockPasswordDimmer}>
+                        <Button aria-label='lock-btn'  className='remove-bg' floated='right' onClick={locked ? showPasswordDimmer : showLockPasswordDimmer}>
                             <Button.Content>
                                 <Icon size='large' className='active-btn' inverted name={locked ? 'unlock' : 'lock'}></Icon>
                             </Button.Content>
                         </Button>
-                        <Button className='remove-bg' floated='right' onClick={() => { deleteNote(note.id); setNotePosition(-1000) }} >
+                        <Button aria-label='delete-btn' className='remove-bg' floated='right' onClick={() => { deleteNote(note.id); setNotePosition(-1000) }} >
                             <Button.Content>
                                 <Icon size='large' color='red' inverted name='trash'></Icon>
                             </Button.Content>
@@ -117,7 +120,7 @@ export const Note = ({ note }) => {
                     </Button.Group>
                 </Card.Content>
             </motion.div>
-            <ShareNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={shareDimmerActive} shareNote={handleShareNote} errorMsg={errorMsg} />
+            <ShareNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={shareDimmerActive} shareNote={handleShareNote} errorMsg={errorMsg} />
             <LockNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={lockDimmerActive} createPassword={handleCreatePassword} errorMsg={errorMsg} />
             <PreviewNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={previewDimmerActive} checkPassword={handleCheckPassword} errorMsg={errorMsg} />
             <UnlockNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={unlockDimmerActive} checkPassword={handleCheckPassword} errorMsg={errorMsg} />
