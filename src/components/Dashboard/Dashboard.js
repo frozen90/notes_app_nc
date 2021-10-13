@@ -13,8 +13,8 @@ export const Dashboard = ({ notesList, foldersList }) => {
     const [navSelection, setNavSelection] = useState('Notes')
 
     return (
-        <div data-testid='main-dashboard'>
-            <Grid.Column computer={16} mobile={16} tablet={16} className="notes-dashboard">
+        <>
+            <Grid.Column computer={16} mobile={16} tablet={16} className="notes-dashboard"  data-testid='main-dashboard'>
                 <Menu fluid compact className='notes-menu'>
                     <Menu.Item
                         as='h2'
@@ -34,7 +34,7 @@ export const Dashboard = ({ notesList, foldersList }) => {
 
             </Grid.Column>
 
-        </div>
+        </>
     )
 }
 
