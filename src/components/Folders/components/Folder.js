@@ -25,11 +25,11 @@ export const Folder = ({ folder, removeFolder, setFolderOpen, setFolderId, setFo
                 transition={{ ease: "easeIn", duration: 0.5 }}>
                 <Card.Content textAlign='center' className='note-content'>
                     <Button onDoubleClick={() => { setFolderOpen(true); setFolderId(folder.id); setFolderName(title) }} className='remove-bg' fluid><Button.Content><Icon className='folder-icon' name='folder' size='massive' /></Button.Content></Button>
-                    <Header as="h3" className='header-card'>
-                        <Input readOnly={blockModifications} onBlur={() => { modifyFolder({ input: { id: folder.id, title: title } }) }} inverted transparent maxLength="20" onChange={(e, { value }) => { setTitle(value) }} value={title} />
+                    <Header  as="h3" className='header-card'>
+                        <Input aria-label='folder_title' readOnly={blockModifications} onBlur={() => { modifyFolder({ input: { id: folder.id, title: title } }) }} inverted transparent maxLength="20" onChange={(e, { value }) => { setTitle(value) }} value={title} />
                     </Header>
                 </Card.Content>
-                <Label attached='bottom right' className='remove-bg'>
+                <Label data-testid='remove-btn' attached='bottom right' className='remove-bg'>
                     <Icon name='trash' size='big' color='red' floated='right' onClick={() => { removeFolder(folder.id); setFolderPosition(-1000) }}></Icon>
                 </Label>
 

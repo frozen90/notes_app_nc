@@ -27,7 +27,7 @@ export const FoldersDashboard = ({ foldersList }) => {
         setFolders(foldersList)
     },[foldersList])
     return (
-        <>
+        <div data-testid="folders-dashboard">
             {!folderOpen ?
                 <Card.Group centered itemsPerRow={6}>
                     {listFolders}
@@ -40,7 +40,7 @@ export const FoldersDashboard = ({ foldersList }) => {
                 :
                 <FolderContent folderId={folderId} setFolderOpen={setFolderOpen} folderName={folderName}/>
             }
-        </>
+        </div>
     )
 }
 

@@ -14,7 +14,7 @@ export const GetStarted = ({dismissWelcome}) => {
                     <Icon size="massive" inverted name='book' />
                     <Header as="h1" inverted>Nordcloud notes</Header>
                     <p style={{ color: 'white' }}>Take notes, reminders, share them with friends in secure manner</p>
-                    <Button className="get-started-btn" content='Get Started' onClick={()=>{dismissWelcome()}} />
+                    <Button aria-label='get-started' className="get-started-btn" content='Get Started' onClick={()=>{dismissWelcome()}} />
                 </Segment>
             </motion.div>
 

@@ -52,9 +52,9 @@ export const CalendarDashboard = () => {
     }
 
     return (
-        <>
+        <div data-testid='react-calendar-dashboard'>
             {!loading ?
-                <Grid centered columns={16}>
+                <Grid centered columns={16} >
                     <Grid.Row>
                         <Calendar utcOffset={0} value={calendarValue} view="month" tileClassName={tileClassName} onChange={handleCalendarValueChange} />
                     </Grid.Row>
@@ -72,7 +72,7 @@ export const CalendarDashboard = () => {
                 <Loader className='loader' active size='large'>Loading...</Loader>
             }
 
-        </>
+        </div>
     )
 }
 
