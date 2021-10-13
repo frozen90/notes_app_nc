@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
 import PropTypes from 'prop-types';
-export const UnlockNoteDimmer = ({ handleHide, active, note, checkPassword, errorMsg, requestLoading}) => {
+export const UnlockNoteDimmer = ({ handleHide, active, note, unlockNote, errorMsg, requestLoading}) => {
 
     const [unlockNotePassword, setUnlockNotePassword] = useState('')
 
@@ -23,7 +23,7 @@ export const UnlockNoteDimmer = ({ handleHide, active, note, checkPassword, erro
 
                 <Input name='note_password' type='password' value={unlockNotePassword} placeholder='Note Password' onChange={(e, { value }) => { setUnlockNotePassword(value) }} />
                 <br />
-                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => { checkPassword(unlockNotePassword, note); setUnlockNotePassword('') }}>Unlock</Button>
+                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {  unlockNote(unlockNotePassword,note); setUnlockNotePassword('') }}>Unlock</Button>
                 {errorMsg.length > 0 && (<Message error>{errorMsg}</Message>)}
 
             </Segment>
@@ -34,7 +34,7 @@ UnlockNoteDimmer.propTypes = {
     handleHide: PropTypes.func,
     active:PropTypes.bool,
     note: PropTypes.object ,
-    checkPassword: PropTypes.func,
+    unlockNote: PropTypes.func,
     errorMsg: PropTypes.string,
     requestLoading:PropTypes.bool
 }

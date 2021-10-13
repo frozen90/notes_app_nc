@@ -3,7 +3,7 @@ import { Header, Card, Icon, Button, Label, Input } from "semantic-ui-react";
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
 import { API, graphqlOperation } from 'aws-amplify';
-import { deleteFolder, updateFolder } from "../../../graphql/mutations";
+import { updateFolder } from "../../../graphql/mutations";
 
 export const Folder = ({ folder, removeFolder, setFolderOpen, setFolderId, setFolderName }) => {
 

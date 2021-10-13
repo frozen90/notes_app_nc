@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Form, Segment, Header, Button, Input, Dimmer, Icon, Message } from "semantic-ui-react"
+import { Form, Segment, Header, Button, Dimmer, Icon, Message } from "semantic-ui-react"
 //PropTypes
 import PropTypes from 'prop-types';
 
@@ -9,6 +9,7 @@ export const NewEventDimmer = ({ createNewEvent, active, setActive, fetchPlanned
     const [error, setError] = useState('')
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
+    
     async function handleSubmit() {
         let data = { title: title, content: content }
         await createNewEvent(data, time)

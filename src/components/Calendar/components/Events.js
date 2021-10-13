@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Header, Label, Segment, Loader, Button } from "semantic-ui-react";
-import { listEvents, eventsByDate } from "../../../graphql/queries";
+import { Grid, Loader, Button } from "semantic-ui-react";
+import { eventsByDate } from "../../../graphql/queries";
 import { createEvents, createPlannedDates } from "../../../graphql/mutations";
 import { API, graphqlOperation } from "@aws-amplify/api";
 import NewEventDimmer from "./NewEventDimmer";

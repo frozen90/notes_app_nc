@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dimmer, Button, Header, Input, Message, Card } from "semantic-ui-react";
-import { API, graphqlOperation } from 'aws-amplify';
-import { listNotes, listSharedNotes } from "../../../../../graphql/queries";
+import { API } from 'aws-amplify';
+import {listSharedNotes } from "../../../../../graphql/queries";
 import LockedNote from "./LockedNote";
 import PropTypes from 'prop-types';
 

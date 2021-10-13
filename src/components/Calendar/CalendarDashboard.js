@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { API, graphqlOperation } from "@aws-amplify/api";
-import { Grid, Label, Segment, Loader, Button, Icon } from "semantic-ui-react";
+import { Grid, Label, Loader} from "semantic-ui-react";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Events from "./components/Events";
