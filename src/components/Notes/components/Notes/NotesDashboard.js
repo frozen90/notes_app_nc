@@ -18,17 +18,17 @@ export const NotesDashboard = ({notesList}) => {
     },[notesList])
 
     return (
-        <>
+        <div data-testid="notes-dashboard">
             <Card.Group centered itemsPerRow={4} stackable >
                 {listNotes}
-                <Button className={notes.length > 0 ? 'remove-bg fixed-btn' : 'remove-bg margin-btn'} onClick={createNewNote} loading={btnLoading} disabled={btnLoading} >
+                <Button data-testid="add-new-btn" className={notes.length > 0 ? 'remove-bg fixed-btn' : 'remove-bg margin-btn'} onClick={createNewNote} loading={btnLoading} disabled={btnLoading} >
                     <Button.Content>
                         <Icon circular size='huge' name='plus' className='add-new-note' />
                     </Button.Content>
                 </Button>
             </Card.Group>
 
-        </>
+        </div>
     )
 }
 
