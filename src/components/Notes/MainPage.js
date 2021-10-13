@@ -96,6 +96,7 @@ export const MainPage = () => {
 
     async function refreshNotes(){
         let notes = await fetchNotes()
+        console.log(notes)
         setNotes(notes)
         setLoading(false)
     }

@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
 
 
-export const PreviewNoteDimmer = ({handleHide, active,checkPassword, errorMsg, requestLoading}) => {
+export const PreviewNoteDimmer = ({handleHide,note, active,checkPassword, errorMsg, requestLoading}) => {
     const [previewNotePassword, setPreviewNotePassword] = useState('')
 
     return (
@@ -18,7 +18,7 @@ export const PreviewNoteDimmer = ({handleHide, active,checkPassword, errorMsg, r
                 </Header>
 
                 <Input name='note_password' type='password' value={previewNotePassword} placeholder='Note Password' onChange={(e,{value})=>{setPreviewNotePassword(value)}}/><br />
-                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {checkPassword(previewNotePassword)}}>Preview</Button>
+                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {checkPassword(previewNotePassword,note)}}>Preview</Button>
                 {errorMsg.length > 0 && (<Message error>{errorMsg}</Message>)}
             </Segment>
         </Dimmer>

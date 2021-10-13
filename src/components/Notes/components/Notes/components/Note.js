@@ -3,21 +3,17 @@ import React, { useState } from "react";
 import { Header, Card, Icon, Button, Input } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
-// GraphQl
-import { API, graphqlOperation } from 'aws-amplify';
-import { listNotes } from "../../../../../graphql/queries";
-import { updateNotes, createSharedNote } from "../../../../../graphql/mutations";
+// Actions
+import { updateNote, deleteNote, shareNote, checkPassword, createPassword } from "../../../../../actions/notes";
 //Dimmers
 import LockNoteDimmer from "./LockNoteDimmer";
 import UnlockNoteDimmer from "./UnlockNoteDimmer";
 import PreviewNoteDimmer from "./PreviewNoteDimmer";
 import ShareNoteDimmer from "./ShareNoteDimmer";
-//helpers
-import { generateLink } from "../../../../../utils/helpers/link_generator";
 //PropTypes
 import PropTypes from 'prop-types';
 
-export const Note = ({ note, deleteNote }) => {
+export const Note = ({ note }) => {
     //note state
     const [notePosition, setNotePosition] = useState(0)
     const [title, setTitle] = useState(note.title)
@@ -48,72 +44,42 @@ export const Note = ({ note, deleteNote }) => {
         setErrorMsg('')
     }
 
-    async function checkPassword(inputPassword) {
-        let password_filter = { and: [{ id: { eq: note.id }, password: { eq: inputPassword } }] }
+    async function handleCheckPassword(password, note) {
         setRequestLoading(true)
-        try {
-            let results = await API.graphql(graphqlOperation(listNotes, { filter: password_filter }))
-            if (results.data.listNotes.items.length > 0) {
-                setLocked(false)
-                handleHide()
-                setRequestLoading(false)
-
-            } else {
-                setErrorMsg('Incorrect password')
-                setRequestLoading(false)
-            }
-
-        } catch (err) {
-            setErrorMsg(err)
+        let check = await checkPassword(password, note)
+        if (check === true) {
+            setLocked(false)
+            handleHide()
             setRequestLoading(false)
-        }
-    }
-
-    async function createPassword(inputPassword) {
-        if (inputPassword.length > 0) {
-            try {
-                await API.graphql(graphqlOperation(updateNotes, { input: { id: note.id, password: inputPassword, locked: true } }))
-                setLocked(true)
-                setLockDimmerActive(false)
-                setRequestLoading(false)
-            } catch (err) {
-                setErrorMsg(err)
-                setRequestLoading(false)
-            }
         } else {
-            setErrorMsg('Password cannot be empty')
+            setErrorMsg('Incorrect password')
             setRequestLoading(false)
         }
+        setRequestLoading(false)
     }
-
-    async function updateNote(updateAction) {
-        try {
-            setBlockModifications(true)
-            await API.graphql(graphqlOperation(updateNotes, updateAction))
-            setBlockModifications(false)
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    async function shareNote(inputPassword, expiryDate) {
+    async function handleCreatePassword(password, note) {
         setRequestLoading(true)
-        let generatedLink = generateLink()
-        if (inputPassword.length > 0) {
-            try {
-                await API.graphql(graphqlOperation(createSharedNote, { input: { password: inputPassword, expire_date: new Date(expiryDate).toISOString(), title: title, content: content, link: generatedLink } }))
-                setRequestLoading(false)
-                return (generatedLink)
-            } catch (err) {
-                setErrorMsg(err)
-                setRequestLoading(false)
-            }
+        let request = await createPassword(password, note)
+        if (request === true) {
+            setLocked(true)
+            handleHide()
+            setRequestLoading(false)
         } else {
-            setErrorMsg('Password cannot be empty')
+            setErrorMsg(request)
             setRequestLoading(false)
         }
     }
 
+    async function handleShareNote(password, exipryDate, title, content) {
+        setRequestLoading(true)
+        let request = await shareNote(password, exipryDate)
+        if (request.type !== undefined) {
+            return request.link
+        } else {
+            setErrorMsg(request)
+        }
+        setRequestLoading(false)
+    }
     return (
         <>
             <motion.div className="ui card note-bg" initial={{ scale: 0, y: +700, x: +1300 }} animate={{ scale: 1, y: 0, x: notePosition }}
@@ -151,10 +117,10 @@ export const Note = ({ note, deleteNote }) => {
                     </Button.Group>
                 </Card.Content>
             </motion.div>
-            <ShareNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={shareDimmerActive} shareNote={shareNote} errorMsg={errorMsg} />
-            <LockNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={lockDimmerActive} createPassword={createPassword} errorMsg={errorMsg} />
-            <PreviewNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={previewDimmerActive} checkPassword={checkPassword} errorMsg={errorMsg} />
-            <UnlockNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={unlockDimmerActive} checkPassword={checkPassword} errorMsg={errorMsg} />
+            <ShareNoteDimmer requestLoading={requestLoading} handleHide={handleHide} active={shareDimmerActive} shareNote={handleShareNote} errorMsg={errorMsg} />
+            <LockNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={lockDimmerActive} createPassword={handleCreatePassword} errorMsg={errorMsg} />
+            <PreviewNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={previewDimmerActive} checkPassword={handleCheckPassword} errorMsg={errorMsg} />
+            <UnlockNoteDimmer note={note} requestLoading={requestLoading} handleHide={handleHide} active={unlockDimmerActive} checkPassword={handleCheckPassword} errorMsg={errorMsg} />
         </>
     )
 }

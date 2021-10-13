@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
 
-export const LockNoteDimmer = ({ handleHide, active, closeFunction, createPassword, errorMsg, requestLoading }) => {
+export const LockNoteDimmer = ({ handleHide, active, note , createPassword, errorMsg, requestLoading }) => {
 
     const [notePassword, setNotePassword] = useState('')
 
@@ -23,7 +23,7 @@ export const LockNoteDimmer = ({ handleHide, active, closeFunction, createPasswo
                 </Header>
 
                 <Input name='note_password' type='password' value={notePassword} placeholder='Note Password' onChange={(e, { value }) => { setNotePassword(value) }} /><br />
-                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {createPassword(notePassword)}}>Lock</Button>
+                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {createPassword(notePassword,note)}}>Lock</Button>
                 {errorMsg.length > 0 && (<Message error>{errorMsg}</Message>)}
             </Segment>
         </Dimmer>
