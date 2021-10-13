@@ -18,7 +18,7 @@ export const PreviewNoteDimmer = ({handleHide,note, active,checkPassword, errorM
                 </Header>
 
                 <Input name='note_password' type='password' value={previewNotePassword} placeholder='Note Password' onChange={(e,{value})=>{setPreviewNotePassword(value)}}/><br />
-                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {checkPassword(previewNotePassword,note)}}>Preview</Button>
+                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {checkPassword(previewNotePassword,note); setPreviewNotePassword('')}}>Preview</Button>
                 {errorMsg.length > 0 && (<Message error>{errorMsg}</Message>)}
             </Segment>
         </Dimmer>

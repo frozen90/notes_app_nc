@@ -23,7 +23,7 @@ export const LockNoteDimmer = ({ handleHide, active, note , createPassword, erro
                 </Header>
 
                 <Input name='note_password' type='password' value={notePassword} placeholder='Note Password' onChange={(e, { value }) => { setNotePassword(value) }} /><br />
-                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {createPassword(notePassword,note)}}>Lock</Button>
+                <Button loading={requestLoading} style={{ marginTop: '15px', backgroundColor: '#F6AE2D', color: 'white' }} onClick={() => {createPassword(notePassword,note); setNotePassword('')}}>Lock</Button>
                 {errorMsg.length > 0 && (<Message error>{errorMsg}</Message>)}
             </Segment>
         </Dimmer>
