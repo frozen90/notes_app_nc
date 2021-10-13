@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Icon, Loader, Header } from "semantic-ui-react";
+import { Card, Button, Icon, Loader, Label, Breadcrumb } from "semantic-ui-react";
 import { API, graphqlOperation } from "@aws-amplify/api";
 import Note from "../../Notes/components/Notes/components/Note";
 import { deleteNotes, createNotes } from "../../../graphql/mutations";
 import { notesByDate } from "../../../graphql/queries";
 
-export const FolderContent = ({ folderId, folderName }) => {
+export const FolderContent = ({ folderId, folderName, setFolderOpen }) => {
     const sections = [
         { key: 'home', content: 'Home', link: true },
         { key: 'registration', content: 'Registration', link: true },
         { key: 'info', content: 'Personal Information', active: true },
-      ]
-      
+    ]
+
     const [loading, setLoading] = useState(true)
     const [notes, setNotes] = useState([])
     const [btnLoading, setBtnLoading] = useState(false)
@@ -44,8 +44,7 @@ export const FolderContent = ({ folderId, folderName }) => {
             console.log('error')
         }
     }
-    // let eventFilter = { and: [{ plannedDateId: { eq: plannedDateId } }] }
-    //         const events = await API.graphql(graphqlOperation(eventsByDate, { type: "Event", sortDirection: 'ASC', filter: eventFilter, }))
+
     async function fetchNotesByFolder() {
         try {
             const notesData = await API.graphql(graphqlOperation(notesByDate, { type: "Note", sortDirection: 'DESC', filter: { and: [{ folderID: { eq: folderId } }] } }))
@@ -60,8 +59,14 @@ export const FolderContent = ({ folderId, folderName }) => {
         fetchNotesByFolder()
     }, [folderId])
     return (
-        <>
-        <Header inverted className="fixed-folder-name" >Folder Name: {folderName}</Header>
+        <div>
+            <Label inverted attached='top left' className='remove-bg'>
+                <Breadcrumb>
+                    <Breadcrumb.Section link onClick={()=>{setFolderOpen(false)}}>Folders</Breadcrumb.Section>
+                    <Breadcrumb.Divider style={{color:'white'}}/>
+                    <Breadcrumb.Section active style={{color:'white'}}>{folderName}</Breadcrumb.Section>
+                </Breadcrumb>
+            </Label>
             {!loading ?
                 <Card.Group centered itemsPerRow={4} stackable >
                     {listNotes}
@@ -77,7 +82,7 @@ export const FolderContent = ({ folderId, folderName }) => {
             }
 
 
-        </>
+        </div>
     )
 }
 

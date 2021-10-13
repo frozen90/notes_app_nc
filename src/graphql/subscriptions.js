@@ -54,6 +54,8 @@ export const onCreateFolder = /* GraphQL */ `
     onCreateFolder(owner: $owner) {
       id
       title
+      type
+      createdAt
       notes {
         items {
           id
@@ -69,7 +71,6 @@ export const onCreateFolder = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
       updatedAt
       owner
     }
@@ -80,6 +81,8 @@ export const onUpdateFolder = /* GraphQL */ `
     onUpdateFolder(owner: $owner) {
       id
       title
+      type
+      createdAt
       notes {
         items {
           id
@@ -95,7 +98,6 @@ export const onUpdateFolder = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
       updatedAt
       owner
     }
@@ -106,6 +108,8 @@ export const onDeleteFolder = /* GraphQL */ `
     onDeleteFolder(owner: $owner) {
       id
       title
+      type
+      createdAt
       notes {
         items {
           id
@@ -121,7 +125,6 @@ export const onDeleteFolder = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
       updatedAt
       owner
     }

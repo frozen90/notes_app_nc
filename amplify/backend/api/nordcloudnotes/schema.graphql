@@ -11,9 +11,13 @@ type Notes @model
   folderID: ID
 }
 
-type Folder @model @auth(rules:[{allow: owner}]){
+type Folder @model 
+  @key(name: "foldersByDate", fields:["type","createdAt"], queryField:"foldersByDate") 
+  @auth(rules:[{allow: owner}]){
   id: ID!
   title: String!
+  type: String!
+  createdAt: String!
   notes: [Notes] @connection(keyName: "byFolderId", fields:["id"])
 }
 

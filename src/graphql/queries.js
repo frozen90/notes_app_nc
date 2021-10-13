@@ -45,6 +45,8 @@ export const getFolder = /* GraphQL */ `
     getFolder(id: $id) {
       id
       title
+      type
+      createdAt
       notes {
         items {
           id
@@ -60,7 +62,6 @@ export const getFolder = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
       updatedAt
       owner
     }
@@ -76,10 +77,11 @@ export const listFolders = /* GraphQL */ `
       items {
         id
         title
+        type
+        createdAt
         notes {
           nextToken
         }
-        createdAt
         updatedAt
         owner
       }
@@ -231,6 +233,38 @@ export const notesByDate = /* GraphQL */ `
         locked
         createdAt
         folderID
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const foldersByDate = /* GraphQL */ `
+  query FoldersByDate(
+    $type: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelFolderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    foldersByDate(
+      type: $type
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        type
+        createdAt
+        notes {
+          nextToken
+        }
         updatedAt
         owner
       }
