@@ -17,8 +17,8 @@ export const MainPage = () => {
     const [folders, setFolders] = useState([])
 
     useEffect(() => {
-        fetchNotes()
         refreshFolders()
+        fetchNotes()
         newFolderSubscribe()
         deleteFolderSubscribe()
     }, [])
@@ -54,11 +54,8 @@ export const MainPage = () => {
 
     async function refreshFolders(){
         let foldersData = await fetchFolders()
-        if(folders.length > 0){
-            setFolders([foldersData, ...folders])
-        }else{
-            setFolders(foldersData)
-        }
+        setFolders(foldersData)
+
         
 
     }

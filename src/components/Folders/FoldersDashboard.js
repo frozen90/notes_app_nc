@@ -23,6 +23,9 @@ export const FoldersDashboard = ({ foldersList }) => {
         setBtnLoading(false)
     }
 
+    useEffect(()=>{
+        setFolders(foldersList)
+    },[foldersList])
     return (
         <>
             {!folderOpen ?

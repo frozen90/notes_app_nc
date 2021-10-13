@@ -60,7 +60,7 @@ export const FolderContent = ({ folderId, folderName, setFolderOpen }) => {
     }, [folderId])
     return (
         <div>
-            <Label inverted attached='top left' className='remove-bg'>
+            <Label attached='top left' className='remove-bg'>
                 <Breadcrumb>
                     <Breadcrumb.Section link onClick={()=>{setFolderOpen(false)}}>Folders</Breadcrumb.Section>
                     <Breadcrumb.Divider style={{color:'white'}}/>
