@@ -1,5 +1,5 @@
 import './App.css';
-import MainPage from './components/Notes/MainPage';
+import MainPage from './components/MainPage';
 import Amplify from "aws-amplify"
 import awsExports from "./aws-exports"
 import {

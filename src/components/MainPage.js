@@ -3,11 +3,11 @@ import { API, graphqlOperation } from 'aws-amplify';
 import Auth from "@aws-amplify/auth";
 import { Container, Grid, Loader } from 'semantic-ui-react'
 import { Helmet } from "react-helmet";
-import Dashboard from "../Dashboard/Dashboard";
-import GetStarted from "./components/GetStarted";
-import { fetchFolders } from "../../actions/folders";
-import { fetchNotes } from "../../actions/notes";
-import * as subscriptions from '../../graphql/subscriptions'
+import Dashboard from "./Dashboard/Dashboard"
+import GetStarted from "./Notes/components/GetStarted";
+import { fetchFolders } from "../actions/folders";
+import {fetchNotes} from "../actions/notes"
+import * as subscriptions from "../graphql/subscriptions"
 
 export const MainPage = () => {
 
@@ -103,7 +103,7 @@ export const MainPage = () => {
     // --- END --- //
 
     const dismissWelcome = () => {
-        setGetStartedDisplay(false)
+        setGetStartedDisplay(true)
     }
     return (
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import Auth from "@aws-amplify/auth";
 // Ui Components
-import {Grid, Container } from "semantic-ui-react"
+import { Grid, Container } from "semantic-ui-react"
 // Forms
 import LoginForm from "./Forms/LoginForm";
 import SignUpForm from "./Forms/SignUpForm";
@@ -17,13 +18,20 @@ export const LoginPage = (props) => {
         }
 
     }, [loggedIn])
+    useEffect(() => {
+        Auth.currentAuthenticatedUser({
+            bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+        }).then(user => setLoggedIn(true))
+            .catch(err => setLoggedIn(false));
+
+    }, [])
 
     return (
         <Container>
             <Grid centered style={{ height: "100vh" }} verticalAlign="middle">
-                {formType === 'Login' && (<LoginForm setFormType={setFormType} setLoggedIn={setLoggedIn}/>)}
-                {formType === 'SignUp' && (<SignUpForm setFormType={setFormType} username={username} setUsername={setUsername}/>)}
-                {formType === 'confirmSignUp' && (<ConfirmSignupForm setFormType={setFormType} username={username}/>)}
+                {formType === 'Login' && (<LoginForm setFormType={setFormType} setLoggedIn={setLoggedIn} />)}
+                {formType === 'SignUp' && (<SignUpForm setFormType={setFormType} username={username} setUsername={setUsername} />)}
+                {formType === 'confirmSignUp' && (<ConfirmSignupForm setFormType={setFormType} username={username} />)}
             </Grid>
         </Container>
     )
