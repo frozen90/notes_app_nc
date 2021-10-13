@@ -117,7 +117,7 @@ export const Note = ({ note }) => {
                                 <Icon size='large' className='active-btn' inverted name={locked ? 'unlock' : 'lock'}></Icon>
                             </Button.Content>
                         </Button>
-                        <Button aria-label='delete-btn' className='remove-bg' floated='right' onClick={() => { deleteNote(note.id); setNotePosition(-1000) }} >
+                        <Button aria-label='delete-btn' className='remove-bg' floated='right' onClick={() => { deleteNote(note.id); setNotePosition(-4000) }} >
                             <Button.Content>
                                 <Icon size='large' color='red' inverted name='trash'></Icon>
                             </Button.Content>

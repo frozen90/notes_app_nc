@@ -30,7 +30,7 @@ export const Folder = ({ folder, removeFolder, setFolderOpen, setFolderId, setFo
                     </Header>
                 </Card.Content>
                 <Label data-testid='remove-btn' attached='bottom right' className='remove-bg'>
-                    <Icon name='trash' size='big' color='red' floated='right' onClick={() => { removeFolder(folder.id); setFolderPosition(-1000) }}></Icon>
+                    <Icon name='trash' size='big' color='red' floated='right' onClick={() => { removeFolder(folder.id); setFolderPosition(-4000) }}></Icon>
                 </Label>
 
             </motion.div>
