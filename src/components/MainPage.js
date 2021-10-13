@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { API, graphqlOperation } from 'aws-amplify';
 import Auth from "@aws-amplify/auth";
-import { Container, Grid, Loader } from 'semantic-ui-react'
+import { Button, Container, Grid, Loader } from 'semantic-ui-react'
 import { Helmet } from "react-helmet";
 import Dashboard from "./Dashboard/Dashboard"
 import GetStarted from "./Notes/components/GetStarted";
