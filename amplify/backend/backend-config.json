@@ -24,17 +24,7 @@
     "nordcloudnotescc9e4c9d": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "nordcloudnotescc9e4c9dPostConfirmation",
-          "triggerProvider": "Cognito",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
-        }
-      ],
+      "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
         "loginMechanisms": [
@@ -64,11 +54,5 @@
       "type": "manual"
     }
   },
-  "function": {
-    "nordcloudnotescc9e4c9dPostConfirmation": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  }
+  "function": {}
 }

@@ -28,7 +28,6 @@ type SharedNote
 @auth(rules:[
   {allow:owner,operations:[create,read,update,delete]}
   {allow: public, provider: iam, operations: [read]}
-  {allow: groups, groups: ["everyone"], operations: [read]}
 ])
 @key(name: "byLink", fields: ["link", "id"], queryField: "notesByLink")
 {

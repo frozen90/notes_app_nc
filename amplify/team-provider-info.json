@@ -20,13 +20,6 @@
           "appId": "d31ajx0v02fihw",
           "type": "manual"
         }
-      },
-      "function": {
-        "nordcloudnotescc9e4c9dPostConfirmation": {
-          "GROUP": "everyone",
-          "deploymentBucketName": "amplify-nordcloudnotes-dev-230427-deployment",
-          "s3Key": "amplify-builds/nordcloudnotescc9e4c9dPostConfirmation-38555a74355866526c65-build.zip"
-        }
       }
     }
   }
