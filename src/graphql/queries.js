@@ -8,7 +8,6 @@ export const getNotes = /* GraphQL */ `
       type
       title
       content
-      password
       locked
       createdAt
       folderID
@@ -29,7 +28,6 @@ export const listNotes = /* GraphQL */ `
         type
         title
         content
-        password
         locked
         createdAt
         folderID
@@ -53,7 +51,6 @@ export const getFolder = /* GraphQL */ `
           type
           title
           content
-          password
           locked
           createdAt
           folderID
@@ -194,7 +191,6 @@ export const notesByDate = /* GraphQL */ `
         type
         title
         content
-        password
         locked
         createdAt
         folderID
@@ -277,7 +273,6 @@ export const getSharedNote = /* GraphQL */ `
       title
       content
       expire_date
-      password
       createdAt
       updatedAt
       owner
@@ -297,7 +292,6 @@ export const listSharedNotes = /* GraphQL */ `
         title
         content
         expire_date
-        password
         createdAt
         updatedAt
         owner
@@ -329,7 +323,6 @@ export const notesByLink = /* GraphQL */ `
         title
         content
         expire_date
-        password
         createdAt
         updatedAt
         owner
