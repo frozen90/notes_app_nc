@@ -46,6 +46,7 @@ export const Note = ({ note }) => {
 
     async function handleCheckPassword(password, note) {
         setRequestLoading(true)
+
         let check = await checkPassword(password, note)
         if (check === true) {
             setLocked(false)

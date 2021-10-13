@@ -18,11 +18,16 @@ export const NotesDashboard = ({notesList}) => {
         setNotes(notesList)
     },[notesList])
 
+    async function handleCreateNewNote(){
+        setBtnLoading(true)
+        await createNewNote()
+        setBtnLoading(false)
+    }
     return (
         <div data-testid="notes-dashboard">
             <Card.Group centered itemsPerRow={4} stackable >
                 {listNotes}
-                <Button data-testid="add-new-btn" className={notes.length > 0 ? 'remove-bg fixed-btn' : 'remove-bg margin-btn'} onClick={createNewNote} loading={btnLoading} disabled={btnLoading} >
+                <Button data-testid="add-new-btn" className={notes.length > 0 ? 'remove-bg fixed-btn' : 'remove-bg margin-btn'} onClick={() => {handleCreateNewNote()}} loading={btnLoading} disabled={btnLoading} >
                     <Button.Content>
                         <Icon circular size='huge' name='plus' className='add-new-note' />
                     </Button.Content>
