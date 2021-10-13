@@ -5,7 +5,8 @@ import { createEvents, createPlannedDates } from "../../../graphql/mutations";
 import { API, graphqlOperation } from "@aws-amplify/api";
 import NewEventDimmer from "./NewEventDimmer";
 import Event from "./Event";
-
+//PropTypes
+import PropTypes from 'prop-types';
 
 export const Events = ({ plannedDateId, setPlannedDateId, date, fetchPlannedDates }) => {
 
@@ -69,5 +70,14 @@ export const Events = ({ plannedDateId, setPlannedDateId, date, fetchPlannedDate
         </>
     )
 }
+
+Events.propTypes = {
+    plannedDateId: PropTypes.string,
+    setPlannedDateId: PropTypes.func,
+    date:PropTypes.string,
+    fetchPlannedDates: PropTypes.func
+
+}
+
 
 export default Events

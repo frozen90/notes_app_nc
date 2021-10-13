@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
-
+import PropTypes from 'prop-types';
 
 export const ShareNoteDimmer = ({ handleHide, active, errorMsg, requestLoading, shareNote, note }) => {
 
@@ -53,6 +53,15 @@ export const ShareNoteDimmer = ({ handleHide, active, errorMsg, requestLoading, 
             </Segment>
         </Dimmer>
     )
+}
+
+ShareNoteDimmer.propTypes = {
+    handleHide: PropTypes.func,
+    active:PropTypes.bool,
+    note: PropTypes.object ,
+    shareNote: PropTypes.func,
+    errorMsg: PropTypes.string,
+    requestLoading:PropTypes.bool
 }
 
 export default ShareNoteDimmer

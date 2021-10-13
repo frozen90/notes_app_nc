@@ -4,6 +4,7 @@ import { API, graphqlOperation } from "@aws-amplify/api";
 import Note from "../../Notes/components/Notes/components/Note";
 import { deleteNotes, createNotes } from "../../../graphql/mutations";
 import { notesByDate } from "../../../graphql/queries";
+import PropTypes from 'prop-types';
 
 export const FolderContent = ({ folderId, folderName, setFolderOpen }) => {
   
@@ -78,5 +79,12 @@ export const FolderContent = ({ folderId, folderName, setFolderOpen }) => {
         </div>
     )
 }
+
+FolderContent.propTypes = {
+    folderId: PropTypes.string,
+    folderName: PropTypes.string,
+    setFolderOpen: PropTypes.func 
+}
+
 
 export default FolderContent

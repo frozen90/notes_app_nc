@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
-
+import PropTypes from 'prop-types';
 
 export const PreviewNoteDimmer = ({handleHide,note, active,checkPassword, errorMsg, requestLoading}) => {
     const [previewNotePassword, setPreviewNotePassword] = useState('')
@@ -25,5 +25,13 @@ export const PreviewNoteDimmer = ({handleHide,note, active,checkPassword, errorM
     )
 }
 
+PreviewNoteDimmer.propTypes = {
+    handleHide: PropTypes.func,
+    active:PropTypes.bool,
+    note: PropTypes.object ,
+    checkPassword: PropTypes.func,
+    errorMsg: PropTypes.string,
+    requestLoading:PropTypes.bool
+}
 
 export default PreviewNoteDimmer

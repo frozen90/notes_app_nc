@@ -1,10 +1,12 @@
 import React from "react"
 import { Segment, Grid, Header, Label, Icon } from "semantic-ui-react"
 import { motion } from 'framer-motion'
+//PropTypes
+import PropTypes from 'prop-types';
 
-export const Event = ({ event, fetchEvents }) => {
 
 
+export const Event = ({ event }) => {
 
 
     return (
@@ -25,5 +27,11 @@ export const Event = ({ event, fetchEvents }) => {
 
     )
 }
+
+
+Event.propTypes = {
+    event: PropTypes.object,
+}
+
 
 export default Event

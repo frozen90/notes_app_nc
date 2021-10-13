@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Dimmer, Button, Segment, Input, Icon, Header, Message } from "semantic-ui-react";
+import PropTypes from 'prop-types';
 
 export const LockNoteDimmer = ({ handleHide, active, note , createPassword, errorMsg, requestLoading }) => {
 
@@ -29,5 +30,15 @@ export const LockNoteDimmer = ({ handleHide, active, note , createPassword, erro
         </Dimmer>
     )
 }
+
+LockNoteDimmer.propTypes = {
+    handleHide: PropTypes.func,
+    active:PropTypes.bool,
+    note: PropTypes.object ,
+    createPassword: PropTypes.func,
+    errorMsg: PropTypes.string,
+    requestLoading:PropTypes.bool
+}
+
 
 export default LockNoteDimmer

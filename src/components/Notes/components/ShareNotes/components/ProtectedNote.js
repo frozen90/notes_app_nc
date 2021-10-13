@@ -3,6 +3,7 @@ import { Dimmer, Button, Header, Input, Message, Card } from "semantic-ui-react"
 import { API, graphqlOperation } from 'aws-amplify';
 import { listSharedNotes } from "../../../../../graphql/queries";
 import LockedNote from "./LockedNote";
+import PropTypes from 'prop-types';
 
 export const ProtectedNote = ({ noteId }) => {
     const [note, setNote] = useState({})
@@ -67,5 +68,8 @@ export const ProtectedNote = ({ noteId }) => {
 
 }
 
+ProtectedNote.propTypes = {
+    noteId: PropTypes.string
+}
 
 export default ProtectedNote

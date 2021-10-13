@@ -39,7 +39,8 @@ export const Dashboard = ({ notesList, foldersList }) => {
 }
 
 Dashboard.propTypes = {
-    notes: PropTypes.array
+    notesList: PropTypes.array,
+    foldersList: PropTypes.array
 }
 
 

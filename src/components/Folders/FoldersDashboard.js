@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Icon, Button, Card } from 'semantic-ui-react'
 import Folder from "./components/Folder";
 import {createNewFolder, removeFolder} from "../../actions/folders"
-import * as subscriptions from '../../graphql/subscriptions'
 import FolderContent from "./components/FolderContent";
-import {API, graphqlOperation} from "@aws-amplify/api";
-import Auth from "@aws-amplify/auth";
+import PropTypes from 'prop-types';
 
 export const FoldersDashboard = ({ foldersList }) => {
     const [folderOpen, setFolderOpen] = useState(false)
@@ -44,5 +42,8 @@ export const FoldersDashboard = ({ foldersList }) => {
     )
 }
 
+FoldersDashboard.propTypes = {
+    foldersList: PropTypes.array
+}
 
 export default FoldersDashboard

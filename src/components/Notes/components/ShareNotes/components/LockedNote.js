@@ -3,7 +3,7 @@ import React from "react";
 import { Header, Card, Input } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
-
+import PropTypes from 'prop-types';
 
 export const LockedNote = ({ note }) => {
 
@@ -24,6 +24,8 @@ export const LockedNote = ({ note }) => {
     )
 }
 
-
+LockedNote.propTypes = {
+    note: PropTypes.object
+}
 
 export default LockedNote;

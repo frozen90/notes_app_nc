@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import Note from "./components/Note";
 import {Icon, Button, Card } from 'semantic-ui-react'
 import { createNewNote } from "../../../../actions/notes";
+import PropTypes from 'prop-types';
 
 export const NotesDashboard = ({notesList}) => {
 
@@ -30,6 +31,10 @@ export const NotesDashboard = ({notesList}) => {
 
         </div>
     )
+}
+
+NotesDashboard.propTypes = {
+    notesList: PropTypes.array
 }
 
 export default NotesDashboard

@@ -41,6 +41,10 @@ export const Folder = ({ folder, removeFolder, setFolderOpen, setFolderId, setFo
 
 Folder.propTypes = {
     folder: PropTypes.object,
+    removeFolder:PropTypes.func,
+    setFolderOpen:PropTypes.func,
+    setFolderId:PropTypes.func,
+    setFolderName:PropTypes.func
 }
 
 export default Folder;

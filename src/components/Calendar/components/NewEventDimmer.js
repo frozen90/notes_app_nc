@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Form, Segment, Header, Button, Input, Dimmer, Icon, Message } from "semantic-ui-react"
-
+//PropTypes
+import PropTypes from 'prop-types';
 
 export const NewEventDimmer = ({ createNewEvent, active, setActive, fetchPlannedDates }) => {
     const [time, setTime] = useState('')
@@ -40,5 +41,13 @@ export const NewEventDimmer = ({ createNewEvent, active, setActive, fetchPlanned
 
 
 }
+
+NewEventDimmer.propTypes = {
+    createNewEvent:PropTypes.func,
+    active:PropTypes.bool,
+    setActive:PropTypes.func,
+    fetchPlannedDates:PropTypes.func
+}
+
 
 export default NewEventDimmer
