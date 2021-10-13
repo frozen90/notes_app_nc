@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // Ui Components / frameworks
-import { Header, Card, Icon, Button, Input } from "semantic-ui-react";
+import { Header, Card, Icon, Button, Input, Popup } from "semantic-ui-react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { motion } from "framer-motion";
 // Actions
@@ -71,7 +71,7 @@ export const Note = ({ note }) => {
     }
 
     async function handleShareNote(password, exipryDate, title, content) {
-        console.log(title,content)
+        console.log(title, content)
         setRequestLoading(true)
         let request = await shareNote(password, exipryDate, title, content)
         if (request.type !== undefined) {
@@ -95,19 +95,24 @@ export const Note = ({ note }) => {
                         <Button fluid className='remove-bg' onClick={() => { showPreviewDimmer() }}>
                             <Button.Content>
                                 <Icon className='active-btn' name='eye' size='massive' />
+                                <div style={locked ? { color: 'white' } : { display: 'none' }}>
+                                    Only Unlocked Folders can be shared
+                                </div>
                             </Button.Content></Button>
                         :
                         <TextareaAutosize onDoubleClick={() => { setEditable(true) }} onBlur={() => { setEditable(false); updateNote({ input: { id: note.id, content: content } }) }} value={content} onChange={handleTextChange} maxRows={10} className='remove-bg note-textarea' readOnly={!editable} />
                     }
                 </Card.Content>
                 <Card.Content extra className='btn-footer' >
+
                     <Button.Group>
-                        <Button aria-label='share' className='remove-bg' floated='right' >
+                        <Button disabled={locked} aria-label='share' className='remove-bg' floated='right' >
                             <Button.Content>
                                 <Icon size='large' inverted name='share square' onClick={() => { setShareDimmerActive(true) }}></Icon>
                             </Button.Content>
+
                         </Button>
-                        <Button aria-label='lock-btn'  className='remove-bg' floated='right' onClick={locked ? showPasswordDimmer : showLockPasswordDimmer}>
+                        <Button aria-label='lock-btn' className='remove-bg' floated='right' onClick={locked ? showPasswordDimmer : showLockPasswordDimmer}>
                             <Button.Content>
                                 <Icon size='large' className='active-btn' inverted name={locked ? 'unlock' : 'lock'}></Icon>
                             </Button.Content>
@@ -130,7 +135,6 @@ export const Note = ({ note }) => {
 
 Note.propTypes = {
     note: PropTypes.object,
-    deleteNote: PropTypes.func
 }
 
 export default Note;
