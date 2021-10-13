@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateNotes = /* GraphQL */ `
-  subscription OnCreateNotes($owner: String!) {
-    onCreateNotes(owner: $owner) {
+  subscription OnCreateNotes {
+    onCreateNotes {
       id
       type
       title
@@ -18,8 +18,8 @@ export const onCreateNotes = /* GraphQL */ `
   }
 `;
 export const onUpdateNotes = /* GraphQL */ `
-  subscription OnUpdateNotes($owner: String!) {
-    onUpdateNotes(owner: $owner) {
+  subscription OnUpdateNotes {
+    onUpdateNotes {
       id
       type
       title
@@ -34,8 +34,8 @@ export const onUpdateNotes = /* GraphQL */ `
   }
 `;
 export const onDeleteNotes = /* GraphQL */ `
-  subscription OnDeleteNotes($owner: String!) {
-    onDeleteNotes(owner: $owner) {
+  subscription OnDeleteNotes {
+    onDeleteNotes {
       id
       type
       title
@@ -127,48 +127,6 @@ export const onDeleteFolder = /* GraphQL */ `
       }
       updatedAt
       owner
-    }
-  }
-`;
-export const onCreateSharedNote = /* GraphQL */ `
-  subscription OnCreateSharedNote {
-    onCreateSharedNote {
-      id
-      link
-      title
-      content
-      expire_date
-      password
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateSharedNote = /* GraphQL */ `
-  subscription OnUpdateSharedNote {
-    onUpdateSharedNote {
-      id
-      link
-      title
-      content
-      expire_date
-      password
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteSharedNote = /* GraphQL */ `
-  subscription OnDeleteSharedNote {
-    onDeleteSharedNote {
-      id
-      link
-      title
-      content
-      expire_date
-      password
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -286,6 +244,51 @@ export const onDeleteEvents = /* GraphQL */ `
       title
       content
       plannedDateId
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateSharedNote = /* GraphQL */ `
+  subscription OnCreateSharedNote($owner: String) {
+    onCreateSharedNote(owner: $owner) {
+      id
+      link
+      title
+      content
+      expire_date
+      password
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateSharedNote = /* GraphQL */ `
+  subscription OnUpdateSharedNote($owner: String) {
+    onUpdateSharedNote(owner: $owner) {
+      id
+      link
+      title
+      content
+      expire_date
+      password
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteSharedNote = /* GraphQL */ `
+  subscription OnDeleteSharedNote($owner: String) {
+    onDeleteSharedNote(owner: $owner) {
+      id
+      link
+      title
+      content
+      expire_date
+      password
       createdAt
       updatedAt
       owner

@@ -1,6 +1,6 @@
 type Notes @model
   @key(name: "byFolderId", fields: ["folderID", "content"])
-  @key(name: "notesByDate", fields:["type","createdAt"], queryField:"notesByDate") @auth(rules:[{allow: owner}]){
+  @key(name: "notesByDate", fields:["type","createdAt"], queryField:"notesByDate") @auth(rules:[{allow: owner, operations:[create, update, delete]}]){
   id: ID!
   type: String!
   title: String!
@@ -21,7 +21,17 @@ type Folder @model
   notes: [Notes] @connection(keyName: "byFolderId", fields:["id"])
 }
 
-type SharedNote @model @key(name: "byLink", fields: ["link", "id"], queryField: "notesByLink"){
+type SharedNote
+@model 
+@aws_iam
+@aws_cognito_user_pools
+@auth(rules:[
+  {allow:owner,operations:[create,read,update,delete]}
+  {allow: public, provider: iam, operations: [read]}
+  {allow: groups, groups: ["everyone"], operations: [read]}
+])
+@key(name: "byLink", fields: ["link", "id"], queryField: "notesByLink")
+{
   id: ID!
   link: String
   title: String

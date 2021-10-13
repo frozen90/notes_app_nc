@@ -19,7 +19,7 @@ export const ShareNote = (props) => {
     
     async function fetchExpiryDate() {
         try {
-            const expiryDate = await API.graphql(graphqlOperation(notesByLink, { link: link, sortDirection: 'DESC' }))
+            const expiryDate = await API.graphql({query:notesByLink,variables:{ link: link, sortDirection: 'DESC' }, authMode:"AWS_IAM"})
             setExpiryDate(expiryDate.data.notesByLink.items[0].expire_date)
             setNoteId(expiryDate.data.notesByLink.items[0].id)
         } catch (err) {

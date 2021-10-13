@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dimmer, Button, Header, Input, Message, Card } from "semantic-ui-react";
 import { API, graphqlOperation } from 'aws-amplify';
-import { listSharedNotes } from "../../../../../graphql/queries";
+import { listNotes, listSharedNotes } from "../../../../../graphql/queries";
 import LockedNote from "./LockedNote";
 import PropTypes from 'prop-types';
 
@@ -18,12 +18,9 @@ export const ProtectedNote = ({ noteId }) => {
         setRequestLoading(true)
         try {
 
-            let results = await API.graphql(graphqlOperation(listSharedNotes, { filter: password_filter }))
-
+            let results = await API.graphql({query:listSharedNotes,variables:{ filter: password_filter }, authMode:"AWS_IAM"})
             if (results.data.listSharedNotes.items.length > 0) {
-
                 setNote(results.data.listSharedNotes.items[0])
-                console.log('Hellou ?')
                 setLocked(false)
                 setRequestLoading(false)
 

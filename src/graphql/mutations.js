@@ -162,6 +162,7 @@ export const createSharedNote = /* GraphQL */ `
       password
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -179,6 +180,7 @@ export const updateSharedNote = /* GraphQL */ `
       password
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -196,6 +198,7 @@ export const deleteSharedNote = /* GraphQL */ `
       password
       createdAt
       updatedAt
+      owner
     }
   }
 `;

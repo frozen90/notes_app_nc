@@ -8,6 +8,7 @@ export const getNotes = /* GraphQL */ `
       type
       title
       content
+      password
       locked
       createdAt
       folderID
@@ -28,6 +29,7 @@ export const listNotes = /* GraphQL */ `
         type
         title
         content
+        password
         locked
         createdAt
         folderID
@@ -51,6 +53,7 @@ export const getFolder = /* GraphQL */ `
           type
           title
           content
+          password
           locked
           createdAt
           folderID
@@ -81,39 +84,6 @@ export const listFolders = /* GraphQL */ `
         }
         updatedAt
         owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getSharedNote = /* GraphQL */ `
-  query GetSharedNote($id: ID!) {
-    getSharedNote(id: $id) {
-      id
-      link
-      title
-      content
-      expire_date
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listSharedNotes = /* GraphQL */ `
-  query ListSharedNotes(
-    $filter: ModelSharedNoteFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSharedNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        link
-        title
-        content
-        expire_date
-        createdAt
-        updatedAt
       }
       nextToken
     }
@@ -224,6 +194,7 @@ export const notesByDate = /* GraphQL */ `
         type
         title
         content
+        password
         locked
         createdAt
         folderID
@@ -266,36 +237,6 @@ export const foldersByDate = /* GraphQL */ `
     }
   }
 `;
-export const notesByLink = /* GraphQL */ `
-  query NotesByLink(
-    $link: String
-    $id: ModelIDKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelSharedNoteFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    notesByLink(
-      link: $link
-      id: $id
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        link
-        title
-        content
-        expire_date
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const eventsByDate = /* GraphQL */ `
   query EventsByDate(
     $type: String
@@ -320,6 +261,75 @@ export const eventsByDate = /* GraphQL */ `
         title
         content
         plannedDateId
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getSharedNote = /* GraphQL */ `
+  query GetSharedNote($id: ID!) {
+    getSharedNote(id: $id) {
+      id
+      link
+      title
+      content
+      expire_date
+      password
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listSharedNotes = /* GraphQL */ `
+  query ListSharedNotes(
+    $filter: ModelSharedNoteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSharedNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        link
+        title
+        content
+        expire_date
+        password
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const notesByLink = /* GraphQL */ `
+  query NotesByLink(
+    $link: String
+    $id: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSharedNoteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    notesByLink(
+      link: $link
+      id: $id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        link
+        title
+        content
+        expire_date
+        password
         createdAt
         updatedAt
         owner

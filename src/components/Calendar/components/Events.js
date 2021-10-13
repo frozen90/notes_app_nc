@@ -74,7 +74,6 @@ export const Events = ({ plannedDateId, setPlannedDateId, date, fetchPlannedDate
 Events.propTypes = {
     plannedDateId: PropTypes.string,
     setPlannedDateId: PropTypes.func,
-    date:PropTypes.string,
     fetchPlannedDates: PropTypes.func
 
 }
