@@ -22,7 +22,7 @@ Additional task :page_with_curl:
   * Create Folders / Add notes to selected folders :heavy_check_mark:
   * Ability to Create New Events via Calendar Component :heavy_check_mark:
  
-## :rocket: APP can be accessed via this link : https://dev.d31ajx0v02fihw.amplifyapp.com
+
 
 ## React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
